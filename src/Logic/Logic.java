@@ -1,10 +1,15 @@
 package Logic;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
+
 import javax.swing.JOptionPane;
+
+import TCPClient.TCPClient;
+import sun.applet.Main;
 import GUI.Screen;
+import JsonClasses.CreateCalender;
+import JsonClasses.Login;
 
 public class Logic {
 	private Screen screen;
@@ -38,25 +43,29 @@ public class Logic {
 				
 			String email = screen.getLogin().getUsernameTextField().getText();
 			String password = screen.getLogin().getPasswordTextField_1().getText();
-//			u3=a.authenticate(email, password);
+			Login L = new Login();
+			L.setEmail(email);
+			L.setPassword(password);
+			TCPClient tcp = new TCPClient();
 			
-//			if (e.getSource() == screen.getLogin().getBtnLogin()){
-//				
-//				if(u3 == null){
-//					JOptionPane.showMessageDialog(null, "\nPlease enter a valid username & password."
-//							, "Error message",JOptionPane.PLAIN_MESSAGE);
-//			}
-//
-//			if	(u3 != null)
-//					{
-//						screen.show(Screen.MAINMENU);
-//					}
-//				
-//			}	
+			
+			new TCPClient().hej();
+
+
 			}	
 			catch(Exception e3){
 			}
+			
+			
 		}	
+	}
+	public void hej(String returnsvar){
+		if (returnsvar.equals("correct")){
+			screen.show(Screen.MAINMENU);
+		}
+		if(!returnsvar.equals("correct")){
+			System.out.println("please enter a correct userName and password");
+		}
 	}
 //	private class MainMenuActionListener implements ActionListener {
 //		public void actionPerformed(ActionEvent e) {
