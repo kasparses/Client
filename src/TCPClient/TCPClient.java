@@ -1,29 +1,28 @@
 package TCPClient;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.net.UnknownHostException;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import JsonClasses.*;
-import Logic.Logic;
 
 public class TCPClient {
 //	public static void main(String[] args) throws Exception {
-		public static void main(String []args) throws Exception {
-			
-			
+		public TCPClient(Object o) throws UnknownHostException, IOException{
 			
 		String modifiedSentence;
 		Gson gson = new GsonBuilder().create();
-		CreateCalender CC = new CreateCalender();
-		Login L = new Login();
+//		CreateCalender CC = new CreateCalender();
+//		Login L = new Login();
 
-		String gsonString = gson.toJson(L);
+		String gsonString = gson.toJson(o);
 		System.out.println("hej");
-		System.out.println("CC: "+CC);
+//		System.out.println("CC: "+CC);
 		System.out.println("gsonString: "+gsonString);
 
 		Socket clientSocket = new Socket("localhost", 8888);
@@ -39,12 +38,9 @@ public class TCPClient {
 		outToServer.flush();
 		BufferedReader inFromServer = new BufferedReader(new InputStreamReader(
 				clientSocket.getInputStream()));
-		System.out.println(inFromServer);
 		modifiedSentence = inFromServer.readLine();
 		System.out.println("FROM SERVER: " + modifiedSentence);
-		Logic LG = new Logic();
-		LG.hej(modifiedSentence);
 		clientSocket.close();
 	}
-	
 }
+	

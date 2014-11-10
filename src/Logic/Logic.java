@@ -46,10 +46,10 @@ public class Logic {
 			Login L = new Login();
 			L.setEmail(email);
 			L.setPassword(password);
-			TCPClient tcp = new TCPClient();
+			TCPClient tcp = new TCPClient(L);
 			
 			
-			new TCPClient().hej();
+//			new TCPClient().hej();
 
 
 			}	

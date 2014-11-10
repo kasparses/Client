@@ -4,8 +4,8 @@ public class Login implements java.io.Serializable
 {
 	private  final long serialVersionUID = 1L;
 	private String overallID = "logIn";
-	private String email = "1234";
-	private String password = "hej";
+	private String email = "";
+	private String password = "";
 	
 	//Getters and setters for everything, bitch
 	public String getOverallID() {
