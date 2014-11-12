@@ -5,15 +5,21 @@ import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import TCPClient.TCPClient;
 import sun.applet.Main;
 import GUI.Screen;
+
 import JsonClasses.CreateCalender;
 import JsonClasses.Login;
+import JsonClasses.LoginAnswer;
 
 public class Logic {
 	private Screen screen;
-
+	TCPClient tcp = new TCPClient();
+	Gson gson = new GsonBuilder().create();
 	
 	public Logic(){
 		screen = new Screen();
@@ -46,24 +52,36 @@ public class Logic {
 			Login L = new Login();
 			L.setEmail(email);
 			L.setPassword(password);
-			TCPClient tcp = new TCPClient(L);
+//			TCPClient tcp = new TCPClient(L);
+			String JsonString=tcp.bla(L);
+			System.out.println("JsonStringLogin: "+JsonString);
 			
+//			LoginAnswer LA = (LoginAnswer)gson.fromJson(jsonString, LoginAnswer.class);
+			LoginAnswer LA = gson.fromJson(JsonString, LoginAnswer.class);  
+			System.out.println(LA.getActive()+LA.getAnswer()+LA.getUserAdmin());
 			
-//			new TCPClient().hej();
-
-
+			if (LA.getAnswer().equals("correct")){
+				screen.show(Screen.MAINMENU);
+			}
+			if(!LA.getAnswer().equals("correct")){
+				System.out.println("please enter a correct userName and password");
+			}
+			
 			}	
 			catch(Exception e3){
 			}
 			
 			
+			
+			
 		}	
 	}
-	public void hej(String returnsvar){
-		if (returnsvar.equals("correct")){
+	public void hej(String ny){
+		System.out.println("What the fuck");
+		if (ny.equals("correct")){
 			screen.show(Screen.MAINMENU);
 		}
-		if(!returnsvar.equals("correct")){
+		if(!ny.equals("correct")){
 			System.out.println("please enter a correct userName and password");
 		}
 	}
