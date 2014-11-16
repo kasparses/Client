@@ -3,9 +3,7 @@ package JsonClasses;
 public class ServerData implements java.io.Serializable
 {
 	private  final long serialVersionUID = 1L;
-	private String overallID = "deleteCalendar";
-
-
+	private String overallID = "";
 	
 	//Getters and setters for everything, bitch
 	public String getOverallID() {

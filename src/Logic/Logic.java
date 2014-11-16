@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.sql.SQLException;
+import java.util.Date;
 
 import javax.swing.JOptionPane;
 
@@ -19,6 +20,8 @@ import JsonClasses.LoginAnswer;
 import JsonClasses.DeleteCalendar;
 import JsonClasses.ServerData;
 import JsonClasses.DailyUpdate;
+import JsonClasses.UpdateLoginTime;
+import JsonClasses.Update;
 
 public class Logic {
 	private Screen screen;
@@ -27,6 +30,8 @@ public class Logic {
 	Login L = new Login();
 	DeleteCalendar DC = new DeleteCalendar();
 	ServerData SD = new ServerData();
+	UpdateLoginTime ULT = new UpdateLoginTime();
+	Update UD = new Update();
 	
 	
 
@@ -56,6 +61,29 @@ public class Logic {
 	private class LoginActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			try{
+				Date date = new Date();
+				long date1 = date.getTime();
+				
+				ULT.setLoginTime(date1);
+				ULT.setUserName("1234");
+				String JsonString2 = tcp.bla(ULT);
+				
+				UD.setUserName("1234");
+				String JsonString3 = tcp.bla(UD);
+				
+				SD.setOverallID("getQuote");
+				try {
+					String JsonString = tcp.bla(SD);
+					DailyUpdate DU = gson.fromJson(JsonString, DailyUpdate.class); 
+				
+					
+				} catch (UnknownHostException e1) {
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 
 				String email = screen.getLogin().getUsernameTextField().getText();
 				String password = screen.getLogin().getPasswordTextField_1().getText();
@@ -99,19 +127,7 @@ public class Logic {
 			}
 			if (e.getSource() == screen.getMainMenu().getBtnGetQuoteoftheday()){
 				
-				SD.setOverallID("getQuote");
-				try {
-					String JsonString = tcp.bla(SD);
-					DailyUpdate DU = gson.fromJson(JsonString, DailyUpdate.class); 
 				
-					
-				} catch (UnknownHostException e1) {
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
 			}
 			if (e.getSource() == screen.getMainMenu().getBtnSavenote()){
 
