@@ -5,14 +5,10 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 import java.sql.SQLException;
 import java.util.Date;
-
 import javax.swing.JOptionPane;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
 import TCPClient.TCPClient;
-import sun.applet.Main;
 import GUI.Screen;
 import JsonClasses.CreateCalender;
 import JsonClasses.Login;
@@ -20,7 +16,6 @@ import JsonClasses.LoginAnswer;
 import JsonClasses.DeleteCalendar;
 import JsonClasses.ServerData;
 import JsonClasses.DailyUpdate;
-import JsonClasses.UpdateLoginTime;
 import JsonClasses.Update;
 
 public class Logic {
@@ -30,14 +25,12 @@ public class Logic {
 	Login L = new Login();
 	DeleteCalendar DC = new DeleteCalendar();
 	ServerData SD = new ServerData();
-	UpdateLoginTime ULT = new UpdateLoginTime();
 	Update UD = new Update();
 	
 	
 
 	public Logic(){
 		screen = new Screen();
-
 
 		screen.getLogin().addActionListener(new LoginActionListener());
 		screen.getMainMenu().addActionListener(new MainMenuActionListener());
@@ -64,26 +57,32 @@ public class Logic {
 				Date date = new Date();
 				long date1 = date.getTime();
 				
-				ULT.setLoginTime(date1);
-				ULT.setUserName("1234");
-				String JsonString2 = tcp.bla(ULT);
 				
-				UD.setUserName("1234");
-				String JsonString3 = tcp.bla(UD);
+				SD.setOverallID("DailyUpdate");
+				String JsonString2 = tcp.bla(SD);
+				DailyUpdate DU = gson.fromJson(JsonString2, DailyUpdate.class);
+				System.out.println("client DailyUpdate Date: "+DU.getDate());
+				System.out.println("client DailyUpdate ApparentTemperature: "+DU.getApparentTemperature());
+				System.out.println("client DailyUpdate Summary: "+DU.getSummary());
+				System.out.println("client DailyUpdate qotd: "+DU.getQotd());
+				System.out.println("client DailyUpdate author: "+DU.getAuthor());
+				System.out.println("client DailyUpdate topic: "+DU.getTopic());
 				
-				SD.setOverallID("getQuote");
-				try {
-					String JsonString = tcp.bla(SD);
-					DailyUpdate DU = gson.fromJson(JsonString, DailyUpdate.class); 
 				
-					
-				} catch (UnknownHostException e1) {
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
+				 
+//				SD.setOverallID("getQuote");
+//				try {
+//					String JsonString = tcp.bla(SD);
+//					DailyUpdate DU = gson.fromJson(JsonString, DailyUpdate.class); 
+//				
+//					
+//				} catch (UnknownHostException e1) {
+//					e1.printStackTrace();
+//				} catch (IOException e1) {
+//					e1.printStackTrace();
+//				} catch (SQLException e1) {
+//					e1.printStackTrace();
+//				}
 
 				String email = screen.getLogin().getUsernameTextField().getText();
 				String password = screen.getLogin().getPasswordTextField_1().getText();
@@ -199,7 +198,6 @@ public class Logic {
 					JOptionPane.showMessageDialog(null, "Please select whether your database is a public or a private database"
 							, "Error message",JOptionPane.PLAIN_MESSAGE);
 
-
 				}
 				
 				if (empty == false && PrivateOrPublic == true){
@@ -224,14 +222,8 @@ public class Logic {
 					
 				}
 				
-				
-
-
-
-
 			}
 		}
-
 
 	}
 

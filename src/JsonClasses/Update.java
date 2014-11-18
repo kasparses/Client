@@ -3,8 +3,8 @@ package JsonClasses;
 public class Update implements java.io.Serializable
 {
 	private  final long serialVersionUID = 1L;
-	private String overallID = "UpdateInfo";
-	private String userName = "";
+	private String overallID = "DailyUpdate";
+	private long LoginTime = 0;
 	
 	//Getters and setters for everything, bitch
 	public String getOverallID() {
@@ -13,11 +13,12 @@ public class Update implements java.io.Serializable
 	public void setOverallID(String overallID) {
 		this.overallID = overallID;
 	}
-	public String getUserName() {
-		return userName;
+	public long getLoginTime() {
+		return LoginTime;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setLoginTime(long loginTime) {
+		LoginTime = loginTime;
 	}
+	
 	
 }
