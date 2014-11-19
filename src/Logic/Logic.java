@@ -1,13 +1,19 @@
 package Logic;
+import Ekstra.CalendarTest;
+import Ekstra.data;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.sql.SQLException;
 import java.util.Date;
+
 import javax.swing.JOptionPane;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
 import TCPClient.TCPClient;
 import GUI.Screen;
 import JsonClasses.CreateCalender;
@@ -17,6 +23,8 @@ import JsonClasses.DeleteCalendar;
 import JsonClasses.ServerData;
 import JsonClasses.DailyUpdate;
 import JsonClasses.Update;
+import JsonClasses.GetCbsCalendar;
+import Ekstra.*;
 
 public class Logic {
 	private Screen screen;
@@ -26,6 +34,9 @@ public class Logic {
 	DeleteCalendar DC = new DeleteCalendar();
 	ServerData SD = new ServerData();
 	Update UD = new Update();
+	GetCbsCalendar GCBS = new GetCbsCalendar();
+	
+	
 	
 	
 
@@ -58,15 +69,36 @@ public class Logic {
 				long date1 = date.getTime();
 				
 				
-				SD.setOverallID("DailyUpdate");
-				String JsonString2 = tcp.bla(SD);
-				DailyUpdate DU = gson.fromJson(JsonString2, DailyUpdate.class);
-				System.out.println("client DailyUpdate Date: "+DU.getDate());
-				System.out.println("client DailyUpdate ApparentTemperature: "+DU.getApparentTemperature());
-				System.out.println("client DailyUpdate Summary: "+DU.getSummary());
-				System.out.println("client DailyUpdate qotd: "+DU.getQotd());
-				System.out.println("client DailyUpdate author: "+DU.getAuthor());
-				System.out.println("client DailyUpdate topic: "+DU.getTopic());
+//				SD.setOverallID("DailyUpdate");
+//				String JsonString2 = tcp.bla(SD);
+//				DailyUpdate DU = gson.fromJson(JsonString2, DailyUpdate.class);
+//				System.out.println("client DailyUpdate Date: "+DU.getDate());
+//				System.out.println("client DailyUpdate ApparentTemperature: "+DU.getApparentTemperature());
+//				System.out.println("client DailyUpdate Summary: "+DU.getSummary());
+//				System.out.println("client DailyUpdate qotd: "+DU.getQotd());
+//				System.out.println("client DailyUpdate author: "+DU.getAuthor());
+//				System.out.println("client DailyUpdate topic: "+DU.getTopic());
+				
+				
+				
+				String JsonString3 = tcp.bla(GCBS);
+				System.out.println(JsonString3);
+				
+//				System.out.println(JsonString3);
+				
+//				Events events = gson.fromJson(JsonString3, Events.class);
+//				0 = år, 1 = måned, 2 = dag, 3 = timer, 4 = minutter
+//				String day =(events.getEvents().get(0).getStart().get(2));
+//				String month =(events.getEvents().get(0).getStart().get(1));
+//				String year =(events.getEvents().get(0).getStart().get(0));
+//				String dato = day+"-"+month+"-"+year;
+//				System.out.println(dato);
+
+				System.out.println("hø");
+				
+				data d = new data();  
+				new CalendarTest().run(d.calculateNewDate(),JsonString3);
+				
 				
 				
 				 
@@ -84,23 +116,23 @@ public class Logic {
 //					e1.printStackTrace();
 //				}
 
-				String email = screen.getLogin().getUsernameTextField().getText();
-				String password = screen.getLogin().getPasswordTextField_1().getText();
-				
-				L.setEmail(email);
-				L.setPassword(password);
-
-				String JsonString=tcp.bla(L);
-
-				LoginAnswer LA = gson.fromJson(JsonString, LoginAnswer.class);  
-
-				if (LA.getAnswer().equals("correct")){
-					screen.show(Screen.MAINMENU);
-				}
-				if(!LA.getAnswer().equals("correct")){
-					JOptionPane.showMessageDialog(null, "\nPlease enter a valid username & password."
-							, "Error message",JOptionPane.PLAIN_MESSAGE);
-				}
+//				String email = screen.getLogin().getUsernameTextField().getText();
+//				String password = screen.getLogin().getPasswordTextField_1().getText();
+//				
+//				L.setEmail(email);
+//				L.setPassword(password);
+//
+//				String JsonString=tcp.bla(L);
+//
+//				LoginAnswer LA = gson.fromJson(JsonString, LoginAnswer.class);  
+//
+//				if (LA.getAnswer().equals("correct")){
+//					screen.show(Screen.MAINMENU);
+//				}
+//				if(!LA.getAnswer().equals("correct")){
+//					JOptionPane.showMessageDialog(null, "\nPlease enter a valid username & password."
+//							, "Error message",JOptionPane.PLAIN_MESSAGE);
+//				}
 			}	
 			catch(Exception e3){
 			}
