@@ -14,7 +14,13 @@ public class data {
     private int realYear = cal.get(GregorianCalendar.YEAR); //Get year
     private int currentMonth = realMonth; //Match month and year
     private int currentYear = realYear;
-    long newDate;
+    private String QOTD;
+    private String Author;
+    private String Topic;
+
+
+    
+    		long newDate;
     String JsonString = "";
     String [] headers = new String[7];
 
@@ -27,6 +33,42 @@ public class data {
     
     
     
+	public String getQOTD() {
+		return QOTD;
+	}
+
+
+
+	public void setQOTD(String qOTD) {
+		QOTD = qOTD;
+	}
+
+
+
+	public String getAuthor() {
+		return Author;
+	}
+
+
+
+	public void setAuthor(String author) {
+		Author = author;
+	}
+
+
+
+	public String getTopic() {
+		return Topic;
+	}
+
+
+
+	public void setTopic(String topic) {
+		Topic = topic;
+	}
+
+
+
 	public String[] getHeaders() {
 		return headers;
 	}

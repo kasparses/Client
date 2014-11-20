@@ -46,6 +46,12 @@ public class CalendarTest{
     private static JLabel label_13;
     data d = new data();
     String [] headers = new String[7];
+    private JLabel lblQuote;
+    private JLabel lblAuthor;
+    private JLabel lblTopic;
+    /**
+     * @wbp.parser.entryPoint
+     */
     public void run (long newDate, String JsonString3){
     	
     	d.setJsonString(JsonString3);
@@ -62,7 +68,7 @@ public class CalendarTest{
         
         //Prepare frame
         frmMain = new JFrame ("Gestionnaire de clients"); //Create frame
-        frmMain.setSize(760, 550); //Set size to 400x400 pixels
+        frmMain.setSize(823, 559); //Set size to 400x400 pixels
         pane = frmMain.getContentPane(); //Get content pane
         pane.setLayout(null); //Apply null layout
         frmMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Close when X is clicked
@@ -100,7 +106,7 @@ public class CalendarTest{
         pnlCalendar.add(stblCalendar);
         
         //Set bounds
-        pnlCalendar.setBounds(0, 0, 737, 510);
+        pnlCalendar.setBounds(0, 0, 807, 508);
         lblYear.setBounds(60, 479, 80, 20);
         cmbYear.setBounds(222, 479, 80, 20);
         stblCalendar.setBounds(60, 91, 662, 377);
@@ -220,6 +226,18 @@ public class CalendarTest{
         label_13 = new JLabel("21:00");
         label_13.setBounds(22, 443, 28, 14);
         pnlCalendar.add(label_13);
+        
+        lblQuote = new JLabel("New label");
+        lblQuote.setBounds(171, 11, 46, 14);
+        pnlCalendar.add(lblQuote);
+        
+        lblAuthor = new JLabel("Author");
+        lblAuthor.setBounds(171, 36, 46, 14);
+        pnlCalendar.add(lblAuthor);
+        
+        lblTopic = new JLabel("Topic");
+        lblTopic.setBounds(559, 11, 46, 14);
+        pnlCalendar.add(lblTopic);
         mtblCalendar.setColumnCount(7);
         mtblCalendar.setRowCount(14);
       
@@ -285,9 +303,7 @@ public class CalendarTest{
     		String minutes =(events.getEvents().get(i).getStart().get(4));
     		String time = hours + ":"+minutes;
     		
-    		
 
-    		
     		if(dato.equals(headers[0])){        		
                  column  = 0;
                  match = true;
@@ -447,5 +463,5 @@ public class CalendarTest{
             }
         }
     }
-    
+     
 }
