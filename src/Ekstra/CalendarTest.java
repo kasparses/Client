@@ -1,4 +1,11 @@
 package Ekstra;
+
+
+
+import java.awt.*;  
+
+import javax.swing.*;  
+import javax.swing.table.*;  
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.table.*;
@@ -53,6 +60,9 @@ public class CalendarTest{
      * @wbp.parser.entryPoint
      */
     public void run (long newDate, String JsonString3){
+//    	tblCalendar.setShowHorizontalLines(false);
+    	
+    	
     	
     	d.setJsonString(JsonString3);
     	d.setNewDate(newDate);
@@ -119,14 +129,14 @@ public class CalendarTest{
         SimpleDateFormat date_format = new SimpleDateFormat("dd-M-yyyy"); // Example: 17-Now-14
 //        
 //        String [] headers = new String[7];
-        for (int i=0; i<7; i++){
+        for (int a=0; a<7; a++){
             String hej = "";
         	Date currentDate = new Date(newDate);
         	String swag = date_format.format(currentDate);
-        	headers[i] = swag;
+        	headers[a] = swag;
         	newDate +=86400000;
         	
-        	mtblCalendar.addColumn(headers[i]);
+        	mtblCalendar.addColumn(headers[a]);
         }
         
         tblCalendar.getParent().setBackground(tblCalendar.getBackground()); //Set background
@@ -235,15 +245,34 @@ public class CalendarTest{
         lblAuthor.setBounds(171, 36, 46, 14);
         pnlCalendar.add(lblAuthor);
         
+        
         lblTopic = new JLabel("Topic");
         lblTopic.setBounds(559, 11, 46, 14);
         pnlCalendar.add(lblTopic);
+        
+        
+        
+        
+        
         mtblCalendar.setColumnCount(7);
         mtblCalendar.setRowCount(14);
+        
+        Color gridColor = UIManager.getColor("Table.gridColor");  
+        TableColumnModel model = tblCalendar.getColumnModel();  
+        for(int b = 0; b < tblCalendar.getColumnCount(); b++)  
+        {  
+            TableColumn col = model.getColumn(b);  
+            col.setCellRenderer(new CustomRenderer(gridColor));  
+        }  
+        
+       
+
+        
+        
       
         //Populate table
-        for (int i=d.getRealYear()-100; i<=d.getRealYear()+100; i++){
-            cmbYear.addItem(String.valueOf(i));
+        for (int c=d.getRealYear()-100; c<=d.getRealYear()+100; c++){
+            cmbYear.addItem(String.valueOf(c));
         }
         
         //Refresh calendar
@@ -253,8 +282,8 @@ public class CalendarTest{
     public  void refreshCalendar(int week, int year, String JSonString3){
         //Variables
     	String [] weeks = new String[53];
-    		for(int a =0; a<weeks.length; a++){
-    			weeks [a] = "Week "+ Integer.toString(a);
+    		for(int d =0; d<weeks.length; d++){
+    			weeks [d] = "Week "+ Integer.toString(d);
     		}
         int nod, som; //Number Of Days, Start Of Month
         
@@ -269,127 +298,139 @@ public class CalendarTest{
         
         Gson gson = new GsonBuilder().create();
         Events events = gson.fromJson(JSonString3, Events.class);
-//		String day =(events.getEvents().get(0).getStart().get(2));
-//		String month =(events.getEvents().get(0).getStart().get(1));
-//		String år =(events.getEvents().get(0).getStart().get(0));
-//		String dato = day+"-"+month+"-"+år;
-//		System.out.println(dato);
+
 		
-//        Clear table
-        for (int i=0; i<6; i++){
-            for (int j=0; j<7; j++){
-                mtblCalendar.setValueAt(null, i, j);
+        String [] startCalendarTime = new String[15];
+        startCalendarTime[0] = "8:00";
+        startCalendarTime[1] = "8:55";
+        startCalendarTime[2] = "9:50";
+        startCalendarTime[3] = "10:45";
+        startCalendarTime[4] = "11:40";
+        startCalendarTime[5] = "12:35";
+        startCalendarTime[6] = "13:30";
+        startCalendarTime[7] = "14:25";
+        startCalendarTime[8] = "15:20";
+        startCalendarTime[9] = "16:15";
+        startCalendarTime[10] = "17:10";
+        startCalendarTime[11] = "18:05";
+        startCalendarTime[12] = "19:00";
+        startCalendarTime[13] = "19:55";
+        startCalendarTime[14] = "20:50";
+        
+        String [] endCalendarTime = new String[15];
+        endCalendarTime[0] = "8:00";
+        endCalendarTime[1] = "8:45";
+        endCalendarTime[2] = "9:40";
+        endCalendarTime[3] = "10:35";
+        endCalendarTime[4] = "11:30";
+        endCalendarTime[5] = "12:25";
+        endCalendarTime[6] = "13:20";
+        endCalendarTime[7] = "14:15";
+        endCalendarTime[8] = "15:10";
+        endCalendarTime[9] = "16:05";
+        endCalendarTime[10] = "17:00";
+        endCalendarTime[11] = "17:55";
+        endCalendarTime[12] = "18:50";
+        endCalendarTime[13] = "19:45";
+        endCalendarTime[14] = "20:40";
+        
+//      Clear table
+        for (int e=0; e<6; e++){
+            for (int f=0; f<7; f++){
+                mtblCalendar.setValueAt(null, e, f);
             }
         }
         
         int column = 0;
         int row = 0;
+        int startRow = 0;
+        int endRow = 0;
         boolean match = false;
-        for (int i=0; i<=90; i++){
-        	String day =(events.getEvents().get(i).getStart().get(2));
+      
+        for (int g=0; g<=90; g++){
+        	String day =(events.getEvents().get(g).getStart().get(2));
         	if (day.equals("1")||day.equals("2")||day.equals("3")||day.equals("4")||day.equals("5")||day.equals("6")||day.equals("7")||day.equals("8")||day.equals("9") ){
         		day = ("0"+day);
         	}
         	
-    		String år =(events.getEvents().get(i).getStart().get(0));
+    		String år =(events.getEvents().get(g).getStart().get(0));
     		
-    		int intMonth =Integer.parseInt(events.getEvents().get(i).getStart().get(1))+1;
+    		int intMonth =Integer.parseInt(events.getEvents().get(g).getStart().get(1))+1;
     		String month = String.valueOf(intMonth);
     		String dato = day+"-"+month+"-"+år;
-    		
+
     		//0 = år, 1 = måned, 2 = dag, 3 = timer, 4 = minutter
+
+    		String startHours =(events.getEvents().get(g).getStart().get(3));
+    		String startMinutes =(events.getEvents().get(g).getStart().get(4));
+    		String startTime = startHours + ":"+startMinutes;
     		
-    		String hours =(events.getEvents().get(i).getStart().get(3));
-    		String minutes =(events.getEvents().get(i).getStart().get(4));
-    		String time = hours + ":"+minutes;
-    		
+    		String endHours =(events.getEvents().get(g).getEnd().get(3));
+    		String endMinutes =(events.getEvents().get(g).getEnd().get(4));
+    		String endTime = endHours + ":"+endMinutes;
 
-    		if(dato.equals(headers[0])){        		
-                 column  = 0;
-                 match = true;
+    		for (int h = 0; h<headers.length; h++){
+    			if(dato.equals(headers[h])){        		
+    				column  = h;
+    				match = true;
 
-    		}
-    		if(dato.equals(headers[1])){     		
-                column  = 1;
-                match = true;
-
-    		}
-    		if(dato.equals(headers[2])){
-        		
-                column  = 2;
-                match = true;
-
-    		}
-    		if(dato.equals(headers[3])){
-        		
-                column  = 3;
-                match = true;
-
-    		}
-    		if(dato.equals(headers[4])){       		
-                column  = 4;
-                match = true;
+    			}
     		}
     		
-    		if(dato.equals(headers[5])){        		
-                column  = 5;
-                match = true;
+    		//lav et array hvor jeg starter ved start row og slutter ved slutrow og derefter laver startRow ++
+
+    		if(match == true){
+    			match = false;
+    			System.out.println();
+    			
+    			System.out.println("startTime: "+startTime);
+    			System.out.println("endTime: "+ endTime);
+
+    			for (int st=0; st<startCalendarTime.length; st++){ //st = startTime
+    				if (startTime.equals(startCalendarTime[st])){
+    					startRow = st;
+    					System.out.println("startRow: "+startRow);
+
+    				}
+    			}
+    			for (int et=0; et<endCalendarTime.length; et++){  //et = endTime
+    				if (endTime.equals(endCalendarTime[et])){
+    					endRow = et;
+    					System.out.println("endRow: "+endRow);
+
+    				}
+    			}
+    			for (int k = startRow; k<endRow; k++){
+    				System.out.println("k: "+k);
+    				System.out.println("startDate: "+startRow);
+    			if(endRow-startRow >1){
+    				
+    				 tblCalendar.setShowGrid(false);  
+    			        tblCalendar.setIntercellSpacing(new Dimension(0,0));  
+    			        // remove line between item 18 and item 22  
+    			        // get reference to renderer for column index 1  
+    			        DefaultTableCellRenderer renderer =  
+    			                (DefaultTableCellRenderer)tblCalendar.getCellRenderer(0,column);  
+    			        // remove border top for item 22 [at row = 5, col = 1]  
+    			        ((CustomRenderer)renderer).eraseBorder(startRow+1,column);  
+    			        
+    				
+    			}
+    			if(k ==startRow){
+    				System.out.println(events.getEvents().get(g).getDescription()+ "row: "+startRow+ " column: "+column+ " time: "+startTime);
+        			mtblCalendar.setValueAt(events.getEvents().get(g).getDescription(), k, column);
+    				
+    			}else{
+    				
+        			
+    			}
+    			
+    			
+    			}
     		}
-    		if(dato.equals(headers[6])){
-                column  = 6;
-                match = true;
-    		}
-        	
-        	
-        	if(match == true){
-        		
-        		if(time.equals("8:00")){
-        			row = 0;
-        		}
-        		if(time.equals("8:55")){
-        			row = 0;
-        		}
-        		if(time.equals("9:50")){
-        			row = 1;
-        		}
-        		if(time.equals("10:45")){
-        			row = 2;
-        		}
-        		if(time.equals("11:40")){
-        			row = 2;
-        		}
-        		if(time.equals("12:35")){
-        			row = 3;
-        		}
-        		if(time.equals("13:30")){
-        			row = 3;
-        		}
-        		if(time.equals("14:25")){
-        			row = 4;
-        		}
-        		
-        	
-        	System.out.println(events.getEvents().get(i).getDescription()+ "row: "+row+ " column: "+column+ " time: "+time);
-            mtblCalendar.setValueAt(events.getEvents().get(i).getDescription(), row, column);
-             match = false;
-        	}
         }
-        
-//        //Get first day of month and number of days
-//        GregorianCalendar cal = new GregorianCalendar(year, week, 1);
-//        nod = cal.getActualMaximum(GregorianCalendar.DAY_OF_MONTH);
-//        som = cal.get(GregorianCalendar.DAY_OF_MONTH);
-//        
-//        System.out.println(nod);
-//        System.out.println(som);
-//        
-        //Draw calendar
-//        for (int i=1; i<=nod; i++){
-//            int row = (i+som-2)/7;;
-//            int column  =  (i+som-2)%7;
-//            mtblCalendar.setValueAt(i, row, column);
-//        }
-        
+
+
         //Apply renderers
         tblCalendar.setDefaultRenderer(tblCalendar.getColumnClass(0), new tblCalendarRenderer());
     }
@@ -463,5 +504,47 @@ public class CalendarTest{
             }
         }
     }
+     class CustomRenderer extends DefaultTableCellRenderer  
+     {  
+         Color gridColor;  
+         int clearRow, clearCol;  
+        
+         public CustomRenderer(Color color)  
+         {  
+             gridColor = color;  
+             clearRow = clearCol = -1;  
+         }  
+         public Component getTableCellRendererComponent(JTable table,  
+                                                        Object value,  
+                                                        boolean isSelected,  
+                                                        boolean hasFocus,  
+                                                        int row,  
+                                                        int column)  
+         {  
+             Color color = Color.black;  
+             if(hasFocus)  
+                 color = Color.blue;  
+             else if(isSelected)  
+                 color = Color.orange;  
+             setForeground(color);  
+             setHorizontalAlignment(JLabel.CENTER);  
+             Color bgColor = getBackground();  
+             if(clearRow == row && clearCol == column) //  t  l  b  r  
+                 setBorder(BorderFactory.createMatteBorder(0, 1, 0, 0, gridColor));  
+             else  
+                 setBorder(BorderFactory.createMatteBorder(1, 1, 0, 0, gridColor));  
+             setText((String)value);  
+             return this;  
+         }  
+        
+         /** 
+          * remove top of border for the component at (row, col) 
+          */  
+         public void eraseBorder(int row, int col)  
+         {  
+             clearRow = row;  
+             clearCol = col;  
+         }  
+     } 
      
 }
