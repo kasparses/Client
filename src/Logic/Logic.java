@@ -17,6 +17,7 @@ import com.google.gson.GsonBuilder;
 import TCPClient.TCPClient;
 import GUI.Screen;
 import JsonClasses.CreateCalender;
+import JsonClasses.CreateEvent;
 import JsonClasses.Login;
 import JsonClasses.LoginAnswer;
 import JsonClasses.DeleteCalendar;
@@ -50,7 +51,7 @@ public class Logic {
 		//		screen.getNoteList().addActionListener(new NoteListActionListener());
 		////		screen.getUserList().addActionListener(new UserListActionListener());
 		//		screen.getEventlist().addActionListener(new EventListActionListener());
-		//		screen.getAddEventGUI().addActionListener(new AddEventGUIActionListener());
+		screen.getCreateEvent().addActionListener(new AddEventGUIActionListener());
 		//		screen.getAddUser().addActionListener(new AddUserActionListener());
 
 
@@ -68,11 +69,6 @@ public class Logic {
 				Date date = new Date();
 				long date1 = date.getTime();
 				
-				
-				
-				
-				 
-
 
 				String email = screen.getLogin().getUsernameTextField().getText();
 				String password = screen.getLogin().getPasswordTextField_1().getText();
@@ -98,15 +94,15 @@ public class Logic {
 					
 					
 					
-					String JsonString3 = tcp.bla(GCBS);
+//					String JsonString3 = tcp.bla(GCBS);
 					
 					
-					data d = new data();  
-					new CalendarTest().run(d.calculateNewDate(),JsonString3);
+//					data d = new data();  
+//					new CalendarTest().run(d.calculateNewDate(),JsonString3);
 					
 //					screen.getMainMenu().setText("Hello " + name);
 					
-//					screen.show(Screen.MAINMENU);
+					screen.show(Screen.MAINMENU);
 				}
 				if(!LA.getAnswer().equals("correct")){
 					JOptionPane.showMessageDialog(null, "\nPlease enter a valid username & password."
@@ -142,6 +138,9 @@ public class Logic {
 			if (e.getSource() == screen.getMainMenu().getBtnSavenote()){
 
 			}
+			if (e.getSource() == screen.getMainMenu().getBtnCreateevent()){
+				screen.show(Screen.CREATEEVENT);
+			}
 
 
 		}
@@ -172,6 +171,7 @@ public class Logic {
 		}
 	}
 	private class CreateCalendarActionListener implements ActionListener {
+
 		public void actionPerformed(ActionEvent e) {
 
 			if (e.getSource() == screen.getCreatecalendar().getBtnCreateCalendar()){
@@ -236,6 +236,57 @@ public class Logic {
 			}
 		}
 
+	}
+	
+	private class AddEventGUIActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			
+			
+			if (e.getSource() == screen.getCreateEvent().getBtnSubmit()){
+				 
+				
+				
+				String description = screen.getCreateEvent().getTextField_Description().getText();
+				String start = screen.getCreateEvent().getTextField_Start().getText();
+				String location = screen.getCreateEvent().getTextField_Location().getText();
+				String end = screen.getCreateEvent().getTextField_End().getText();
+				String title = screen.getCreateEvent().getTextField_Title().getText();
+				String type = screen.getCreateEvent().getTextField_Type().getText();
+				String eventID = screen.getCreateEvent().getTextField_EventID().getText();
+				String activityID = screen.getCreateEvent().getTextField_ActivityID().getText();
+				String calendarName = screen.getCreateEvent().getTextField_CalendarName().getText();
+				
+				CreateEvent CE = new CreateEvent("createEvent", 0,activityID , eventID, type, title, description, start, end, location, calendarName );
+							
+				
+				
+				try {
+					try {
+						String JsonString5=tcp.bla(CE);
+					} catch (UnknownHostException e1) {
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+							
+				
+//
+////				if (Location.equals("")|| Createdby.equals("")|| start.equals("")|| end.equals("")|| name.equals("")|| text.equals(""))
+////				{
+////					JOptionPane.showMessageDialog(null, "\nPlease fill out all the fields"
+////							, "Error message",JOptionPane.PLAIN_MESSAGE);
+////				}
+////				else
+////				{
+			
+	
+			}
+
+
+		}
 	}
 
 }

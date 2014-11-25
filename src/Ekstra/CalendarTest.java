@@ -35,7 +35,7 @@ public class CalendarTest{
 	
     static JLabel lblMonth, lblYear;
     static JButton btnPrev, btnNext;
-     JTable tblCalendar;
+    JTable tblCalendar;
     static JComboBox cmbYear;
     static JFrame frmMain;
     static Container pane;

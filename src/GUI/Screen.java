@@ -17,14 +17,13 @@ public class Screen extends JFrame {
 	public static final String DELTECALENDAR = "name_271341061178742";
 	public static final String DELETENOTE = "name_271324206063397";
 	public static final String CREATENOTE = "name_271311829920778";
-	public static final String CREATEEVENT = "name_271300909076732";
+	public static final String CREATEEVENT = "name_403949887096492";
 	public static final String CREATECALENDAR = "name_271288584224003";
 	public static final String CALENDAR = "name_271270913019346";
 
 	private JPanel contentPane;
 	private Calendar calendar;
 	private Createcalendar createcalendar;
-	private CreateEvent createEvent;
 	private CreateNote createNote;
 	private DeleteNote deleteNote;
 	private DelteCalendar delteCalendar;
@@ -32,6 +31,7 @@ public class Screen extends JFrame {
 	private LogOut logOut;
 	private MainMenu mainMenu;
 	CardLayout c;
+	private CreateEvent createEvent;
 
 	/**
 	 * Launch the application.
@@ -60,6 +60,9 @@ public class Screen extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new CardLayout(0, 0));
 		
+		createEvent = new CreateEvent();
+		contentPane.add(createEvent, "name_403949887096492");
+		
 		mainMenu = new MainMenu();
 		contentPane.add(mainMenu, "name_271375820943970");
 		
@@ -77,9 +80,6 @@ public class Screen extends JFrame {
 		
 		createNote = new CreateNote();
 		contentPane.add(createNote, "name_271311829920778");
-		
-		createEvent = new CreateEvent();
-		contentPane.add(createEvent, "name_271300909076732");
 		
 		createcalendar = new Createcalendar();
 		contentPane.add(createcalendar, "name_271288584224003");
@@ -131,6 +131,4 @@ public class Screen extends JFrame {
 	public MainMenu getMainMenu() {
 		return mainMenu;
 	}
-	
-
 }
