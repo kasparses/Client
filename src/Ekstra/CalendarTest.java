@@ -2,6 +2,11 @@ package Ekstra;
 
 
 
+
+import Ekstra.CellBorder;
+import Ekstra.LinesBorder;
+import Ekstra.BorderCellRenderer;
+
 import java.awt.*;  
 
 import javax.swing.*;  
@@ -9,6 +14,14 @@ import javax.swing.table.*;
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.table.*;
+
+import java.awt.*;
+import java.awt.event.*;
+
+import javax.swing.*;
+import javax.swing.table.*;
+import javax.swing.event.*;
+import javax.swing.border.*;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -22,11 +35,11 @@ public class CalendarTest{
 	
     static JLabel lblMonth, lblYear;
     static JButton btnPrev, btnNext;
-    static JTable tblCalendar;
+     JTable tblCalendar;
     static JComboBox cmbYear;
     static JFrame frmMain;
     static Container pane;
-    static DefaultTableModel mtblCalendar; //Table model
+    DefaultTableModel mtblCalendar; //Table model
     static JScrollPane stblCalendar; //The scrollpane
     static JPanel pnlCalendar;
 //    static int realYear, realMonth, realDay, currentYear, currentMonth, dayofWeek, weekofYear;
@@ -255,15 +268,16 @@ public class CalendarTest{
         
         
         mtblCalendar.setColumnCount(7);
-        mtblCalendar.setRowCount(14);
+        mtblCalendar.setRowCount(20);
         
         Color gridColor = UIManager.getColor("Table.gridColor");  
         TableColumnModel model = tblCalendar.getColumnModel();  
-        for(int b = 0; b < tblCalendar.getColumnCount(); b++)  
-        {  
-            TableColumn col = model.getColumn(b);  
-            col.setCellRenderer(new CustomRenderer(gridColor));  
-        }  
+        
+//        for(int b = 0; b < tblCalendar.getColumnCount(); b++)  
+//        {  
+//            TableColumn col = model.getColumn(b);  
+//            col.setCellRenderer(new CustomRenderer(gridColor));  
+//        }  
         
        
 
@@ -279,7 +293,10 @@ public class CalendarTest{
         refreshCalendar (d.getWeekofYear(), d.getRealYear(), d.getJsonString()); //Refresh calendar
     }
     
+    
+    
     public  void refreshCalendar(int week, int year, String JSonString3){
+    	
         //Variables
     	String [] weeks = new String[53];
     		for(int d =0; d<weeks.length; d++){
@@ -300,7 +317,7 @@ public class CalendarTest{
         Events events = gson.fromJson(JSonString3, Events.class);
 
 		
-        String [] startCalendarTime = new String[15];
+        String [] startCalendarTime = new String[17];
         startCalendarTime[0] = "8:00";
         startCalendarTime[1] = "8:55";
         startCalendarTime[2] = "9:50";
@@ -316,8 +333,11 @@ public class CalendarTest{
         startCalendarTime[12] = "19:00";
         startCalendarTime[13] = "19:55";
         startCalendarTime[14] = "20:50";
+        startCalendarTime[15] = "21:45";
+        startCalendarTime[16] = "22:40";
         
-        String [] endCalendarTime = new String[15];
+        
+        String [] endCalendarTime = new String[17];
         endCalendarTime[0] = "8:00";
         endCalendarTime[1] = "8:45";
         endCalendarTime[2] = "9:40";
@@ -333,6 +353,8 @@ public class CalendarTest{
         endCalendarTime[12] = "18:50";
         endCalendarTime[13] = "19:45";
         endCalendarTime[14] = "20:40";
+        startCalendarTime[15] = "21:35";
+        startCalendarTime[16] = "22:30";
         
 //      Clear table
         for (int e=0; e<6; e++){
@@ -346,6 +368,80 @@ public class CalendarTest{
         int startRow = 0;
         int endRow = 0;
         boolean match = false;
+
+        tblCalendar.setDefaultRenderer(Object.class, new BorderCellRenderer());
+        tblCalendar.setShowGrid(false);
+        
+        boolean isTop,isLeft,isBottom,isRight;
+        
+
+        
+        int[] rows    = new int[20];
+        
+        for(int å1 = 0; å1<rows.length; å1++){
+      	  rows[å1] = å1;
+        }
+        
+        int[] columns = new int[7];
+        for(int ab1 = 0; ab1<columns.length; ab1++){
+      	  columns[ab1] = ab1;
+        }
+        
+        
+        for(int i = 0; i<columns.length; i++){
+      	  System.out.println("columns "+i+": "+columns [i]);
+        }
+        for(int a = 0; a<rows.length; a++){
+      	  System.out.println("rows "+a+": "+rows [a]);
+        }
+        
+        int rowMax    = rows.length;
+        int columnMax = columns.length;
+         
+        for (int i=0;i<rowMax;i++) {
+          int row1 = rows[i];
+          isTop    = (i == 0       )? true: false;
+          isBottom = (i == rowMax-1)? true: false;
+           
+          for (int j=0;j<columnMax;j++) {
+            int column1 = columns[j];
+            isLeft  = (j == 0          )? true: false;
+            isRight = (j == columnMax-1)? true: false;
+             
+
+            MyData myData = (MyData)null;
+
+            Color color = UIManager.getColor("Table.gridColor");
+           
+            if (myData == null) {
+              myData = new MyData("", new LinesBorder(color,0));
+            }
+            LinesBorder border = (LinesBorder)myData.getBorder();
+            
+            Insets insets = new Insets(1,1,1,1);
+            insets.top    = 1;    
+            insets.left   = 1;     
+            insets.bottom = 1;    
+            insets.right  = 1; 
+            
+            
+           boolean isReplace = true;
+              Insets tmp = new Insets(0,0,0,0);
+              if (isTop)    tmp.top    = Math.max(tmp.top    ,insets.top);
+              if (isLeft)   tmp.left   = Math.max(tmp.left   ,insets.left);
+              if (isBottom) tmp.bottom = Math.max(tmp.bottom ,insets.bottom);
+              if (isRight)  tmp.right  = Math.max(tmp.right  ,insets.right);
+              border.append(insets, isReplace);
+
+              
+             
+              mtblCalendar.setValueAt(myData, row1, column1);
+          }
+        }
+        tblCalendar.clearSelection();
+        tblCalendar.revalidate();
+        tblCalendar.repaint();
+
       
         for (int g=0; g<=90; g++){
         	String day =(events.getEvents().get(g).getStart().get(2));
@@ -377,7 +473,7 @@ public class CalendarTest{
     			}
     		}
     		
-    		//lav et array hvor jeg starter ved start row og slutter ved slutrow og derefter laver startRow ++
+    		
 
     		if(match == true){
     			match = false;
@@ -402,58 +498,115 @@ public class CalendarTest{
     			}
     			for (int k = startRow; k<endRow; k++){
     				System.out.println("k: "+k);
-    				System.out.println("startDate: "+startRow);
-    			if(endRow-startRow >1){
-    				
-    				 tblCalendar.setShowGrid(false);  
-    			        tblCalendar.setIntercellSpacing(new Dimension(0,0));  
-    			        // remove line between item 18 and item 22  
-    			        // get reference to renderer for column index 1  
-    			        DefaultTableCellRenderer renderer =  
-    			                (DefaultTableCellRenderer)tblCalendar.getCellRenderer(0,column);  
-    			        // remove border top for item 22 [at row = 5, col = 1]  
-    			        ((CustomRenderer)renderer).eraseBorder(startRow+1,column);  
-    			        
-    				
-    			}
-    			if(k ==startRow){
+    				System.out.println("startRow: "+startRow);
+    				tblCalendar.setIntercellSpacing(new Dimension(0,0));
+    			
+    			
     				System.out.println(events.getEvents().get(g).getDescription()+ "row: "+startRow+ " column: "+column+ " time: "+startTime);
-        			mtblCalendar.setValueAt(events.getEvents().get(g).getDescription(), k, column);
     				
-    			}else{
-    				
-        			
-    			}
+
+       
+        			  boolean isTop1,isLeft1,isBottom1,isRight1; 		       
+
+        		      int rowLength1 = endRow-startRow;
+        		      
+        		      int[] rows1    = new int[rowLength1];
+        		      
+        		      for(int å1 = 0; å1<rows1.length; å1++){
+        		    	  rows1[å1] = startRow+å1;
+        		      }
+        		      
+        		      int[] columns1 = new int[1];
+        		      
+        		      for(int ab1 = 0; ab1<columns1.length; ab1++){
+        		    	  columns1[ab1] = column;
+        		      }
+        		      
+        		      int rowMax1    = rows1.length;
+        		      int columnMax1 = columns1.length;
+        		      
+        		      for (int i1=0;i1<rowMax1;i1++) {
+        		        int rowb1 = rows1[i1];
+        		        
+        		        String value = "";
+            			if(i1==0){
+            				value = events.getEvents().get(g).getDescription();
+            			}
+            			if(i1>0){
+            				value = "";
+            			}
+        		        isTop1    = (i1 == 0       )? true: false;
+        		        isBottom1 = (i1 == rowMax1-1)? true: false;
+        		         
+        		        for (int j1=0;j1<columnMax1;j1++) {
+        		          int columnb1 = columns1[j1];
+        		          isLeft1  = (j1 == 0          )? true: false;
+        		          isRight1 = (j1 == columnMax1-1)? true: false;
+        		          
+        		          Color color1 = UIManager.getColor("Table.gridColor");
+
+
+        		          MyData myData = (MyData)null;  
+
+        		            myData = new MyData(value, new LinesBorder(color1,0));
+        		         
+ 
+        		              Insets insets = new Insets(1,1,1,1);
+        		              insets.top    = 1;     
+        		              insets.left   = 1;     
+        		              insets.bottom = 1;     
+        		              insets.right  = 1;     
+        		                       
+        		          LinesBorder border = (LinesBorder)myData.getBorder();
+        		          
+        		     boolean isReplace = true;
+        		            Insets tmp = new Insets(0,0,0,0);
+        		            if (isTop1)    tmp.top    = Math.max(tmp.top    ,insets.top);
+        		            if (isLeft1)   tmp.left   = Math.max(tmp.left   ,insets.left);
+        		            if (isBottom1) tmp.bottom = Math.max(tmp.bottom ,insets.bottom);
+        		            if (isRight1)  tmp.right  = Math.max(tmp.right  ,insets.right);
+        		            border.append(tmp, isReplace);
+        		            
+        		            
+        		         
+        		            mtblCalendar.setValueAt(myData, rowb1, columnb1);
+//        		            mtblCalendar.setValueAt(mtblCalendar.getValueAt(k, column), rowb1, columnb1);
+        		        }
+        		      }
+        		      tblCalendar.clearSelection();
+        		      tblCalendar.revalidate();
+        		      tblCalendar.repaint();
+    			
     			
     			
     			}
     		}
         }
-
+        
 
         //Apply renderers
-        tblCalendar.setDefaultRenderer(tblCalendar.getColumnClass(0), new tblCalendarRenderer());
+//        tblCalendar.setDefaultRenderer(tblCalendar.getColumnClass(0), new tblCalendarRenderer());
     }
     
-     class tblCalendarRenderer extends DefaultTableCellRenderer{
-        public Component getTableCellRendererComponent (JTable table, Object value, boolean selected, boolean focused, int row, int column){
-            super.getTableCellRendererComponent(table, value, selected, focused, row, column);
-            if (column == 5 || column == 6){ //Week-end
-                setBackground(new Color(255, 220, 220));
-            }
-            else{ //Week
-                setBackground(new Color(255, 255, 255));
-            }
-            if (value != null){
-                if (Integer.parseInt(value.toString()) == d.getRealDay() && d.getCurrentMonth() == d.getRealMonth() && d.getCurrentYear() == d.getRealYear()){ //Today
-                    setBackground(new Color(220, 220, 255));
-                }
-            }
-            setBorder(null);
-            setForeground(Color.black);
-            return this;
-        }
-    }
+//     class tblCalendarRenderer extends DefaultTableCellRenderer{
+//        public Component getTableCellRendererComponent (JTable table, Object value, boolean selected, boolean focused, int row, int column){
+//            super.getTableCellRendererComponent(table, value, selected, focused, row, column);
+//            if (column == 5 || column == 6){ //Week-end
+//                setBackground(new Color(255, 220, 220));
+//            }
+//            else{ //Week
+//                setBackground(new Color(255, 255, 255));
+//            }
+//            if (value != null){
+//                if (Integer.parseInt(value.toString()) == d.getRealDay() && d.getCurrentMonth() == d.getRealMonth() && d.getCurrentYear() == d.getRealYear()){ //Today
+//                    setBackground(new Color(220, 220, 255));
+//                }
+//            }
+//            setBorder(null);
+//            setForeground(Color.black);
+//            return this;
+//        }
+//    }
     
      class btnPrev_Action implements ActionListener{
         public void actionPerformed (ActionEvent e){
@@ -504,47 +657,32 @@ public class CalendarTest{
             }
         }
     }
-     class CustomRenderer extends DefaultTableCellRenderer  
-     {  
-         Color gridColor;  
-         int clearRow, clearCol;  
-        
-         public CustomRenderer(Color color)  
-         {  
-             gridColor = color;  
-             clearRow = clearCol = -1;  
-         }  
-         public Component getTableCellRendererComponent(JTable table,  
-                                                        Object value,  
-                                                        boolean isSelected,  
-                                                        boolean hasFocus,  
-                                                        int row,  
-                                                        int column)  
-         {  
-             Color color = Color.black;  
-             if(hasFocus)  
-                 color = Color.blue;  
-             else if(isSelected)  
-                 color = Color.orange;  
-             setForeground(color);  
-             setHorizontalAlignment(JLabel.CENTER);  
-             Color bgColor = getBackground();  
-             if(clearRow == row && clearCol == column) //  t  l  b  r  
-                 setBorder(BorderFactory.createMatteBorder(0, 1, 0, 0, gridColor));  
-             else  
-                 setBorder(BorderFactory.createMatteBorder(1, 1, 0, 0, gridColor));  
-             setText((String)value);  
-             return this;  
-         }  
-        
-         /** 
-          * remove top of border for the component at (row, col) 
-          */  
-         public void eraseBorder(int row, int col)  
-         {  
-             clearRow = row;  
-             clearCol = col;  
-         }  
-     } 
+
+     class MyData implements CellBorder {
+    	    private Border border;
+    	    private Object obj;
+    	     
+    	    public MyData(Object obj, Border border) {
+    	      this.obj    = obj;
+    	      this.border = border;
+    	    }
+    	     
+    	    public void setObject(Object obj) {
+    	      this.obj = obj;
+    	    }   
+    	    public String toString() {
+    	      return obj.toString();
+    	    }
+    	     
+    	    // CellBorder  
+    	    public void setBorder(Border border) {
+    	      this.border = border;
+    	    }  
+    	    public Border getBorder() {
+    	      return border;
+    	    }
+    	    public void setBorder(Border border, int row, int col) {}
+    	    public Border getBorder(int row, int col) { return null; }
+    	  }
      
 }
