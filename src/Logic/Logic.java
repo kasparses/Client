@@ -28,6 +28,32 @@ import JsonClasses.GetCbsCalendar;
 import Ekstra.*;
 
 public class Logic {
+	
+	public static String Date1;
+	public static String Celsius1;
+	public static String Desc1;
+	public static String Date2;
+	public static String Celsius2;
+	public static String Desc2;
+	public static String Date3;
+	public static String Celsius3;
+	public static String Desc3;
+	public static String Date4;
+	public static String Celsius4;
+	public static String Desc4;
+	public static String Date5;
+	public static String Celsius5;
+	public static String Desc5;
+	public static String Date6;
+	public static String Celsius6;
+	public static String Desc6;
+	public static String Date7;
+	public static String Celsius7;
+	public static String Desc7;
+	public static String Quote;
+	public static String Author;
+	public static String Topic;
+	
 	private Screen screen;
 	TCPClient tcp = new TCPClient();
 	Gson gson = new GsonBuilder().create();
@@ -87,6 +113,11 @@ public class Logic {
 					System.out.println("client DailyUpdate qotd: "+DU.getQotd());
 					System.out.println("client DailyUpdate author: "+DU.getAuthor());
 					System.out.println("client DailyUpdate topic: "+DU.getTopic());
+					
+					//variabler til visning af quote i clienten (hentes af CalendarTest)
+					Quote = DU.getQotd();
+					Author = DU.getAuthor();
+					Topic = DU.getTopic();
 
 
 					GCBS.setUserName(L.getEmail());
@@ -112,6 +143,35 @@ public class Logic {
 					}
 
 					System.out.println("fagegwgrsegegeg "+lcs.get(0).getCelsius()); 
+					
+					//Variabler til visning af vejr i clienten (hentes af ClendarTest)
+					Date1 = lcs.get(0).getDate();
+					Celsius1 = lcs.get(0).getCelsius();
+					Desc1 = lcs.get(0).getDesc();
+					
+					Date2 = lcs.get(1).getDate();
+					Celsius2 = lcs.get(1).getCelsius();
+					Desc2 = lcs.get(1).getDesc();
+					
+					Date3 = lcs.get(2).getDate();
+					Celsius3 = lcs.get(2).getCelsius();
+					Desc3 = lcs.get(2).getDesc();
+					
+					Date4 = lcs.get(3).getDate();
+					Celsius4 = lcs.get(3).getCelsius();
+					Desc4 = lcs.get(3).getDesc();
+					
+					Date5 = lcs.get(4).getDate();
+					Celsius5 = lcs.get(4).getCelsius();
+					Desc5 = lcs.get(4).getDesc();
+					
+					Date6 = lcs.get(5).getDate();
+					Celsius6 = lcs.get(5).getCelsius();
+					Desc6 = lcs.get(5).getDesc();
+					
+					Date7 = lcs.get(6).getDate();
+					Celsius7 = lcs.get(6).getCelsius();
+					Desc7 = lcs.get(6).getDesc();
 
 
 					data d = new data();  

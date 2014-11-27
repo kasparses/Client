@@ -67,11 +67,42 @@ public class CalendarTest{
     private static JLabel label_11;
     private static JLabel label_12;
     private static JLabel label_13;
+    private static JLabel lblQuote;
+    private static JLabel lblAuthor;
+    private static JLabel lblTopic;
+    private static JLabel lblDesc1;
+    private static JLabel lblPicture1;
+    private static JLabel lblCelsius1;
+    private static JLabel lblDate1;
+    private static JLabel lblDesc2;
+    private static JLabel lblPicture2;
+    private static JLabel lblCelsius2;
+    private static JLabel lblDate2;
+    private static JLabel lblDesc3;
+    private static JLabel lblPicture3;
+    private static JLabel lblCelsius3;
+    private static JLabel lblDate3;
+    private static JLabel lblDesc4;
+    private static JLabel lblPicture4;
+    private static JLabel lblCelsius4;
+    private static JLabel lblDate4;
+    private static JLabel lblDesc5;
+    private static JLabel lblPicture5;
+    private static JLabel lblCelsius5;
+    private static JLabel lblDate5;
+    private static JLabel lblDesc6;
+    private static JLabel lblPicture6;
+    private static JLabel lblCelsius6;
+    private static JLabel lblDate6;
+    private static JLabel lblDesc7;
+    private static JLabel lblPicture7;
+    private static JLabel lblCelsius7;
+    private static JLabel lblDate7;
+    private static JLabel label_14;
+    
     data d = new data();
     String [] headers = new String[7];
-    private JLabel lblQuote;
-    private JLabel lblAuthor;
-    private JLabel lblTopic;
+   
     /**
      * @wbp.parser.entryPoint
      */
@@ -94,7 +125,7 @@ public class CalendarTest{
         
         //Prepare frame
         frmMain = new JFrame ("Gestionnaire de clients"); //Create frame
-        frmMain.setSize(823, 559); //Set size to 400x400 pixels
+        frmMain.setSize(1366, 768); //Set size to 400x400 pixels
         pane = frmMain.getContentPane(); //Get content pane
         pane.setLayout(null); //Apply null layout
         frmMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Close when X is clicked
@@ -116,7 +147,7 @@ public class CalendarTest{
         //Create controls
         lblMonth = new JLabel ("January");
         pnlCalendar.add(lblMonth);
-        lblMonth.setBounds(160, 25, 405, 25);
+        lblMonth.setBounds(590, 25, 405, 25);
         pnlCalendar.add(lblYear);
         pnlCalendar.add(cmbYear);
         btnNext = new JButton ("Next");
@@ -126,16 +157,16 @@ public class CalendarTest{
         //Register action listeners
         btnPrev.addActionListener(new btnPrev_Action());
         pnlCalendar.add(btnPrev);
-        btnPrev.setBounds(60, 25, 80, 25);
+        btnPrev.setBounds(349, 25, 80, 25);
         pnlCalendar.add(btnNext);
-        btnNext.setBounds(628, 25, 94, 25);
+        btnNext.setBounds(917, 25, 94, 25);
         pnlCalendar.add(stblCalendar);
         
         //Set bounds
-        pnlCalendar.setBounds(0, 0, 807, 508);
-        lblYear.setBounds(60, 479, 80, 20);
-        cmbYear.setBounds(222, 479, 80, 20);
-        stblCalendar.setBounds(60, 91, 662, 377);
+        pnlCalendar.setBounds(0, 0, 1360, 739);
+        lblYear.setBounds(317, 479, 80, 20);
+        cmbYear.setBounds(479, 479, 80, 20);
+        stblCalendar.setBounds(349, 91, 662, 377);
         
         //Make frame visible
         frmMain.setResizable(false);
@@ -170,104 +201,224 @@ public class CalendarTest{
         tblCalendar.setRowHeight(38);
         
         lblMonday = new JLabel("Monday");
-        lblMonday.setBounds(90, 66, 38, 14);
+        lblMonday.setBounds(379, 66, 38, 14);
         pnlCalendar.add(lblMonday);
         
         lblTuesday = new JLabel("Tuesday");
-        lblTuesday.setBounds(183, 66, 41, 14);
+        lblTuesday.setBounds(472, 66, 41, 14);
         pnlCalendar.add(lblTuesday);
         
         lblWenseday = new JLabel("Wednseday");
-        lblWenseday.setBounds(268, 66, 57, 14);
+        lblWenseday.setBounds(557, 66, 57, 14);
         pnlCalendar.add(lblWenseday);
         
         lblThuesday = new JLabel("Thursday");
-        lblThuesday.setBounds(370, 66, 45, 14);
+        lblThuesday.setBounds(659, 66, 45, 14);
         pnlCalendar.add(lblThuesday);
         
         lblFriday = new JLabel("Friday");
-        lblFriday.setBounds(470, 66, 30, 14);
+        lblFriday.setBounds(759, 66, 30, 14);
         pnlCalendar.add(lblFriday);
         
         lblSaturday = new JLabel("Saturday");
-        lblSaturday.setBounds(559, 66, 44, 14);
+        lblSaturday.setBounds(848, 66, 44, 14);
         pnlCalendar.add(lblSaturday);
         
         lblSunday = new JLabel("Sunday");
-        lblSunday.setBounds(653, 66, 36, 14);
+        lblSunday.setBounds(942, 66, 36, 14);
         pnlCalendar.add(lblSunday);
         
         label = new JLabel("8:00");
-        label.setBounds(28, 118, 22, 14);
+        label.setBounds(317, 116, 22, 14);
         pnlCalendar.add(label);
         
         label_1 = new JLabel("9:00");
-        label_1.setBounds(28, 143, 22, 14);
+        label_1.setBounds(317, 141, 22, 14);
         pnlCalendar.add(label_1);
         
         label_2 = new JLabel("10:00");
-        label_2.setBounds(22, 168, 28, 14);
+        label_2.setBounds(311, 166, 28, 14);
         pnlCalendar.add(label_2);
         
         label_3 = new JLabel("11:00");
-        label_3.setBounds(22, 193, 28, 14);
+        label_3.setBounds(311, 191, 28, 14);
         pnlCalendar.add(label_3);
         
         label_4 = new JLabel("12:00");
-        label_4.setBounds(22, 218, 28, 14);
+        label_4.setBounds(311, 216, 28, 14);
         pnlCalendar.add(label_4);
         
         label_5 = new JLabel("13:00");
-        label_5.setBounds(22, 243, 28, 14);
+        label_5.setBounds(311, 241, 28, 14);
         pnlCalendar.add(label_5);
         
         label_6 = new JLabel("14:00");
-        label_6.setBounds(22, 268, 28, 14);
+        label_6.setBounds(311, 266, 28, 14);
         pnlCalendar.add(label_6);
         
         label_7 = new JLabel("15:00");
-        label_7.setBounds(22, 293, 28, 14);
+        label_7.setBounds(311, 291, 28, 14);
         pnlCalendar.add(label_7);
         
         label_8 = new JLabel("16:00");
-        label_8.setBounds(22, 318, 28, 14);
+        label_8.setBounds(311, 316, 28, 14);
         pnlCalendar.add(label_8);
         
         label_9 = new JLabel("17:00");
-        label_9.setBounds(22, 343, 28, 14);
+        label_9.setBounds(311, 341, 28, 14);
         pnlCalendar.add(label_9);
         
         label_10 = new JLabel("18:00");
-        label_10.setBounds(22, 368, 28, 14);
+        label_10.setBounds(311, 366, 28, 14);
         pnlCalendar.add(label_10);
         
         label_11 = new JLabel("19:00");
-        label_11.setBounds(22, 393, 28, 14);
+        label_11.setBounds(311, 391, 28, 14);
         pnlCalendar.add(label_11);
         
         label_12 = new JLabel("20:00");
-        label_12.setBounds(22, 418, 28, 14);
+        label_12.setBounds(311, 416, 28, 14);
         pnlCalendar.add(label_12);
         
         label_13 = new JLabel("21:00");
-        label_13.setBounds(22, 443, 28, 14);
+        label_13.setBounds(311, 441, 28, 14);
         pnlCalendar.add(label_13);
         
-        lblQuote = new JLabel("New label");
-        lblQuote.setBounds(171, 11, 46, 14);
+        lblQuote = new JLabel("");
+        lblQuote.setBounds(613, 479, 518, 25);
         pnlCalendar.add(lblQuote);
         
-        lblAuthor = new JLabel("Author");
-        lblAuthor.setBounds(171, 36, 46, 14);
+        lblAuthor = new JLabel("");
+        lblAuthor.setBounds(613, 503, 145, 20);
         pnlCalendar.add(lblAuthor);
         
         
-        lblTopic = new JLabel("Topic");
-        lblTopic.setBounds(559, 11, 46, 14);
+        lblTopic = new JLabel("");
+        lblTopic.setBounds(759, 503, 154, 20);
         pnlCalendar.add(lblTopic);
         
+        //1th day weather
+        lblPicture1 = new JLabel("");
+        lblPicture1.setBounds(60, 589, 164, 124);
+        pnlCalendar.add(lblPicture1);
         
+        lblCelsius1 = new JLabel("");
+        lblCelsius1.setBounds(60, 557, 164, 14);
+        pnlCalendar.add(lblCelsius1);
         
+        lblDate1 = new JLabel("");
+        lblDate1.setBounds(60, 543, 164, 14);
+        pnlCalendar.add(lblDate1);
+        
+        lblDesc1 = new JLabel("");
+        lblDesc1.setBounds(60, 571, 164, 14);
+        pnlCalendar.add(lblDesc1);
+        
+        //2th day weather
+        lblPicture2 = new JLabel("");
+        lblPicture2.setBounds(234, 589, 164, 124);
+        pnlCalendar.add(lblPicture2);
+        
+        lblCelsius2 = new JLabel("");
+        lblCelsius2.setBounds(234, 557, 163, 14);
+        pnlCalendar.add(lblCelsius2);
+        
+        lblDate2 = new JLabel("");
+        lblDate2.setBounds(234, 543, 163, 14);
+        pnlCalendar.add(lblDate2);
+        
+        lblDesc2 = new JLabel("");
+        lblDesc2.setBounds(234, 571, 163, 14);
+        pnlCalendar.add(lblDesc2);
+        
+        //3th day weather
+        lblPicture3 = new JLabel("");
+        lblPicture3.setBounds(408, 589, 164, 124);
+        pnlCalendar.add(lblPicture3);
+        
+        lblCelsius3 = new JLabel("");
+        lblCelsius3.setBounds(408, 557, 164, 14);
+        pnlCalendar.add(lblCelsius3);
+        
+        lblDate3 = new JLabel("");
+        lblDate3.setBounds(408, 543, 164, 14);
+        pnlCalendar.add(lblDate3);
+        
+        lblDesc3 = new JLabel("");
+        lblDesc3.setBounds(408, 571, 164, 14);
+        pnlCalendar.add(lblDesc3);
+        
+        //4th day weather
+        lblPicture4 = new JLabel("");
+        lblPicture4.setBounds(582, 589, 164, 124);
+        pnlCalendar.add(lblPicture4);
+        
+        lblCelsius4 = new JLabel("");
+        lblCelsius4.setBounds(582, 557, 164, 14);
+        pnlCalendar.add(lblCelsius4);
+        
+        lblDate4 = new JLabel("");
+        lblDate4.setBounds(582, 543, 164, 14);
+        pnlCalendar.add(lblDate4);
+        
+        lblDesc4 = new JLabel("");
+        lblDesc4.setBounds(582, 571, 164, 14);
+        pnlCalendar.add(lblDesc4);
+        
+        //5th day weather
+        lblPicture5 = new JLabel("");
+        lblPicture5.setBounds(756, 589, 164, 124);
+        pnlCalendar.add(lblPicture5);
+        
+        lblCelsius5 = new JLabel("");
+        lblCelsius5.setBounds(756, 557, 166, 14);
+        pnlCalendar.add(lblCelsius5);
+        
+        lblDate5 = new JLabel("");
+        lblDate5.setBounds(756, 543, 166, 14);
+        pnlCalendar.add(lblDate5);
+        
+        lblDesc5 = new JLabel("");
+        lblDesc5.setBounds(756, 571, 166, 14);
+        pnlCalendar.add(lblDesc5);
+        
+        //6th day weather
+        lblPicture6 = new JLabel("");
+        lblPicture6.setBounds(930, 589, 164, 124);
+        pnlCalendar.add(lblPicture6);
+        
+        lblCelsius6 = new JLabel("");
+        lblCelsius6.setBounds(930, 557, 164, 14);
+        pnlCalendar.add(lblCelsius6);
+        
+        lblDate6 = new JLabel("");
+        lblDate6.setBounds(930, 543, 164, 14);
+        pnlCalendar.add(lblDate6);
+        
+        lblDesc6 = new JLabel("");
+        lblDesc6.setBounds(930, 571, 164, 14);
+        pnlCalendar.add(lblDesc6);
+        
+        //7th day weather
+        lblPicture7 = new JLabel("");
+        lblPicture7.setBounds(1104, 589, 164, 124);
+        pnlCalendar.add(lblPicture7);
+        
+        lblCelsius7 = new JLabel("");
+        lblCelsius7.setBounds(1104, 557, 164, 14);
+        pnlCalendar.add(lblCelsius7);
+        
+        lblDate7 = new JLabel("");
+        lblDate7.setBounds(1104, 543, 164, 14);
+        pnlCalendar.add(lblDate7);
+        
+        lblDesc7 = new JLabel("");
+        lblDesc7.setBounds(1104, 571, 164, 14);
+        pnlCalendar.add(lblDesc7);
+        
+        label_14 = new JLabel("________________________________________________________________________________________________________________________________________________________________________________________________________________________");
+        label_14.setBounds(30, 515, 1302, 14);
+        pnlCalendar.add(label_14);
         
         
         mtblCalendar.setColumnCount(7);
@@ -313,8 +464,132 @@ public class CalendarTest{
         if (week == 1 && year <= d.getRealYear()-10){btnPrev.setEnabled(false);} //Too early
         if (week == 52 && year >= d.getRealYear()+100){btnNext.setEnabled(false);} //Too late
         lblMonth.setText(weeks[week]); //Refresh the month label (at the top)
-        lblMonth.setBounds(380-lblMonth.getPreferredSize().width/2, 25, 180, 25); //Re-align label with calendar
+        lblMonth.setBounds(683-lblMonth.getPreferredSize().width/2, 25, 180, 25); //Re-align label with calendar
         cmbYear.setSelectedItem(String.valueOf(year)); //Select the correct year in the combo box
+        
+        //sætter quote, author og topic
+        lblQuote.setText("''"+Logic.Logic.Quote+"''");
+        lblAuthor.setText("By: "+Logic.Logic.Author);
+        lblTopic.setText("Topic: "+Logic.Logic.Topic);
+        
+        //sætter beskrivelser til dag 1
+        lblDate1.setText(Logic.Logic.Date1);
+        lblCelsius1.setText(Logic.Logic.Celsius1+" Celsius.");
+        lblDesc1.setText("Weather: "+Logic.Logic.Desc1);
+        //sætter billeder til dag 1
+        if(Logic.Logic.Desc1.equals("broken clouds")){
+        	lblPicture1.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/broken clouds.png")));
+        } else if(Logic.Logic.Desc1.equals("few clouds")){
+        	lblPicture1.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/few clouds.png")));
+        } else if(Logic.Logic.Desc1.equals("light rain")){
+        	lblPicture1.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/light rain.png")));
+        } else if(Logic.Logic.Desc1.equals("sky is clear")){
+        	lblPicture1.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/sky is clear.png")));
+        } else if(Logic.Logic.Desc1.equals("light snow")){
+        	lblPicture1.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/light snow.png")));
+        }
+        
+      //sætter beskrivelser til dag 2
+        lblDate2.setText(Logic.Logic.Date2);
+        lblCelsius2.setText(Logic.Logic.Celsius2+" Celsius.");
+        lblDesc2.setText("Weather: "+Logic.Logic.Desc2);
+        //sætter billeder til dag 2
+        if(Logic.Logic.Desc2.equals("broken clouds")){
+        	lblPicture2.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/broken clouds.png")));
+        } else if(Logic.Logic.Desc2.equals("few clouds")){
+        	lblPicture2.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/few clouds.png")));
+        } else if(Logic.Logic.Desc2.equals("light rain")){
+        	lblPicture2.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/light rain.png")));
+        } else if(Logic.Logic.Desc2.equals("sky is clear")){
+        	lblPicture2.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/sky is clear.png")));
+        } else if(Logic.Logic.Desc2.equals("light snow")){
+        	lblPicture2.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/light snow.png")));
+        }
+        
+      //sætter beskrivelser til dag 3
+        lblDate3.setText(Logic.Logic.Date3);
+        lblCelsius3.setText(Logic.Logic.Celsius3+" Celsius.");
+        lblDesc3.setText("Weather: "+Logic.Logic.Desc3);
+        //sætter billeder til dag 3
+        if(Logic.Logic.Desc3.equals("broken clouds")){
+        	lblPicture3.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/broken clouds.png")));
+        } else if(Logic.Logic.Desc3.equals("few clouds")){
+        	lblPicture3.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/few clouds.png")));
+        } else if(Logic.Logic.Desc3.equals("light rain")){
+        	lblPicture3.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/light rain.png")));
+        } else if(Logic.Logic.Desc3.equals("sky is clear")){
+        	lblPicture3.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/sky is clear.png")));
+        } else if(Logic.Logic.Desc3.equals("light snow")){
+        	lblPicture3.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/light snow.png")));
+        }
+        
+      //sætter beskrivelser til dag 4
+        lblDate4.setText(Logic.Logic.Date4);
+        lblCelsius4.setText(Logic.Logic.Celsius4+" Celsius.");
+        lblDesc4.setText("Weather: "+Logic.Logic.Desc4);
+        //sætter billeder til dag 4
+        if(Logic.Logic.Desc4.equals("broken clouds")){
+        	lblPicture4.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/broken clouds.png")));
+        } else if(Logic.Logic.Desc4.equals("few clouds")){
+        	lblPicture4.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/few clouds.png")));
+        } else if(Logic.Logic.Desc4.equals("light rain")){
+        	lblPicture4.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/light rain.png")));
+        } else if(Logic.Logic.Desc4.equals("sky is clear")){
+        	lblPicture4.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/sky is clear.png")));
+        } else if(Logic.Logic.Desc4.equals("light snow")){
+        	lblPicture4.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/light snow.png")));
+        }
+        
+      //sætter beskrivelser til dag 5
+        lblDate5.setText(Logic.Logic.Date5);
+        lblCelsius5.setText(Logic.Logic.Celsius5+" Celsius.");
+        lblDesc5.setText("Weather: "+Logic.Logic.Desc5);
+        //sætter billeder til dag 5
+        if(Logic.Logic.Desc5.equals("broken clouds")){
+        	lblPicture5.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/broken clouds.png")));
+        } else if(Logic.Logic.Desc5.equals("few clouds")){
+        	lblPicture5.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/few clouds.png")));
+        } else if(Logic.Logic.Desc5.equals("light rain")){
+        	lblPicture5.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/light rain.png")));
+        } else if(Logic.Logic.Desc5.equals("sky is clear")){
+        	lblPicture5.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/sky is clear.png")));
+        } else if(Logic.Logic.Desc5.equals("light snow")){
+        	lblPicture5.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/light snow.png")));
+        }
+        
+      //sætter beskrivelser til dag 6
+        lblDate6.setText(Logic.Logic.Date6);
+        lblCelsius6.setText(Logic.Logic.Celsius6+" Celsius.");
+        lblDesc6.setText("Weather: "+Logic.Logic.Desc6);
+        //sætter billeder til dag 6
+        if(Logic.Logic.Desc6.equals("broken clouds")){
+        	lblPicture6.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/broken clouds.png")));
+        } else if(Logic.Logic.Desc6.equals("few clouds")){
+        	lblPicture6.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/few clouds.png")));
+        } else if(Logic.Logic.Desc6.equals("light rain")){
+        	lblPicture6.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/light rain.png")));
+        } else if(Logic.Logic.Desc6.equals("sky is clear")){
+        	lblPicture6.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/sky is clear.png")));
+        } else if(Logic.Logic.Desc6.equals("light snow")){
+        	lblPicture6.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/light snow.png")));
+        }
+        
+        //sætter beskrivelser til dag 7
+        lblDate7.setText(Logic.Logic.Date7);
+        lblCelsius7.setText(Logic.Logic.Celsius7+" Celsius.");
+        lblDesc7.setText("Weather: "+Logic.Logic.Desc7);
+        //sætter billeder til dag 7
+        if(Logic.Logic.Desc7.equals("broken clouds")){
+        	lblPicture7.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/broken clouds.png")));
+        } else if(Logic.Logic.Desc7.equals("few clouds")){
+        	lblPicture7.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/few clouds.png")));
+        } else if(Logic.Logic.Desc7.equals("light rain")){
+        	lblPicture7.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/light rain.png")));
+        } else if(Logic.Logic.Desc7.equals("sky is clear")){
+        	lblPicture7.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/sky is clear.png")));
+        } else if(Logic.Logic.Desc7.equals("light snow")){
+        	lblPicture7.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/light snow.png")));
+        }
         
         Gson gson = new GsonBuilder().create();
         
@@ -712,5 +987,4 @@ public class CalendarTest{
     	    public void setBorder(Border border, int row, int col) {}
     	    public Border getBorder(int row, int col) { return null; }
     	  }
-     
 }
