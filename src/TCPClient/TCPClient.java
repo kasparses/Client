@@ -6,14 +6,16 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.sql.SQLException;
-import Shared.encryption;
+
+import Shared.Encryption;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 
 public class TCPClient {
 	private String ny = "";
-	private encryption cryp = new encryption();
+	private Encryption cryp = new Encryption();
 
 		public String bla(Object o) throws UnknownHostException, IOException, SQLException{
 			

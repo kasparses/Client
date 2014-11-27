@@ -2,7 +2,7 @@ package Shared;
 import javax.xml.bind.ParseConversionEvent;
 
 
-public class encryption {
+public class Encryption {
 //	Decryption path
 	public String decrypt(byte[] b)
 	{
