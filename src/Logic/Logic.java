@@ -1,19 +1,19 @@
 package Logic;
 import Ekstra.CalendarTest;
 import Ekstra.data;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
-
 import javax.swing.JOptionPane;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import TCPClient.TCPClient;
 import GUI.Screen;
 import JsonClasses.CreateCalender;
@@ -36,10 +36,6 @@ public class Logic {
 	ServerData SD = new ServerData();
 	Update UD = new Update();
 	GetCbsCalendar GCBS = new GetCbsCalendar();
-	
-	
-	
-	
 
 	public Logic(){
 		screen = new Screen();
@@ -68,11 +64,11 @@ public class Logic {
 			try{
 				Date date = new Date();
 				long date1 = date.getTime();
-				
+
 
 				String email = screen.getLogin().getUsernameTextField().getText();
 				String password = screen.getLogin().getPasswordTextField_1().getText();
-				
+
 				L.setEmail(email);
 				L.setPassword(password);
 
@@ -91,17 +87,38 @@ public class Logic {
 					System.out.println("client DailyUpdate qotd: "+DU.getQotd());
 					System.out.println("client DailyUpdate author: "+DU.getAuthor());
 					System.out.println("client DailyUpdate topic: "+DU.getTopic());
-					
-					
-					
+
+
+					GCBS.setUserName(L.getEmail());
 					String JsonString3 = tcp.bla(GCBS);
 					System.out.println(JsonString3);
-					
+
+
+
+					SD.setOverallID("getClientForecast");
+					String JsonString4 = tcp.bla(SD);
+
+
+					JsonParser parser = new JsonParser();
+					JsonArray jArray = parser.parse(JsonString4).getAsJsonArray();
+
+					ArrayList<Forecast> lcs = new ArrayList<Forecast>();
+
+					for(JsonElement obj : jArray )
+					{
+						Forecast cse = gson.fromJson( obj , Forecast.class);
+						lcs.add(cse);
+
+					}
+
+					System.out.println("fagegwgrsegegeg "+lcs.get(0).getCelsius()); 
+
+
 					data d = new data();  
 					new CalendarTest().run(d.calculateNewDate(),JsonString3);
-					
-//					screen.getMainMenu().setText("Hello " + name);
-					
+
+					//					screen.getMainMenu().setText("Hello " + name);
+
 					screen.show(Screen.MAINMENU);
 				}
 				if(!LA.getAnswer().equals("correct")){
@@ -132,8 +149,8 @@ public class Logic {
 
 			}
 			if (e.getSource() == screen.getMainMenu().getBtnGetQuoteoftheday()){
-				
-				
+
+
 			}
 			if (e.getSource() == screen.getMainMenu().getBtnSavenote()){
 
@@ -153,8 +170,8 @@ public class Logic {
 				DC.setUserName(L.getEmail());
 				try {
 					String JSonString = tcp.bla(DC);
-					
-					
+
+
 					JOptionPane.showMessageDialog(null, JSonString
 							, "Return message",JOptionPane.PLAIN_MESSAGE);
 				} catch (UnknownHostException e1) {
@@ -175,13 +192,13 @@ public class Logic {
 		public void actionPerformed(ActionEvent e) {
 
 			if (e.getSource() == screen.getCreatecalendar().getBtnCreateCalendar()){
-				
+
 				CreateCalender CC = new CreateCalender();
 				boolean empty = false;
 				String name = screen.getCreatecalendar().getTxtName().getText();
 				int type = 2; //2 betyder er det er en brugerskabt kalender og ikke den som er hentet fra CBS.
 				int active = 1; // 1 betyder at den er aktiv. 2 betyder at den ikke er aktiv.
-				
+
 				if( name.equals("")) {
 
 					JOptionPane.showMessageDialog(null, "\nPlease fill out all the fields"
@@ -191,7 +208,7 @@ public class Logic {
 
 				boolean PrivateOrPublic = false;
 				int PrivateOrPublicValue = 0;
-				
+
 
 				if (screen.getCreatecalendar().getRdbtnPrivate().isSelected())
 				{
@@ -210,42 +227,42 @@ public class Logic {
 							, "Error message",JOptionPane.PLAIN_MESSAGE);
 
 				}
-				
+
 				if (empty == false && PrivateOrPublic == true){
 					CC.setCalenderName(name);
 					CC.setPublicOrPrivate(PrivateOrPublicValue);
 					CC.setType(type);
 					CC.setActive(active);
 					CC.setUserName(L.getEmail());
-					
+
 					try {
 						String JsonString=tcp.bla(CC);
 						JOptionPane.showMessageDialog(null, JsonString
 								, "Return message",JOptionPane.PLAIN_MESSAGE);
 					} catch (UnknownHostException e1) {
-						
+
 						e1.printStackTrace();
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 					}
-					
+
 				}
-				
+
 			}
 		}
 
 	}
-	
+
 	private class AddEventGUIActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			
-			
+
+
 			if (e.getSource() == screen.getCreateEvent().getBtnSubmit()){
-				 
-				
-				
+
+
+
 				String description = screen.getCreateEvent().getTextField_Description().getText();
 				String start = screen.getCreateEvent().getTextField_Start().getText();
 				String location = screen.getCreateEvent().getTextField_Location().getText();
@@ -255,11 +272,11 @@ public class Logic {
 				String eventID = screen.getCreateEvent().getTextField_EventID().getText();
 				String activityID = screen.getCreateEvent().getTextField_ActivityID().getText();
 				String calendarName = screen.getCreateEvent().getTextField_CalendarName().getText();
-				
+
 				CreateEvent CE = new CreateEvent("createEvent", 0,activityID , eventID, type, title, description, start, end, location, calendarName );
-							
-				
-				
+
+
+
 				try {
 					try {
 						String JsonString5=tcp.bla(CE);
@@ -271,18 +288,18 @@ public class Logic {
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
-							
-				
-//
-////				if (Location.equals("")|| Createdby.equals("")|| start.equals("")|| end.equals("")|| name.equals("")|| text.equals(""))
-////				{
-////					JOptionPane.showMessageDialog(null, "\nPlease fill out all the fields"
-////							, "Error message",JOptionPane.PLAIN_MESSAGE);
-////				}
-////				else
-////				{
-			
-	
+
+
+				//
+				////				if (Location.equals("")|| Createdby.equals("")|| start.equals("")|| end.equals("")|| name.equals("")|| text.equals(""))
+				////				{
+				////					JOptionPane.showMessageDialog(null, "\nPlease fill out all the fields"
+				////							, "Error message",JOptionPane.PLAIN_MESSAGE);
+				////				}
+				////				else
+				////				{
+
+
 			}
 
 

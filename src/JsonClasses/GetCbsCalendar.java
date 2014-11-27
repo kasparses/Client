@@ -4,7 +4,7 @@ public class GetCbsCalendar implements java.io.Serializable
 {
 	private  final long serialVersionUID = 1L;
 	private String overallID = "GetCbsCalendar";
-	private String userName = "kabj13ab";
+	private String userName = "";
 
 	
 	

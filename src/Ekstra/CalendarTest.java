@@ -334,24 +334,12 @@ public class CalendarTest{
             
    
         }
-        
-        
-       
-       
-//      String test3 = cse.getDescription();
-//      System.out.println("test3: "+test3);
-//      
-//      String test4 = cse.getStart().get(0);
-//      System.out.println("test4: "+test4);
-       
-        
-//        Events events = gson.fromJson(JSonString3, Events.class);
-        
+
 		
         String [] startCalendarTime = new String[17];
-        startCalendarTime[0] = "8:00";
-        startCalendarTime[1] = "8:55";
-        startCalendarTime[2] = "9:50";
+        startCalendarTime[0] = "08:00";
+        startCalendarTime[1] = "08:55";
+        startCalendarTime[2] = "09:50";
         startCalendarTime[3] = "10:45";
         startCalendarTime[4] = "11:40";
         startCalendarTime[5] = "12:35";
@@ -369,9 +357,9 @@ public class CalendarTest{
         
         
         String [] endCalendarTime = new String[17];
-        endCalendarTime[0] = "8:00";
-        endCalendarTime[1] = "8:45";
-        endCalendarTime[2] = "9:40";
+        endCalendarTime[0] = "08:00";
+        endCalendarTime[1] = "08:45";
+        endCalendarTime[2] = "09:40";
         endCalendarTime[3] = "10:35";
         endCalendarTime[4] = "11:30";
         endCalendarTime[5] = "12:25";
@@ -404,9 +392,7 @@ public class CalendarTest{
         tblCalendar.setShowGrid(false);
         
         boolean isTop,isLeft,isBottom,isRight;
-        
 
-        
         int[] rows    = new int[20];
         
         for(int å1 = 0; å1<rows.length; å1++){
@@ -473,48 +459,39 @@ public class CalendarTest{
         tblCalendar.revalidate();
         tblCalendar.repaint();
         
-        String test = lcs.get(0).getEnd().get(0);
-        System.out.println("test: "+test);
-        
-       String test2 = lcs.get(0).getDescription();
-       System.out.println("test2: "+test2);
 
-      
         for (int g=0; g<=1000; g++){
-        	System.out.println("rhjwig");
+        
         	
-        	String day =lcs.get(g).getStart().get(0);
+        	String dateStart =lcs.get(g).getStart().get(0);
+        	String dateEnd = lcs.get(g).getEnd().get(0);
         	
-        	String s = "123 456 789 The rest of the string";
-        	String ss[] = s.split(" ", 4);
-        	// ss = {"123", "456", "789", "The rest of the string"};
-        	System.out.println(ss[1]);
+        	System.out.println("dateStart: "+dateStart);
+        	System.out.println("dateEnd: "+dateEnd);
         	
-        	
-        	
-        	
-        	String daySplit [] = day.split("\\-");
-        	System.out.println(daySplit[1]);
-        	
-        	System.out.println(day);
-        	if (day.equals("1")||day.equals("2")||day.equals("3")||day.equals("4")||day.equals("5")||day.equals("6")||day.equals("7")||day.equals("8")||day.equals("9") ){
-        		day = ("0"+day);
+        	String daySplitEnd [] = dateEnd.split("");
+        	String daySplit [] = dateStart.split("");
+
+        	for (int i = 0; i<daySplit.length; i++){
+        		System.out.println(" daysplit "+i+" "+ daySplit[i]);
         	}
-        	System.out.println("fafeag");
-    		String år =(lcs.get(g).getStart().get(0));
-    		
-    		int intMonth =Integer.parseInt(lcs.get(g).getStart().get(1))+1;
-    		String month = String.valueOf(intMonth);
-    		String dato = day+"-"+month+"-"+år;
+        	
+        	String day = daySplit[9]+ daySplit[10];
+        	String month = daySplit[6]+ daySplit[7];
+        	String år = daySplit[1]+daySplit[2]+daySplit[3]+daySplit[4];
+        	String dato = day+"-"+month+"-"+år;
+        	System.out.println("dato: "+dato);
 
-    		//0 = år, 1 = måned, 2 = dag, 3 = timer, 4 = minutter
+//        	if (day.equals("1")||day.equals("2")||day.equals("3")||day.equals("4")||day.equals("5")||day.equals("6")||day.equals("7")||day.equals("8")||day.equals("9") ){
+//        		day = ("0"+day);
+//        	}
 
-    		String startHours =(lcs.get(g).getStart().get(3));
-    		String startMinutes =(lcs.get(g).getStart().get(4));
+    		String startHours =daySplit[11]+daySplit[12];
+    		String startMinutes =daySplit[14]+daySplit[15];
     		String startTime = startHours + ":"+startMinutes;
     		
-    		String endHours =(lcs.get(g).getEnd().get(3));
-    		String endMinutes =(lcs.get(g).getEnd().get(4));
+    		String endHours =daySplitEnd[11]+daySplitEnd[12];
+    		String endMinutes =daySplitEnd[14]+daySplitEnd[15];
     		String endTime = endHours + ":"+endMinutes;
 
     		for (int h = 0; h<headers.length; h++){
@@ -524,7 +501,6 @@ public class CalendarTest{
 
     			}
     		}
-    		
     		
 
     		if(match == true){
