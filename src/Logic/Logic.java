@@ -94,11 +94,11 @@ public class Logic {
 					
 					
 					
-//					String JsonString3 = tcp.bla(GCBS);
+					String JsonString3 = tcp.bla(GCBS);
+					System.out.println(JsonString3);
 					
-					
-//					data d = new data();  
-//					new CalendarTest().run(d.calculateNewDate(),JsonString3);
+					data d = new data();  
+					new CalendarTest().run(d.calculateNewDate(),JsonString3);
 					
 //					screen.getMainMenu().setText("Hello " + name);
 					

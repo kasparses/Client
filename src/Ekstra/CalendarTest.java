@@ -25,6 +25,9 @@ import javax.swing.border.*;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -314,8 +317,36 @@ public class CalendarTest{
         cmbYear.setSelectedItem(String.valueOf(year)); //Select the correct year in the combo box
         
         Gson gson = new GsonBuilder().create();
-        Events events = gson.fromJson(JSonString3, Events.class);
+        
+        
+//        channelSearchEnum[] enums = gson.fromJson(yourJson, channelSearchEnum[].class);
+        
+        
+        JsonParser parser = new JsonParser();
+        JsonArray jArray = parser.parse(JSonString3).getAsJsonArray();
 
+        ArrayList<Event> lcs = new ArrayList<Event>();
+
+        for(JsonElement obj : jArray )
+        {
+        	Event cse = gson.fromJson( obj , Event.class);
+            lcs.add(cse);
+            
+   
+        }
+        
+        
+       
+       
+//      String test3 = cse.getDescription();
+//      System.out.println("test3: "+test3);
+//      
+//      String test4 = cse.getStart().get(0);
+//      System.out.println("test4: "+test4);
+       
+        
+//        Events events = gson.fromJson(JSonString3, Events.class);
+        
 		
         String [] startCalendarTime = new String[17];
         startCalendarTime[0] = "8:00";
@@ -389,10 +420,10 @@ public class CalendarTest{
         
         
         for(int i = 0; i<columns.length; i++){
-      	  System.out.println("columns "+i+": "+columns [i]);
+      	
         }
         for(int a = 0; a<rows.length; a++){
-      	  System.out.println("rows "+a+": "+rows [a]);
+      	  
         }
         
         int rowMax    = rows.length;
@@ -441,28 +472,49 @@ public class CalendarTest{
         tblCalendar.clearSelection();
         tblCalendar.revalidate();
         tblCalendar.repaint();
+        
+        String test = lcs.get(0).getEnd().get(0);
+        System.out.println("test: "+test);
+        
+       String test2 = lcs.get(0).getDescription();
+       System.out.println("test2: "+test2);
 
       
-        for (int g=0; g<=90; g++){
-        	String day =(events.getEvents().get(g).getStart().get(2));
+        for (int g=0; g<=1000; g++){
+        	System.out.println("rhjwig");
+        	
+        	String day =lcs.get(g).getStart().get(0);
+        	
+        	String s = "123 456 789 The rest of the string";
+        	String ss[] = s.split(" ", 4);
+        	// ss = {"123", "456", "789", "The rest of the string"};
+        	System.out.println(ss[1]);
+        	
+        	
+        	
+        	
+        	String daySplit [] = day.split("\\-");
+        	System.out.println(daySplit[1]);
+        	
+        	System.out.println(day);
         	if (day.equals("1")||day.equals("2")||day.equals("3")||day.equals("4")||day.equals("5")||day.equals("6")||day.equals("7")||day.equals("8")||day.equals("9") ){
         		day = ("0"+day);
         	}
-        	
-    		String år =(events.getEvents().get(g).getStart().get(0));
+        	System.out.println("fafeag");
+    		String år =(lcs.get(g).getStart().get(0));
     		
-    		int intMonth =Integer.parseInt(events.getEvents().get(g).getStart().get(1))+1;
+    		int intMonth =Integer.parseInt(lcs.get(g).getStart().get(1))+1;
     		String month = String.valueOf(intMonth);
     		String dato = day+"-"+month+"-"+år;
 
     		//0 = år, 1 = måned, 2 = dag, 3 = timer, 4 = minutter
 
-    		String startHours =(events.getEvents().get(g).getStart().get(3));
-    		String startMinutes =(events.getEvents().get(g).getStart().get(4));
+    		String startHours =(lcs.get(g).getStart().get(3));
+    		String startMinutes =(lcs.get(g).getStart().get(4));
     		String startTime = startHours + ":"+startMinutes;
     		
-    		String endHours =(events.getEvents().get(g).getEnd().get(3));
-    		String endMinutes =(events.getEvents().get(g).getEnd().get(4));
+    		String endHours =(lcs.get(g).getEnd().get(3));
+    		String endMinutes =(lcs.get(g).getEnd().get(4));
     		String endTime = endHours + ":"+endMinutes;
 
     		for (int h = 0; h<headers.length; h++){
@@ -502,7 +554,7 @@ public class CalendarTest{
     				tblCalendar.setIntercellSpacing(new Dimension(0,0));
     			
     			
-    				System.out.println(events.getEvents().get(g).getDescription()+ "row: "+startRow+ " column: "+column+ " time: "+startTime);
+    				System.out.println(lcs.get(g).getDescription()+ "row: "+startRow+ " column: "+column+ " time: "+startTime);
     				
 
        
@@ -530,7 +582,7 @@ public class CalendarTest{
         		        
         		        String value = "";
             			if(i1==0){
-            				value = events.getEvents().get(g).getDescription();
+            				value = lcs.get(g).getDescription();
             			}
             			if(i1>0){
             				value = "";
