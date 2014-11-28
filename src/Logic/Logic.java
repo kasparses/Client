@@ -161,10 +161,16 @@ public class Logic {
 					Date7 = lcs.get(6).getDate();
 					Celsius7 = lcs.get(6).getCelsius();
 					Desc7 = lcs.get(6).getDesc();
-
+					
+					SD.setOverallID("getCalendar");
+					System.out.println("blablabla");
+					String JsonString5 = tcp.bla(SD);
+					System.out.println("hejhejehj");
+					
+					
 
 					data d = new data();  
-					new CalendarTest().run(d.calculateNewDate(),JsonString3);
+					new CalendarTest().run(d.calculateNewDate(),JsonString3, JsonString5);
 
 					//					screen.getMainMenu().setText("Hello " + name);
 

@@ -17,6 +17,7 @@ public class data {
     private String QOTD;
     private String Author;
     private String Topic;
+    private String JsonString5;
     
 
     
@@ -35,6 +36,18 @@ public class data {
     
 	public String getQOTD() {
 		return QOTD;
+	}
+
+
+
+	public String getJsonString5() {
+		return JsonString5;
+	}
+
+
+
+	public void setJsonString5(String jsonString5) {
+		JsonString5 = jsonString5;
 	}
 
 

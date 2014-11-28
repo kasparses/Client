@@ -118,6 +118,7 @@ public class CalendarTest{
     String [] headers = new String[7];
     int notes [][] = new int [20][7];
     ArrayList<Event> lcs = new ArrayList<Event>();
+    ArrayList<CalendarData> lcs2 = new ArrayList<CalendarData>();
     boolean updated = false;
     Gson gson = new GsonBuilder().create();
     TCPClient tcp = new TCPClient();
@@ -125,17 +126,20 @@ public class CalendarTest{
     private JButton btnGetNote;
     private JButton btnAddNote;
     private JTextField txtNotetext;
+    private JLabel lblSelectCalendar;
+    private JComboBox comboBox_Calendar;
    
     /**
      * @wbp.parser.entryPoint
      */
-    public void run (long newDate, String JsonString3){
+    public void run (long newDate, String JsonString3, String JsonString5){
 //    	tblCalendar.setShowHorizontalLines(false);
     	
     	
     	
     	d.setJsonString(JsonString3);
     	d.setNewDate(newDate);
+    	d.setJsonString5(JsonString5);
     	
         //Look and feel
         try {UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());}
@@ -463,6 +467,14 @@ public class CalendarTest{
         txtNotetext.setBounds(1050, 163, 86, 20);
         pnlCalendar.add(txtNotetext);
         txtNotetext.setColumns(10);
+        
+        lblSelectCalendar = new JLabel("Select Calendar");
+        lblSelectCalendar.setBounds(171, 66, 75, 14);
+        pnlCalendar.add(lblSelectCalendar);
+        
+        comboBox_Calendar = new JComboBox();
+        comboBox_Calendar.setBounds(171, 100, 110, 20);
+        pnlCalendar.add(comboBox_Calendar);
         btnAddNote.addActionListener(new btnAddNote());
         
         
@@ -489,12 +501,12 @@ public class CalendarTest{
         }
         
         //Refresh calendar
-        refreshCalendar (d.getWeekofYear(), d.getRealYear(), d.getJsonString()); //Refresh calendar
+        refreshCalendar (d.getWeekofYear(), d.getRealYear(), d.getJsonString(), d.getJsonString5()); //Refresh calendar
     }
     
     
     
-    public  void refreshCalendar(int week, int year, String JSonString3){
+    public  void refreshCalendar(int week, int year, String JSonString3, String JsonString5){
     	
         //Variables
     	String [] weeks = new String[53];
@@ -657,7 +669,18 @@ public class CalendarTest{
         updated = true;
         }
 
-		
+        JsonParser parser = new JsonParser();
+        JsonArray jArray = parser.parse(JsonString5).getAsJsonArray();
+
+        for(JsonElement obj : jArray )
+        {
+        	CalendarData cse = gson.fromJson( obj , CalendarData.class);
+            lcs2.add(cse);
+            
+   
+        }
+        System.out.println("hej"+ lcs2.get(0).getName());
+        
         String [] startCalendarTime = new String[17];
         startCalendarTime[0] = "08:00";
         startCalendarTime[1] = "08:55";
@@ -951,7 +974,7 @@ public class CalendarTest{
             	d.setWeekofYear(52);            	
             	d.setNewDate(d.getNewDate()-604800000);
             	frmMain.dispose();
-            	run(d.getNewDate(), d.getJsonString());
+            	run(d.getNewDate(), d.getJsonString(),d.getJsonString5());
             	
             }
             else{ //Back one week
@@ -959,10 +982,10 @@ public class CalendarTest{
             	d.setWeekofYear(d.getWeekofYear()-1);
             	d.setNewDate(d.getNewDate()-604800000);	
             	frmMain.dispose();
-            	run(d.getNewDate(), d.getJsonString());
+            	run(d.getNewDate(), d.getJsonString(),d.getJsonString5());
             	
             }
-            refreshCalendar(d.getWeekofYear(), d.getCurrentYear(),d.getJsonString());
+            refreshCalendar(d.getWeekofYear(), d.getCurrentYear(),d.getJsonString(),d.getJsonString5());
         }
     }
      class btnNext_Action implements ActionListener{
@@ -972,7 +995,7 @@ public class CalendarTest{
             	d.setWeekofYear(1);          
             	d.setNewDate(d.getNewDate()+604800000);
             	frmMain.dispose();
-            	run(d.getNewDate(),d.getJsonString());
+            	run(d.getNewDate(),d.getJsonString(),d.getJsonString5());
             	
             }
             else{ //Foward one month
@@ -980,9 +1003,9 @@ public class CalendarTest{
             	d.setNewDate(d.getNewDate()+604800000); //604800000 is the number of milliseconds in a week
             	
             	frmMain.dispose();
-            	run(d.getNewDate(), d.getJsonString());
+            	run(d.getNewDate(), d.getJsonString(),d.getJsonString5());
             }
-            refreshCalendar(d.getWeekofYear(), d.getCurrentYear(), d.getJsonString());
+            refreshCalendar(d.getWeekofYear(), d.getCurrentYear(), d.getJsonString(),d.getJsonString5());
         }
     }
      class btnGetNote implements ActionListener{
@@ -1040,7 +1063,7 @@ public class CalendarTest{
             if (cmbYear.getSelectedItem() != null){
                 String b = cmbYear.getSelectedItem().toString();
                 d.setCurrentYear(Integer.parseInt(b));
-                refreshCalendar(d.getWeekofYear(), d.getCurrentYear(), d.getJsonString());
+                refreshCalendar(d.getWeekofYear(), d.getCurrentYear(), d.getJsonString(),d.getJsonString5());
             }
         }
     }
@@ -1082,5 +1105,4 @@ public class CalendarTest{
     	    public void setBorder(Border border, int row, int col) {}
     	    public Border getBorder(int row, int col) { return null; }
     	  }
-     
 }
