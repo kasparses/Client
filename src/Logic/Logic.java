@@ -107,12 +107,6 @@ public class Logic {
 					SD.setOverallID("DailyUpdate");
 					String JsonString2 = tcp.bla(SD);
 					DailyUpdate DU = gson.fromJson(JsonString2, DailyUpdate.class);
-					System.out.println("client DailyUpdate Date: "+DU.getDate());
-					System.out.println("client DailyUpdate ApparentTemperature: "+DU.getApparentTemperature());
-					System.out.println("client DailyUpdate Summary: "+DU.getSummary());
-					System.out.println("client DailyUpdate qotd: "+DU.getQotd());
-					System.out.println("client DailyUpdate author: "+DU.getAuthor());
-					System.out.println("client DailyUpdate topic: "+DU.getTopic());
 					
 					//variabler til visning af quote i clienten (hentes af CalendarTest)
 					Quote = DU.getQotd();
@@ -122,9 +116,6 @@ public class Logic {
 
 					GCBS.setUserName(L.getEmail());
 					String JsonString3 = tcp.bla(GCBS);
-					System.out.println(JsonString3);
-
-
 
 					SD.setOverallID("getClientForecast");
 					String JsonString4 = tcp.bla(SD);
@@ -141,8 +132,6 @@ public class Logic {
 						lcs.add(cse);
 
 					}
-
-					System.out.println("fagegwgrsegegeg "+lcs.get(0).getCelsius()); 
 					
 					//Variabler til visning af vejr i clienten (hentes af ClendarTest)
 					Date1 = lcs.get(0).getDate();

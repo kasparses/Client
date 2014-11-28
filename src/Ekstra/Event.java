@@ -17,6 +17,7 @@ public class Event implements java.io.Serializable{
     private ArrayList<String> start;
     private ArrayList<String> end;
     private String location;
+    private String note;
 
     // Settere og gettere for Event objektet 
     public void setActivityid(String activityid){
@@ -33,7 +34,13 @@ public class Event implements java.io.Serializable{
         return eventid;
     }
 
-    public void setType(String type){
+    public String getNote() {
+		return note;
+	}
+	public void setNote(String note) {
+		this.note = note;
+	}
+	public void setType(String type){
         this.type = type;
     }
     public String getType(){
@@ -83,7 +90,7 @@ public class Event implements java.io.Serializable{
 	}
 	public Event( int ID, String activityid, String eventid, String type, String title,
 			String description, ArrayList<String> start,
-			ArrayList<String> end, String location) {
+			ArrayList<String> end, String location, String note) {
 		super();
 		this.ID = ID;
 		this.activityid = activityid;
@@ -94,6 +101,7 @@ public class Event implements java.io.Serializable{
 		this.start = start;
 		this.end = end;
 		this.location = location;
+		this.note =note;
 	}
     
     
