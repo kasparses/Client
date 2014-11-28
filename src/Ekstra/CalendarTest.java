@@ -16,6 +16,7 @@ import com.google.gson.JsonParser;
 
 import java.awt.*;  
 
+import JsonClasses.DailyUpdate;
 import JsonClasses.Login;
 import JsonClasses.SaveNote;
 
@@ -123,6 +124,7 @@ public class CalendarTest{
 	SaveNote SN = new SaveNote();
     private JButton btnGetNote;
     private JButton btnAddNote;
+    private JTextField txtNotetext;
    
     /**
      * @wbp.parser.entryPoint
@@ -455,6 +457,12 @@ public class CalendarTest{
         btnAddNote.setEnabled(true);
         btnAddNote.setBounds(1050, 125, 175, 23);
         pnlCalendar.add(btnAddNote);
+        
+        txtNotetext = new JTextField();
+        txtNotetext.setText("NoteText");
+        txtNotetext.setBounds(1050, 163, 86, 20);
+        pnlCalendar.add(txtNotetext);
+        txtNotetext.setColumns(10);
         btnAddNote.addActionListener(new btnAddNote());
         
         
@@ -1000,21 +1008,29 @@ public class CalendarTest{
              
              
             SN.setSuperID(superID);
-
+            SN.setNote(txtNotetext.getText());
+            
+           
 				try {
-					String JsonString=tcp.bla(SN);
+					 String JsonString=tcp.bla(SN);
+					 SaveNote SN = gson.fromJson(JsonString, SaveNote.class);
+					 lcs.get(selection).setNote(txtNotetext.getText());
+					 
+					 System.out.println(SN.getAnswer());
+					 JOptionPane.showMessageDialog(null, SN.getAnswer()
+								, "Note",JOptionPane.PLAIN_MESSAGE);
 				} catch (UnknownHostException e1) {
-					// TODO Auto-generated catch block
+					
 					e1.printStackTrace();
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
+					
 					e1.printStackTrace();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
+					
 					e1.printStackTrace();
 				}
             
-             
+				 
              
              
          }
@@ -1028,8 +1044,19 @@ public class CalendarTest{
             }
         }
     }
+     
 
-     class MyData implements CellBorder {
+     public JTextField getTxtNotetext() {
+		return txtNotetext;
+	}
+
+
+
+	public void setTxtNotetext(JTextField txtNotetext) {
+		this.txtNotetext = txtNotetext;
+	}
+
+	class MyData implements CellBorder {
     	    private Border border;
     	    private Object obj;
     	     
@@ -1055,4 +1082,5 @@ public class CalendarTest{
     	    public void setBorder(Border border, int row, int col) {}
     	    public Border getBorder(int row, int col) { return null; }
     	  }
+     
 }

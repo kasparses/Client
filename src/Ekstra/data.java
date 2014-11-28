@@ -17,7 +17,7 @@ public class data {
     private String QOTD;
     private String Author;
     private String Topic;
-
+    
 
     
     		long newDate;
