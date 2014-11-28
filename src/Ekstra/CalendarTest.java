@@ -6,8 +6,18 @@ package Ekstra;
 import Ekstra.CellBorder;
 import Ekstra.LinesBorder;
 import Ekstra.BorderCellRenderer;
+import TCPClient.TCPClient;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 import java.awt.*;  
+
+import JsonClasses.Login;
+import JsonClasses.SaveNote;
 
 import javax.swing.*;  
 import javax.swing.table.*;  
@@ -31,6 +41,9 @@ import com.google.gson.JsonParser;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
+import java.net.UnknownHostException;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -102,6 +115,14 @@ public class CalendarTest{
     
     data d = new data();
     String [] headers = new String[7];
+    int notes [][] = new int [20][7];
+    ArrayList<Event> lcs = new ArrayList<Event>();
+    boolean updated = false;
+    Gson gson = new GsonBuilder().create();
+    TCPClient tcp = new TCPClient();
+	SaveNote SN = new SaveNote();
+    private JButton btnGetNote;
+    private JButton btnAddNote;
    
     /**
      * @wbp.parser.entryPoint
@@ -193,9 +214,13 @@ public class CalendarTest{
         tblCalendar.getTableHeader().setReorderingAllowed(false);
         
         //Single cell selection
-        tblCalendar.setColumnSelectionAllowed(true);
-        tblCalendar.setRowSelectionAllowed(true);
-        tblCalendar.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+//        tblCalendar.setColumnSelectionAllowed(true);
+//        tblCalendar.setRowSelectionAllowed(true);
+//        tblCalendar.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        
+        
+        tblCalendar.setCellSelectionEnabled(true);
+        tblCalendar.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         
         //Set row/column count
         tblCalendar.setRowHeight(38);
@@ -420,6 +445,18 @@ public class CalendarTest{
         label_14.setBounds(30, 515, 1302, 14);
         pnlCalendar.add(label_14);
         
+        btnGetNote = new JButton("Show note for selected event");
+        btnGetNote.setEnabled(true);
+        btnGetNote.setBounds(1050, 91, 175, 23);
+        pnlCalendar.add(btnGetNote);
+        btnGetNote.addActionListener(new btnGetNote());
+        
+        btnAddNote = new JButton("Add note to selected event");
+        btnAddNote.setEnabled(true);
+        btnAddNote.setBounds(1050, 125, 175, 23);
+        pnlCalendar.add(btnAddNote);
+        btnAddNote.addActionListener(new btnAddNote());
+        
         
         mtblCalendar.setColumnCount(7);
         mtblCalendar.setRowCount(20);
@@ -596,11 +633,11 @@ public class CalendarTest{
         
 //        channelSearchEnum[] enums = gson.fromJson(yourJson, channelSearchEnum[].class);
         
-        
+        if(updated ==false){
         JsonParser parser = new JsonParser();
         JsonArray jArray = parser.parse(JSonString3).getAsJsonArray();
 
-        ArrayList<Event> lcs = new ArrayList<Event>();
+       
 
         for(JsonElement obj : jArray )
         {
@@ -608,6 +645,8 @@ public class CalendarTest{
             lcs.add(cse);
             
    
+        }
+        updated = true;
         }
 
 		
@@ -735,31 +774,25 @@ public class CalendarTest{
         tblCalendar.repaint();
         
 
-        for (int g=0; g<=1000; g++){
+        for (int g=0; g<=lcs.size(); g++){
         
         	
         	String dateStart =lcs.get(g).getStart().get(0);
         	String dateEnd = lcs.get(g).getEnd().get(0);
         	
-        	System.out.println("dateStart: "+dateStart);
-        	System.out.println("dateEnd: "+dateEnd);
-        	
+      
         	String daySplitEnd [] = dateEnd.split("");
         	String daySplit [] = dateStart.split("");
 
         	for (int i = 0; i<daySplit.length; i++){
-        		System.out.println(" daysplit "+i+" "+ daySplit[i]);
+        	
         	}
         	
         	String day = daySplit[9]+ daySplit[10];
         	String month = daySplit[6]+ daySplit[7];
         	String år = daySplit[1]+daySplit[2]+daySplit[3]+daySplit[4];
         	String dato = day+"-"+month+"-"+år;
-        	System.out.println("dato: "+dato);
-
-//        	if (day.equals("1")||day.equals("2")||day.equals("3")||day.equals("4")||day.equals("5")||day.equals("6")||day.equals("7")||day.equals("8")||day.equals("9") ){
-//        		day = ("0"+day);
-//        	}
+    
 
     		String startHours =daySplit[11]+daySplit[12];
     		String startMinutes =daySplit[14]+daySplit[15];
@@ -780,34 +813,25 @@ public class CalendarTest{
 
     		if(match == true){
     			match = false;
-    			System.out.println();
     			
-    			System.out.println("startTime: "+startTime);
-    			System.out.println("endTime: "+ endTime);
 
     			for (int st=0; st<startCalendarTime.length; st++){ //st = startTime
     				if (startTime.equals(startCalendarTime[st])){
     					startRow = st;
-    					System.out.println("startRow: "+startRow);
+    					
 
     				}
     			}
     			for (int et=0; et<endCalendarTime.length; et++){  //et = endTime
     				if (endTime.equals(endCalendarTime[et])){
     					endRow = et;
-    					System.out.println("endRow: "+endRow);
+    					
 
     				}
     			}
     			for (int k = startRow; k<endRow; k++){
-    				System.out.println("k: "+k);
-    				System.out.println("startRow: "+startRow);
-    				tblCalendar.setIntercellSpacing(new Dimension(0,0));
-    			
-    			
-    				System.out.println(lcs.get(g).getDescription()+ "row: "+startRow+ " column: "+column+ " time: "+startTime);
     				
-
+    				tblCalendar.setIntercellSpacing(new Dimension(0,0));
        
         			  boolean isTop1,isLeft1,isBottom1,isRight1; 		       
 
@@ -871,8 +895,9 @@ public class CalendarTest{
         		            border.append(tmp, isReplace);
         		            
         		            
-        		         
+        		            notes [rowb1][columnb1] = g;
         		            mtblCalendar.setValueAt(myData, rowb1, columnb1);
+        		            
 //        		            mtblCalendar.setValueAt(mtblCalendar.getValueAt(k, column), rowb1, columnb1);
         		        }
         		      }
@@ -945,12 +970,55 @@ public class CalendarTest{
             else{ //Foward one month
             	d.setWeekofYear(d.getWeekofYear()+1);
             	d.setNewDate(d.getNewDate()+604800000); //604800000 is the number of milliseconds in a week
+            	
             	frmMain.dispose();
             	run(d.getNewDate(), d.getJsonString());
             }
             refreshCalendar(d.getWeekofYear(), d.getCurrentYear(), d.getJsonString());
         }
     }
+     class btnGetNote implements ActionListener{
+         public void actionPerformed (ActionEvent e){
+             
+        	 int rowIndex = tblCalendar.getSelectedRow();
+             int colIndex = tblCalendar.getSelectedColumn();
+             int selection = notes[rowIndex][colIndex];
+            
+             JOptionPane.showMessageDialog(null, lcs.get(selection).getNote()
+						, lcs.get(selection).getDescription(),JOptionPane.PLAIN_MESSAGE);
+             
+         }
+     }
+     class btnAddNote implements ActionListener{
+         public void actionPerformed (ActionEvent e){
+        	 
+        	 int rowIndex = tblCalendar.getSelectedRow();
+             int colIndex = tblCalendar.getSelectedColumn();
+             int selection = notes[rowIndex][colIndex];
+             int superID = selection+1;
+             
+             
+             
+            SN.setSuperID(superID);
+
+				try {
+					String JsonString=tcp.bla(SN);
+				} catch (UnknownHostException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+            
+             
+             
+             
+         }
+     }
      class cmbYear_Action implements ActionListener{
         public void actionPerformed (ActionEvent e){
             if (cmbYear.getSelectedItem() != null){
