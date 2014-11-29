@@ -62,6 +62,7 @@ public class Logic {
 	ServerData SD = new ServerData();
 	Update UD = new Update();
 	GetCbsCalendar GCBS = new GetCbsCalendar();
+	String [] Date = new String[20];
 
 	public Logic(){
 		screen = new Screen();
@@ -162,15 +163,20 @@ public class Logic {
 					Celsius7 = lcs.get(6).getCelsius();
 					Desc7 = lcs.get(6).getDesc();
 					
+					
+
+					
 					SD.setOverallID("getCalendar");
 					System.out.println("blablabla");
+					
 					String JsonString5 = tcp.bla(SD);
 					System.out.println("hejhejehj");
+					System.out.println(JsonString5);
 					
 					
 
 					data d = new data();  
-					new CalendarTest().run(d.calculateNewDate(),JsonString3, JsonString5);
+					new CalendarTest().run(d.calculateNewDate(),JsonString3, JsonString5, L.getEmail());
 
 					//					screen.getMainMenu().setText("Hello " + name);
 
@@ -361,6 +367,15 @@ public class Logic {
 		}
 	}
 
+	public String[] getDate() {
+		return Date;
+	}
+	public void setDate(String[] date) {
+		Date = date;
+	}
+
+	
+	
 }
 
 

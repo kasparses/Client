@@ -18,6 +18,8 @@ public class data {
     private String Author;
     private String Topic;
     private String JsonString5;
+    private String userName;
+    private int calendarID = 1;
     
 
     
@@ -34,6 +36,30 @@ public class data {
     
     
     
+	public int getCalendarID() {
+		return calendarID;
+	}
+
+
+
+	public void setCalendarID(int calendarID) {
+		this.calendarID = calendarID;
+	}
+
+
+
+	public String getUserName() {
+		return userName;
+	}
+
+
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+
+
 	public String getQOTD() {
 		return QOTD;
 	}

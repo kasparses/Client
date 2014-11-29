@@ -1,47 +1,23 @@
 package Ekstra;
 
-
-
-
 import Ekstra.CellBorder;
 import Ekstra.LinesBorder;
 import Ekstra.BorderCellRenderer;
 import TCPClient.TCPClient;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-
 import java.awt.*;  
-
 import JsonClasses.DailyUpdate;
 import JsonClasses.Login;
 import JsonClasses.SaveNote;
-
 import javax.swing.*;  
 import javax.swing.table.*;  
-import javax.swing.*;
 import javax.swing.event.*;
-import javax.swing.table.*;
-
-import java.awt.*;
 import java.awt.event.*;
-
-import javax.swing.*;
-import javax.swing.table.*;
-import javax.swing.event.*;
 import javax.swing.border.*;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-
-import java.awt.*;
-import java.awt.event.*;
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.sql.SQLException;
@@ -119,7 +95,9 @@ public class CalendarTest{
     int notes [][] = new int [20][7];
     ArrayList<Event> lcs = new ArrayList<Event>();
     ArrayList<CalendarData> lcs2 = new ArrayList<CalendarData>();
-    boolean updated = false;
+    boolean updatedlcs = false;
+    boolean updatedlcs2 = false;
+    private int comboBoxSize;
     Gson gson = new GsonBuilder().create();
     TCPClient tcp = new TCPClient();
 	SaveNote SN = new SaveNote();
@@ -128,15 +106,18 @@ public class CalendarTest{
     private JTextField txtNotetext;
     private JLabel lblSelectCalendar;
     private JComboBox comboBox_Calendar;
+    private JButton btnLoadSelectedCalendar;
+    
    
     /**
      * @wbp.parser.entryPoint
      */
-    public void run (long newDate, String JsonString3, String JsonString5){
-//    	tblCalendar.setShowHorizontalLines(false);
+    public void run (long newDate, String JsonString3, String JsonString5, String userName){
     	
+    	System.out.println(JsonString3);
+
     	
-    	
+    	d.setUserName(userName);
     	d.setJsonString(JsonString3);
     	d.setNewDate(newDate);
     	d.setJsonString5(JsonString5);
@@ -218,12 +199,6 @@ public class CalendarTest{
         //No resize/reorder
         tblCalendar.getTableHeader().setResizingAllowed(false);
         tblCalendar.getTableHeader().setReorderingAllowed(false);
-        
-        //Single cell selection
-//        tblCalendar.setColumnSelectionAllowed(true);
-//        tblCalendar.setRowSelectionAllowed(true);
-//        tblCalendar.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        
         
         tblCalendar.setCellSelectionEnabled(true);
         tblCalendar.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
@@ -473,40 +448,34 @@ public class CalendarTest{
         pnlCalendar.add(lblSelectCalendar);
         
         comboBox_Calendar = new JComboBox();
-        comboBox_Calendar.setBounds(171, 100, 110, 20);
+        comboBox_Calendar.setBounds(157, 100, 110, 20);
         pnlCalendar.add(comboBox_Calendar);
+        
+        btnLoadSelectedCalendar = new JButton("Load selected calendar");
+        btnLoadSelectedCalendar.setBounds(157, 137, 143, 23);
+        btnLoadSelectedCalendar.addActionListener(new btnLoadSelectedCalendar_Action());
+        pnlCalendar.add(btnLoadSelectedCalendar);
+        
         btnAddNote.addActionListener(new btnAddNote());
         
-        
+
         mtblCalendar.setColumnCount(7);
         mtblCalendar.setRowCount(20);
         
         Color gridColor = UIManager.getColor("Table.gridColor");  
         TableColumnModel model = tblCalendar.getColumnModel();  
         
-//        for(int b = 0; b < tblCalendar.getColumnCount(); b++)  
-//        {  
-//            TableColumn col = model.getColumn(b);  
-//            col.setCellRenderer(new CustomRenderer(gridColor));  
-//        }  
-        
-       
-
-        
-        
-      
-        //Populate table
-        for (int c=d.getRealYear()-100; c<=d.getRealYear()+100; c++){
-            cmbYear.addItem(String.valueOf(c));
-        }
+//        for (int c=d.getRealYear()-100; c<=d.getRealYear()+100; c++){
+//            cmbYear.addItem(String.valueOf(c));
+//        }
         
         //Refresh calendar
-        refreshCalendar (d.getWeekofYear(), d.getRealYear(), d.getJsonString(), d.getJsonString5()); //Refresh calendar
+        refreshCalendar (d.getWeekofYear(), d.getRealYear(), d.getJsonString(), d.getJsonString5(), d.getUserName()); //Refresh calendar
     }
     
     
     
-    public  void refreshCalendar(int week, int year, String JSonString3, String JsonString5){
+    public  void refreshCalendar(int week, int year, String JSonString3, String JsonString5, String userName){
     	
         //Variables
     	String [] weeks = new String[53];
@@ -534,6 +503,8 @@ public class CalendarTest{
         lblCelsius1.setText(Logic.Logic.Celsius1+" Celsius.");
         lblDesc1.setText("Weather: "+Logic.Logic.Desc1);
         //sætter billeder til dag 1
+        
+        
         if(Logic.Logic.Desc1.equals("broken clouds")){
         	lblPicture1.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/broken clouds.png")));
         } else if(Logic.Logic.Desc1.equals("few clouds")){
@@ -651,9 +622,7 @@ public class CalendarTest{
         Gson gson = new GsonBuilder().create();
         
         
-//        channelSearchEnum[] enums = gson.fromJson(yourJson, channelSearchEnum[].class);
-        
-        if(updated ==false){
+        if(updatedlcs ==false){
         JsonParser parser = new JsonParser();
         JsonArray jArray = parser.parse(JSonString3).getAsJsonArray();
 
@@ -666,9 +635,10 @@ public class CalendarTest{
             
    
         }
-        updated = true;
+        updatedlcs = true;
         }
 
+        if(updatedlcs2 ==false){
         JsonParser parser = new JsonParser();
         JsonArray jArray = parser.parse(JsonString5).getAsJsonArray();
 
@@ -679,7 +649,22 @@ public class CalendarTest{
             
    
         }
-        System.out.println("hej"+ lcs2.get(0).getName());
+        updatedlcs2 = true;
+        }
+
+
+        
+
+        System.out.println(lcs2.size());
+        for (int c=0; c<lcs2.size(); c++){
+        	if (lcs2.get(c).getActive()==1 && (lcs2.get(c).getPrivatePublic()==1 || lcs2.get(c).getCreatedBy().equals(userName) )){  //1 er aktiv og 1 er public
+        		
+        		
+        		comboBox_Calendar.addItem(lcs2.get(c).getName());
+        	}
+	        }
+        
+
         
         String [] startCalendarTime = new String[17];
         startCalendarTime[0] = "08:00";
@@ -804,10 +789,11 @@ public class CalendarTest{
         tblCalendar.revalidate();
         tblCalendar.repaint();
         
-
+      
         for (int g=0; g<=lcs.size(); g++){
-        
+        if(lcs.get(g).getID() ==d.getCalendarID()){
         	
+
         	String dateStart =lcs.get(g).getStart().get(0);
         	String dateEnd = lcs.get(g).getEnd().get(0);
         	
@@ -929,7 +915,6 @@ public class CalendarTest{
         		            notes [rowb1][columnb1] = g;
         		            mtblCalendar.setValueAt(myData, rowb1, columnb1);
         		            
-//        		            mtblCalendar.setValueAt(mtblCalendar.getValueAt(k, column), rowb1, columnb1);
         		        }
         		      }
         		      tblCalendar.clearSelection();
@@ -942,7 +927,7 @@ public class CalendarTest{
     		}
         }
         
-
+        }
         //Apply renderers
 //        tblCalendar.setDefaultRenderer(tblCalendar.getColumnClass(0), new tblCalendarRenderer());
     }
@@ -974,7 +959,7 @@ public class CalendarTest{
             	d.setWeekofYear(52);            	
             	d.setNewDate(d.getNewDate()-604800000);
             	frmMain.dispose();
-            	run(d.getNewDate(), d.getJsonString(),d.getJsonString5());
+            	run(d.getNewDate(), d.getJsonString(),d.getJsonString5(),d.getUserName());
             	
             }
             else{ //Back one week
@@ -982,10 +967,10 @@ public class CalendarTest{
             	d.setWeekofYear(d.getWeekofYear()-1);
             	d.setNewDate(d.getNewDate()-604800000);	
             	frmMain.dispose();
-            	run(d.getNewDate(), d.getJsonString(),d.getJsonString5());
+            	run(d.getNewDate(), d.getJsonString(),d.getJsonString5(),d.getUserName());
             	
             }
-            refreshCalendar(d.getWeekofYear(), d.getCurrentYear(),d.getJsonString(),d.getJsonString5());
+            refreshCalendar(d.getWeekofYear(), d.getCurrentYear(),d.getJsonString(),d.getJsonString5(), d.getUserName());
         }
     }
      class btnNext_Action implements ActionListener{
@@ -995,7 +980,7 @@ public class CalendarTest{
             	d.setWeekofYear(1);          
             	d.setNewDate(d.getNewDate()+604800000);
             	frmMain.dispose();
-            	run(d.getNewDate(),d.getJsonString(),d.getJsonString5());
+            	run(d.getNewDate(),d.getJsonString(),d.getJsonString5(),d.getUserName());
             	
             }
             else{ //Foward one month
@@ -1003,9 +988,9 @@ public class CalendarTest{
             	d.setNewDate(d.getNewDate()+604800000); //604800000 is the number of milliseconds in a week
             	
             	frmMain.dispose();
-            	run(d.getNewDate(), d.getJsonString(),d.getJsonString5());
+            	run(d.getNewDate(), d.getJsonString(),d.getJsonString5(),d.getUserName());
             }
-            refreshCalendar(d.getWeekofYear(), d.getCurrentYear(), d.getJsonString(),d.getJsonString5());
+            refreshCalendar(d.getWeekofYear(), d.getCurrentYear(), d.getJsonString(),d.getJsonString5(), d.getUserName());
         }
     }
      class btnGetNote implements ActionListener{
@@ -1063,13 +1048,41 @@ public class CalendarTest{
             if (cmbYear.getSelectedItem() != null){
                 String b = cmbYear.getSelectedItem().toString();
                 d.setCurrentYear(Integer.parseInt(b));
-                refreshCalendar(d.getWeekofYear(), d.getCurrentYear(), d.getJsonString(),d.getJsonString5());
+                refreshCalendar(d.getWeekofYear(), d.getCurrentYear(), d.getJsonString(),d.getJsonString5(), d.getUserName());
             }
         }
     }
+     class btnLoadSelectedCalendar_Action implements ActionListener{
+         public void actionPerformed (ActionEvent e){
+        	 Object objectCalendarName = comboBox_Calendar.getSelectedItem();
+             String stringCalendarName = objectCalendarName.toString();
+             System.out.println("comboBox_Calendar.getSelectedItem: "+stringCalendarName);
+ 
+             for(int bh2 = 0; bh2<lcs2.size(); bh2++){
+             	if(stringCalendarName.equals(lcs2.get(bh2).getName())){
+             		d.setCalendarID(lcs2.get(bh2).getCalendarID()) ;
+             	}
+             }
+             frmMain.dispose();
+         	run(d.getNewDate(),d.getJsonString(),d.getJsonString5(),d.getUserName());
+             
+         }
+     }
      
 
-     public JTextField getTxtNotetext() {
+     public JComboBox getComboBox_Calendar() {
+		return comboBox_Calendar;
+	}
+
+
+
+	public void setComboBox_Calendar(JComboBox comboBox_Calendar) {
+		this.comboBox_Calendar = comboBox_Calendar;
+	}
+
+
+
+	public JTextField getTxtNotetext() {
 		return txtNotetext;
 	}
 
