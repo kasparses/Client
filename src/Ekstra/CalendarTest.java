@@ -4,20 +4,29 @@ import Ekstra.CellBorder;
 import Ekstra.LinesBorder;
 import Ekstra.BorderCellRenderer;
 import TCPClient.TCPClient;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+
 import java.awt.*;  
+
 import JsonClasses.DailyUpdate;
 import JsonClasses.Login;
 import JsonClasses.SaveNote;
+
 import javax.swing.*;  
 import javax.swing.table.*;  
 import javax.swing.event.*;
+
 import java.awt.event.*;
+
 import javax.swing.border.*;
+
+
+
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.sql.SQLException;
@@ -93,6 +102,11 @@ public class CalendarTest{
     data d = new data();
     String [] headers = new String[7];
     int notes [][] = new int [20][7];
+    int [] rows = new int[100];	// tilpas længden
+    int [] columns = new int[100]; // tilpas længden 
+
+    ArrayList<ColumnRow> columnRows = new ArrayList<ColumnRow>();
+    
     ArrayList<Event> lcs = new ArrayList<Event>();
     ArrayList<CalendarData> lcs2 = new ArrayList<CalendarData>();
     boolean updatedlcs = false;
@@ -114,9 +128,12 @@ public class CalendarTest{
      */
     public void run (long newDate, String JsonString3, String JsonString5, String userName){
     	
-    	System.out.println(JsonString3);
-
     	
+    	System.out.println("CalendarTest size "+columnRows.size());
+    	 columnRows.add(new ColumnRow(1,15));
+    	 System.out.println("CalendarTest size "+columnRows.size());
+    	
+
     	d.setUserName(userName);
     	d.setJsonString(JsonString3);
     	d.setNewDate(newDate);
@@ -894,7 +911,6 @@ public class CalendarTest{
 
         		            myData = new MyData(value, new LinesBorder(color1,0));
         		         
- 
         		              Insets insets = new Insets(1,1,1,1);
         		              insets.top    = 1;     
         		              insets.left   = 1;     
@@ -913,7 +929,16 @@ public class CalendarTest{
         		            
         		            
         		            notes [rowb1][columnb1] = g;
+        		            
         		            mtblCalendar.setValueAt(myData, rowb1, columnb1);
+        		            
+        		            columnRows.add(new ColumnRow(rowb1,columnb1));
+        		            
+        		            System.out.println("for loop "+columnRows.size());
+        		            
+        		          
+        		            
+
         		            
         		        }
         		      }
@@ -1090,6 +1115,16 @@ public class CalendarTest{
 
 	public void setTxtNotetext(JTextField txtNotetext) {
 		this.txtNotetext = txtNotetext;
+	}
+	
+	public ArrayList<ColumnRow> getColumnRows() {
+		return columnRows;
+	}
+
+
+
+	public void setColumnRows(ArrayList<ColumnRow> columnRows) {
+		this.columnRows = columnRows;
 	}
 
 	class MyData implements CellBorder {

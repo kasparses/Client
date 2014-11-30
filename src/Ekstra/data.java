@@ -20,12 +20,16 @@ public class data {
     private String JsonString5;
     private String userName;
     private int calendarID = 1;
+   
     
 
     
     		long newDate;
     String JsonString = "";
     String [] headers = new String[7];
+    
+    int [] rows = new int[100];	// tilpas længden
+    int [] columns = new int[100]; // tilpas længden 
 
 
     public long calculateNewDate(){
@@ -36,6 +40,35 @@ public class data {
     
     
     
+    
+	public int[] getRows() {
+		return rows;
+	}
+
+
+
+
+	public void setRows(int[] rows) {
+		this.rows = rows;
+	}
+
+
+
+
+	public int[] getColumns() {
+		return columns;
+	}
+
+
+
+
+	public void setColumns(int[] columns) {
+		this.columns = columns;
+	}
+
+
+
+
 	public int getCalendarID() {
 		return calendarID;
 	}
