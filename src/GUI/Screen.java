@@ -11,27 +11,24 @@ import java.awt.CardLayout;
 
 public class Screen extends JFrame {
 	
-	public static final String MAINMENU = "name_271375820943970";
 	public static final String LOGOUT = "name_271364461837793";
 	public static final String LOGIN = "name_271353069859059";
 	public static final String DELTECALENDAR = "name_271341061178742";
-	public static final String DELETENOTE = "name_271324206063397";
-	public static final String CREATENOTE = "name_271311829920778";
 	public static final String CREATEEVENT = "name_403949887096492";
 	public static final String CREATECALENDAR = "name_271288584224003";
 	public static final String CALENDAR = "name_271270913019346";
+	public static final String FORGOT = "name_1025140884411824";
+	public static final String EVENTLIST = "name_1036762552199787";
 
 	private JPanel contentPane;
-	private Calendar calendar;
 	private Createcalendar createcalendar;
-	private CreateNote createNote;
-	private DeleteNote deleteNote;
-	private DelteCalendar delteCalendar;
+	private DeleteCalendar deleteCalendar;
 	private Login login;
 	private LogOut logOut;
-	private MainMenu mainMenu;
 	CardLayout c;
 	private CreateEvent createEvent;
+	private final ForgotLogin forgotLogin = new ForgotLogin();
+	private final Eventlist eventlist = new Eventlist();
 
 	/**
 	 * Launch the application.
@@ -54,47 +51,36 @@ public class Screen extends JFrame {
 	 */
 	public Screen() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 1390, 830);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new CardLayout(0, 0));
 		
+		contentPane.add(eventlist, "name_1036762552199787");
+		
 		createEvent = new CreateEvent();
 		contentPane.add(createEvent, "name_403949887096492");
-		
-		mainMenu = new MainMenu();
-		contentPane.add(mainMenu, "name_271375820943970");
-		
+
 		logOut = new LogOut();
 		contentPane.add(logOut, "name_271364461837793");
 		
 		login = new Login();
 		contentPane.add(login, "name_271353069859059");
 		
-		delteCalendar = new DelteCalendar();
-		contentPane.add(delteCalendar, "name_271341061178742");
+		deleteCalendar = new DeleteCalendar();
+		contentPane.add(deleteCalendar, "name_271341061178742");
 		
-		deleteNote = new DeleteNote();
-		contentPane.add(deleteNote, "name_271324206063397");
-		
-		createNote = new CreateNote();
-		contentPane.add(createNote, "name_271311829920778");
-		
+		contentPane.add(forgotLogin, "name_1025140884411824");
+
 		createcalendar = new Createcalendar();
 		contentPane.add(createcalendar, "name_271288584224003");
-		
-		calendar = new Calendar();
-		contentPane.add(calendar, "name_271270913019346");
+
 		c = (CardLayout) getContentPane().getLayout();
 	}
 
 	public JPanel getContentPane() {
 		return contentPane;
-	}
-
-	public Calendar getCalendar() {
-		return calendar;
 	}
 
 	public Createcalendar getCreatecalendar() {
@@ -108,16 +94,8 @@ public class Screen extends JFrame {
 		return createEvent;
 	}
 
-	public CreateNote getCreateNote() {
-		return createNote;
-	}
-
-	public DeleteNote getDeleteNote() {
-		return deleteNote;
-	}
-
-	public DelteCalendar getDelteCalendar() {
-		return delteCalendar;
+	public DeleteCalendar getDeleteCalendar() {
+		return deleteCalendar;
 	}
 
 	public Login getLogin() {
@@ -128,7 +106,12 @@ public class Screen extends JFrame {
 		return logOut;
 	}
 
-	public MainMenu getMainMenu() {
-		return mainMenu;
+	public ForgotLogin getForgotLogin() {
+		return forgotLogin;
 	}
+
+	public Eventlist getEventlist() {
+		return eventlist;
+	}
+	
 }

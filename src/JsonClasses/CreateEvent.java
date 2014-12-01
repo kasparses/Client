@@ -13,9 +13,10 @@ public class CreateEvent implements java.io.Serializable
 	private String start;
 	private String end;
 	private String location;
+	private String note;
 	private String calendarName;
 	
-	public CreateEvent(String _overallID, int _ID, String _activityID, String _eventID, String _type, String _title, String _description, String _start, String _end, String _location, String _calendarName){
+	public CreateEvent(String _overallID, int _ID, String _activityID, String _eventID, String _type, String _title, String _description, String _start, String _end, String _location, String _calendarName, String _note){
 		setOverallID(_overallID);
 		setID(_ID);
 		setActivityID(_activityID);
@@ -27,6 +28,7 @@ public class CreateEvent implements java.io.Serializable
 		setEnd(_end);
 		setLocation(_location);
 		setCalendarName(_calendarName);
+		setNote(_note);
 		
 	}
 	
@@ -37,8 +39,32 @@ public class CreateEvent implements java.io.Serializable
 	public String getOverallID() {
 		return overallID;
 	}
+	public String getNote() {
+		return note;
+	}
+
+
+
+	public void setNote(String note) {
+		this.note = note;
+	}
+
+
+
 	public String getCalendarName() {
 		return calendarName;
+	}
+
+
+
+	public String getEventID() {
+		return eventID;
+	}
+
+
+
+	public void setEventID(String eventID) {
+		this.eventID = eventID;
 	}
 
 
@@ -64,12 +90,7 @@ public class CreateEvent implements java.io.Serializable
 	public void setActivityID(String activityID) {
 		this.activityID = activityID;
 	}
-	public String getEventID() {
-		return eventID;
-	}
-	public void setEventID(String eventID) {
-		this.eventID = eventID;
-	}
+	
 	public String getType() {
 		return type;
 	}

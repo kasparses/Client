@@ -1,6 +1,7 @@
 package Logic;
 import Ekstra.CalendarTest;
 import Ekstra.data;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
@@ -8,16 +9,23 @@ import java.net.UnknownHostException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.CloseAction;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.sun.xml.internal.ws.Closeable;
+
 import TCPClient.TCPClient;
 import GUI.Screen;
 import JsonClasses.CreateCalender;
 import JsonClasses.CreateEvent;
+import JsonClasses.ForgotLogin;
 import JsonClasses.Login;
 import JsonClasses.LoginAnswer;
 import JsonClasses.DeleteCalendar;
@@ -68,14 +76,11 @@ public class Logic {
 		screen = new Screen();
 
 		screen.getLogin().addActionListener(new LoginActionListener());
-		screen.getMainMenu().addActionListener(new MainMenuActionListener());
 		screen.getCreatecalendar().addActionListener(new CreateCalendarActionListener());
-		screen.getDelteCalendar().addActionListener(new DelteCalendarActionListener());
-		//		screen.getNoteList().addActionListener(new NoteListActionListener());
-		////		screen.getUserList().addActionListener(new UserListActionListener());
-		//		screen.getEventlist().addActionListener(new EventListActionListener());
+		screen.getDeleteCalendar().addActionListener(new DeleteCalendarActionListener());
+		screen.getEventlist().addActionListener(new EventListActionListener());
 		screen.getCreateEvent().addActionListener(new AddEventGUIActionListener());
-		//		screen.getAddUser().addActionListener(new AddUserActionListener());
+		screen.getForgotLogin().addActionListener(new ForgotLoginActionListener());
 
 
 
@@ -86,15 +91,20 @@ public class Logic {
 		screen.setVisible(true);
 	}
 
+		
+
 	private class LoginActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			try{
+			
+			if (e.getSource() == screen.getLogin().getBtnLogin()){			
+				try{
+			
 				Date date = new Date();
 				long date1 = date.getTime();
 
 
-				String email = screen.getLogin().getUsernameTextField().getText();
-				String password = screen.getLogin().getPasswordTextField_1().getText();
+				String email = screen.getLogin().getTextField_Username().getText();
+				String password = screen.getLogin().getTextField_Password().getText();
 
 				L.setEmail(email);
 				L.setPassword(password);
@@ -134,7 +144,7 @@ public class Logic {
 
 					}
 					
-					//Variabler til visning af vejr i clienten (hentes af ClendarTest)
+					//Variabler til visning af vejr i clienten (hentes af CalendarTest)
 					Date1 = lcs.get(0).getDate();
 					Celsius1 = lcs.get(0).getCelsius();
 					Desc1 = lcs.get(0).getDesc();
@@ -175,58 +185,35 @@ public class Logic {
 					
 					
 
-					data d = new data();  
+					data d = new data();
+					screen.dispose();
 					new CalendarTest().run(d.calculateNewDate(),JsonString3, JsonString5, L.getEmail());
 
-					//					screen.getMainMenu().setText("Hello " + name);
-
-					screen.show(Screen.MAINMENU);
 				}
 				if(!LA.getAnswer().equals("correct")){
 					JOptionPane.showMessageDialog(null, "\nPlease enter a valid username & password."
 							, "Error message",JOptionPane.PLAIN_MESSAGE);
 				}
+				}	
+				catch(Exception e3){
+				}
+			
 			}	
-			catch(Exception e3){
-			}
-		}	
-	}
+		if (e.getSource() == screen.getLogin().getBtnForgotLogin()){
+				
+			screen.show(Screen.FORGOT);
 
-	private class MainMenuActionListener implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
-			if (e.getSource() == screen.getMainMenu().getBtnCreateevent()){
-
+			
 			}
-			if (e.getSource() == screen.getMainMenu().getBtnCreateNewCalendar()){
-				screen.show(Screen.CREATECALENDAR);
-			}
-			if (e.getSource() == screen.getMainMenu().getBtnDeleteCalendar()){
-				screen.show(Screen.DELTECALENDAR);
-			}
-			if (e.getSource() == screen.getMainMenu().getBtnDeletenote()){
-
-			}
-			if (e.getSource() == screen.getMainMenu().getBtnGetForecast()){
-
-			}
-			if (e.getSource() == screen.getMainMenu().getBtnGetQuoteoftheday()){
-
-
-			}
-			if (e.getSource() == screen.getMainMenu().getBtnSavenote()){
-
-			}
-			if (e.getSource() == screen.getMainMenu().getBtnCreateevent()){
-				screen.show(Screen.CREATEEVENT);
-			}
-
-
 		}
 	}
-	private class DelteCalendarActionListener implements ActionListener {
+	
+	private class DeleteCalendarActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			if (e.getSource() == screen.getDelteCalendar().getBtnDeletecalendar()){
-				String calendarName = screen.getDelteCalendar().getTxtCalendarname().getText();
+			if (e.getSource() == screen.getDeleteCalendar().getBtnDeletecalendar()){
+				
+				String calendarName = screen.getDeleteCalendar().getTxtCalendarname().getText();
+				
 				DC.setCalendarName(calendarName);
 				DC.setUserName(L.getEmail());
 				try {
@@ -244,9 +231,22 @@ public class Logic {
 				}
 
 			}
+		if (e.getSource() == screen.getDeleteCalendar().getBtnEventList()){
 
+			screen.show(Screen.EVENTLIST);
 
 		}
+		if (e.getSource() == screen.getDeleteCalendar().getBtnLogOut()){
+
+			screen.show(Screen.LOGOUT);
+
+		}
+		if (e.getSource() == screen.getDeleteCalendar().getBtnMain()){
+
+			screen.dispose();
+
+		}
+	}
 	}
 	private class CreateCalendarActionListener implements ActionListener {
 
@@ -308,10 +308,25 @@ public class Logic {
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 					}
+					JOptionPane.showMessageDialog(null, "Your calendar has now been created."
+							, "Message",JOptionPane.PLAIN_MESSAGE);
 
 				}
 
 			}
+		if (e.getSource() == screen.getCreatecalendar().getBtnEventList()){
+			screen.show(Screen.EVENTLIST);
+
+		}
+		if (e.getSource() == screen.getCreatecalendar().getBtnLogOut()){
+			screen.show(Screen.LOGOUT);
+
+		}
+		if (e.getSource() == screen.getCreatecalendar().getBtnMain()){
+			System.out.println("calendar");
+			screen.dispose();
+
+		}
 		}
 
 	}
@@ -320,51 +335,135 @@ public class Logic {
 		public void actionPerformed(ActionEvent e) {
 
 
-			if (e.getSource() == screen.getCreateEvent().getBtnSubmit()){
+			if (e.getSource() == screen.getCreateEvent().getBtnCreateEvent()){
 
 
 
 				String description = screen.getCreateEvent().getTextField_Description().getText();
-				String start = screen.getCreateEvent().getTextField_Start().getText();
+				
 				String location = screen.getCreateEvent().getTextField_Location().getText();
-				String end = screen.getCreateEvent().getTextField_End().getText();
+				
 				String title = screen.getCreateEvent().getTextField_Title().getText();
 				String type = screen.getCreateEvent().getTextField_Type().getText();
-				String eventID = screen.getCreateEvent().getTextField_EventID().getText();
-				String activityID = screen.getCreateEvent().getTextField_ActivityID().getText();
-				String calendarName = screen.getCreateEvent().getTextField_CalendarName().getText();
-
-				CreateEvent CE = new CreateEvent("createEvent", 0,activityID , eventID, type, title, description, start, end, location, calendarName );
-
-
-
+				
+				String eventID = "1";
+				String activityID = "1";
+				String calendarName =  screen.getCreateEvent().getTextField_CalendarName().getText();
+				String note = screen.getCreateEvent().getTextField_Text().getText();
+				
+				Object startYear = screen.getCreateEvent().getComboBox_StartYear().getSelectedItem();
+				Object startMonth = screen.getCreateEvent().getComboBox_StartMonth().getSelectedItem();
+				Object startDay = screen.getCreateEvent().getComboBox_StartDay().getSelectedItem();
+				Object startHour = screen.getCreateEvent().getComboBox_StartHour().getSelectedItem();
+				Object startMinutes = screen.getCreateEvent().getComboBox_StartMinutes().getSelectedItem();
+				
+				
+				
+				if(startMinutes.equals("0")){
+					startMinutes = "00";
+				}
+				
+				Object endYear = screen.getCreateEvent().getComboBox_EndYear().getSelectedItem();
+				Object endMonth = screen.getCreateEvent().getComboBox_EndMonth().getSelectedItem();
+				Object endDay = screen.getCreateEvent().getComboBox_EndDay().getSelectedItem();
+				Object endHour = screen.getCreateEvent().getComboBox_EndHour().getSelectedItem();
+				Object endMinutes = screen.getCreateEvent().getComboBox_EndMinutes().getSelectedItem();
+				
+				if(endMinutes.equals("0")){
+					endMinutes = "00";
+				}
+			
+				String start = startYear.toString()+ "-"+ startMonth.toString()+ "-"+ startDay.toString()+ " "+startHour.toString()+":"+startMinutes+":00";
+				String end = endYear.toString()+ "-"+ endMonth.toString()+ "-"+ endDay.toString()+ " "+endHour.toString()+":"+endMinutes+":00";
+				        
+				String EventID = "1";
+				System.out.println("note: "+note);
+				CreateEvent CE = new CreateEvent("createEvent", 0,activityID,EventID , type, title, description, start, end, location,  calendarName ,note);
+						
+				
+				
 				try {
-					try {
-						String JsonString5=tcp.bla(CE);
+					String CreateEvent = tcp.bla(CE);
+					
+					JOptionPane.showMessageDialog(null, CreateEvent
+							, "Return message",JOptionPane.PLAIN_MESSAGE);
 					} catch (UnknownHostException e1) {
+						
 						e1.printStackTrace();
 					} catch (IOException e1) {
 						e1.printStackTrace();
+					} catch (SQLException e1) {
+						e1.printStackTrace();
 					}
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-
-
-				//
-				////				if (Location.equals("")|| Createdby.equals("")|| start.equals("")|| end.equals("")|| name.equals("")|| text.equals(""))
-				////				{
-				////					JOptionPane.showMessageDialog(null, "\nPlease fill out all the fields"
-				////							, "Error message",JOptionPane.PLAIN_MESSAGE);
-				////				}
-				////				else
-				////				{
-
-
 			}
-
+		if (e.getSource() == screen.getCreateEvent().getBtnEventList()){
+				screen.show(Screen.EVENTLIST);
+		}
+		if (e.getSource() == screen.getCreateEvent().getBtnMain()){
+			screen.dispose();
+		}
+		if (e.getSource() == screen.getCreateEvent().getBtnLogout()){
+			screen.show(Screen.LOGOUT);
+		}
+		
 
 		}
+	}
+	private class EventListActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			if (e.getSource() == screen.getEventlist().getBtnMain()){
+				
+				screen.dispose();
+
+			}
+		if (e.getSource() == screen.getEventlist().getBtnAdd()){
+
+			screen.show(Screen.CREATEEVENT);
+
+		}
+		if (e.getSource() == screen.getEventlist().getBtnLogOut()){
+
+			screen.show(Screen.LOGOUT);
+
+		}
+	}
+	}
+	private class ForgotLoginActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			if (e.getSource() == screen.getForgotLogin().getBtnGetLogin()){
+				
+				String cPR = screen.getForgotLogin().getTextField_CPR().getText();
+				String Forgot ="";
+				ForgotLogin FL = new ForgotLogin();
+				
+				FL.setCPR(cPR);
+				
+				try {
+					Forgot = tcp.bla(FL);
+				} catch (IOException | SQLException e1) {
+					e1.printStackTrace();
+				}
+				
+				FL = gson.fromJson(Forgot, ForgotLogin.class);
+
+
+				if (FL.getAnswer().equals("correct")){
+					JOptionPane.showMessageDialog(null, "\nYour username is: "+FL.getEmail()+"\nYour password is: "+FL.getPassword()
+							, "Message",JOptionPane.PLAIN_MESSAGE);
+				}
+				else if(FL.getAnswer().equals("notCorrect")){
+					JOptionPane.showMessageDialog(null, "\nIt did not work!...."
+							, "Error",JOptionPane.PLAIN_MESSAGE);
+				}
+
+			}
+		if (e.getSource() == screen.getForgotLogin().getBtnLogin()){
+
+			screen.show(Screen.LOGIN);
+
+		}
+		
+	}
 	}
 
 	public String[] getDate() {
@@ -376,7 +475,5 @@ public class Logic {
 
 	
 	
-}
-
-
-
+	
+	}

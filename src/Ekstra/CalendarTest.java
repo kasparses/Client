@@ -3,6 +3,7 @@ package Ekstra;
 import Ekstra.CellBorder;
 import Ekstra.LinesBorder;
 import Ekstra.BorderCellRenderer;
+import GUI.Screen;
 import TCPClient.TCPClient;
 
 import com.google.gson.Gson;
@@ -13,6 +14,7 @@ import com.google.gson.JsonParser;
 
 import java.awt.*;  
 
+import JsonClasses.CreateCalender;
 import JsonClasses.DailyUpdate;
 import JsonClasses.Login;
 import JsonClasses.SaveNote;
@@ -24,8 +26,6 @@ import javax.swing.event.*;
 import java.awt.event.*;
 
 import javax.swing.border.*;
-
-
 
 import java.io.IOException;
 import java.net.UnknownHostException;
@@ -98,6 +98,8 @@ public class CalendarTest{
     private static JLabel lblCelsius7;
     private static JLabel lblDate7;
     private static JLabel label_14;
+	Screen screen = new Screen();
+
     
     data d = new data();
     String [] headers = new String[7];
@@ -121,6 +123,13 @@ public class CalendarTest{
     private JLabel lblSelectCalendar;
     private JComboBox comboBox_Calendar;
     private JButton btnLoadSelectedCalendar;
+    private JLabel label_background;
+    private JButton btnCreateCalendar;
+    private JButton btnDeleteCalendar;
+    private JButton btnEventList;
+    private JButton btnCreateEvent;
+    private JButton btnLogOut;
+    Login L = new Login();
     
    
     /**
@@ -150,6 +159,7 @@ public class CalendarTest{
         
         //Prepare frame
         frmMain = new JFrame ("Gestionnaire de clients"); //Create frame
+        frmMain.setTitle("D\u00D8K Calendar");
         frmMain.setSize(1366, 768); //Set size to 400x400 pixels
         pane = frmMain.getContentPane(); //Get content pane
         pane.setLayout(null); //Apply null layout
@@ -176,13 +186,19 @@ public class CalendarTest{
         pnlCalendar.add(lblYear);
         pnlCalendar.add(cmbYear);
         btnNext = new JButton ("Next");
+        btnNext.setContentAreaFilled(false);
+        btnNext.setForeground(Color.WHITE);
+        btnNext.setFont(new Font("Tahoma", Font.BOLD, 20));
         btnNext.addActionListener(new btnNext_Action());
         btnPrev = new JButton ("Prev");
+        btnPrev.setContentAreaFilled(false);
+        btnPrev.setForeground(Color.WHITE);
+        btnPrev.setFont(new Font("Tahoma", Font.BOLD, 20));
         
         //Register action listeners
         btnPrev.addActionListener(new btnPrev_Action());
         pnlCalendar.add(btnPrev);
-        btnPrev.setBounds(349, 25, 80, 25);
+        btnPrev.setBounds(349, 25, 94, 25);
         pnlCalendar.add(btnNext);
         btnNext.setBounds(917, 25, 94, 25);
         pnlCalendar.add(stblCalendar);
@@ -444,24 +460,32 @@ public class CalendarTest{
         pnlCalendar.add(label_14);
         
         btnGetNote = new JButton("Show note for selected event");
+        btnGetNote.setContentAreaFilled(false);
+        btnGetNote.setForeground(Color.WHITE);
+        btnGetNote.setFont(new Font("Tahoma", Font.BOLD, 16));
         btnGetNote.setEnabled(true);
-        btnGetNote.setBounds(1050, 91, 175, 23);
+        btnGetNote.setBounds(1050, 91, 271, 29);
         pnlCalendar.add(btnGetNote);
         btnGetNote.addActionListener(new btnGetNote());
         
         btnAddNote = new JButton("Add note to selected event");
+        btnAddNote.setContentAreaFilled(false);
+        btnAddNote.setForeground(Color.WHITE);
+        btnAddNote.setFont(new Font("Tahoma", Font.BOLD, 16));
         btnAddNote.setEnabled(true);
-        btnAddNote.setBounds(1050, 125, 175, 23);
+        btnAddNote.setBounds(1050, 125, 253, 29);
         pnlCalendar.add(btnAddNote);
         
         txtNotetext = new JTextField();
         txtNotetext.setText("NoteText");
-        txtNotetext.setBounds(1050, 163, 86, 20);
+        txtNotetext.setBounds(1070, 163, 86, 20);
         pnlCalendar.add(txtNotetext);
         txtNotetext.setColumns(10);
         
         lblSelectCalendar = new JLabel("Select Calendar");
-        lblSelectCalendar.setBounds(171, 66, 75, 14);
+        lblSelectCalendar.setFont(new Font("Tahoma", Font.BOLD, 16));
+        lblSelectCalendar.setForeground(Color.WHITE);
+        lblSelectCalendar.setBounds(157, 61, 128, 20);
         pnlCalendar.add(lblSelectCalendar);
         
         comboBox_Calendar = new JComboBox();
@@ -469,9 +493,166 @@ public class CalendarTest{
         pnlCalendar.add(comboBox_Calendar);
         
         btnLoadSelectedCalendar = new JButton("Load selected calendar");
-        btnLoadSelectedCalendar.setBounds(157, 137, 143, 23);
+        btnLoadSelectedCalendar.setContentAreaFilled(false);
+        btnLoadSelectedCalendar.setForeground(Color.WHITE);
+        btnLoadSelectedCalendar.setFont(new Font("Tahoma", Font.BOLD, 16));
+        btnLoadSelectedCalendar.setBounds(90, 132, 219, 29);
         btnLoadSelectedCalendar.addActionListener(new btnLoadSelectedCalendar_Action());
         pnlCalendar.add(btnLoadSelectedCalendar);
+        
+        btnCreateCalendar = new JButton("Create Calendar");
+        btnCreateCalendar.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		screen.setVisible(true);
+        		screen.show(Screen.CREATECALENDAR);
+        		
+        	}
+        });
+        btnCreateCalendar.setContentAreaFilled(false);
+        btnCreateCalendar.setForeground(Color.WHITE);
+        btnCreateCalendar.setFont(new Font("Tahoma", Font.BOLD, 12));
+        btnCreateCalendar.setBounds(25, 187, 129, 23);
+        pnlCalendar.add(btnCreateCalendar);
+        
+        btnDeleteCalendar = new JButton("Delete Calendar");
+        btnDeleteCalendar.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		screen.setVisible(true);
+        		screen.show(Screen.DELTECALENDAR);
+        		private class CreateCalendarActionListener implements ActionListener {
+
+        			public void actionPerformed(ActionEvent e) {
+
+        				if (e.getSource() == screen.getCreatecalendar().getBtnCreateCalendar()){
+
+        					CreateCalender CC = new CreateCalender();
+        					boolean empty = false;
+        					String name = screen.getCreatecalendar().getTxtName().getText();
+        					int type = 2; //2 betyder er det er en brugerskabt kalender og ikke den som er hentet fra CBS.
+        					int active = 1; // 1 betyder at den er aktiv. 2 betyder at den ikke er aktiv.
+
+        					if( name.equals("")) {
+
+        						JOptionPane.showMessageDialog(null, "\nPlease fill out all the fields"
+        								, "Error message",JOptionPane.PLAIN_MESSAGE);
+        						empty = true;
+        					}
+
+        					boolean PrivateOrPublic = false;
+        					int PrivateOrPublicValue = 0;
+
+
+        					if (screen.getCreatecalendar().getRdbtnPrivate().isSelected())
+        					{
+        						PrivateOrPublicValue = 2; //2 er lig med private.
+        						PrivateOrPublic = true;
+        					}
+        					if (screen.getCreatecalendar().getRdbtnPublic().isSelected())
+        					{
+        						PrivateOrPublicValue = 1; //1 er lig med public.
+        						PrivateOrPublic = true;
+        					}
+
+
+        					if( PrivateOrPublic == false){
+        						JOptionPane.showMessageDialog(null, "Please select whether your database is a public or a private database"
+        								, "Error message",JOptionPane.PLAIN_MESSAGE);
+
+        					}
+
+        					if (empty == false && PrivateOrPublic == true){
+        						CC.setCalenderName(name);
+        						CC.setPublicOrPrivate(PrivateOrPublicValue);
+        						CC.setType(type);
+        						CC.setActive(active);
+        						CC.setUserName(L.getEmail());
+
+        						try {
+        							String JsonString=tcp.bla(CC);
+        							JOptionPane.showMessageDialog(null, JsonString
+        									, "Return message",JOptionPane.PLAIN_MESSAGE);
+        						} catch (UnknownHostException e1) {
+
+        							e1.printStackTrace();
+        						} catch (IOException e1) {
+        							e1.printStackTrace();
+        						} catch (SQLException e1) {
+        							e1.printStackTrace();
+        						}
+        						JOptionPane.showMessageDialog(null, "Your calendar has now been created."
+        								, "Message",JOptionPane.PLAIN_MESSAGE);
+
+        					}
+
+        				}
+        			if (e.getSource() == screen.getCreatecalendar().getBtnEventList()){
+        				screen.show(Screen.EVENTLIST);
+
+        			}
+        			if (e.getSource() == screen.getCreatecalendar().getBtnLogOut()){
+        				screen.show(Screen.LOGOUT);
+
+        			}
+        			if (e.getSource() == screen.getCreatecalendar().getBtnMain()){
+        				System.out.println("calendar");
+        				screen.dispose();
+
+        			}
+        			}
+
+        		}
+
+        	}
+        });
+        btnDeleteCalendar.setForeground(Color.WHITE);
+        btnDeleteCalendar.setFont(new Font("Tahoma", Font.BOLD, 12));
+        btnDeleteCalendar.setContentAreaFilled(false);
+        btnDeleteCalendar.setBounds(25, 232, 129, 23);
+        pnlCalendar.add(btnDeleteCalendar);
+        
+        btnEventList = new JButton("Event List");
+        btnEventList.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		screen.setVisible(true);
+        		screen.show(Screen.EVENTLIST);
+        	}
+        });
+        btnEventList.setForeground(Color.WHITE);
+        btnEventList.setFont(new Font("Tahoma", Font.BOLD, 12));
+        btnEventList.setContentAreaFilled(false);
+        btnEventList.setBounds(25, 332, 129, 23);
+        pnlCalendar.add(btnEventList);
+        
+        btnCreateEvent = new JButton("Create Event");
+        btnCreateEvent.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		screen.setVisible(true);
+        		screen.show(Screen.CREATEEVENT);
+        	}
+        });
+        btnCreateEvent.setForeground(Color.WHITE);
+        btnCreateEvent.setFont(new Font("Tahoma", Font.BOLD, 12));
+        btnCreateEvent.setContentAreaFilled(false);
+        btnCreateEvent.setBounds(25, 282, 129, 23);
+        pnlCalendar.add(btnCreateEvent);
+        
+        btnLogOut = new JButton("Log Out");
+        btnLogOut.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		screen.setVisible(true);
+        		screen.show(Screen.LOGOUT);
+        	}
+        });
+        btnLogOut.setForeground(Color.WHITE);
+        btnLogOut.setFont(new Font("Tahoma", Font.BOLD, 12));
+        btnLogOut.setContentAreaFilled(false);
+        btnLogOut.setBounds(25, 376, 129, 23);
+        pnlCalendar.add(btnLogOut);
+        
+        label_background = new JLabel("");
+        label_background.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images2/MetalBackground.jpg")));
+        label_background.setBounds(0, 0, 1360, 739);
+        pnlCalendar.add(label_background);
         
         btnAddNote.addActionListener(new btnAddNote());
         
@@ -485,7 +666,7 @@ public class CalendarTest{
 //        for (int c=d.getRealYear()-100; c<=d.getRealYear()+100; c++){
 //            cmbYear.addItem(String.valueOf(c));
 //        }
-        
+        System.out.println("yolo");
         //Refresh calendar
         refreshCalendar (d.getWeekofYear(), d.getRealYear(), d.getJsonString(), d.getJsonString5(), d.getUserName()); //Refresh calendar
     }
@@ -498,6 +679,7 @@ public class CalendarTest{
     	String [] weeks = new String[53];
     		for(int d =0; d<weeks.length; d++){
     			weeks [d] = "Week "+ Integer.toString(d);
+    	System.out.println("yolo2");
     		}
         int nod, som; //Number Of Days, Start Of Month
         
@@ -1093,9 +1275,51 @@ public class CalendarTest{
              
          }
      }
+
+     
+     
+// 	public void addActionListener(ActionListener l){
+//		btnCreateCalendar.addActionListener(l);
+//		btnDeleteCalendar.addActionListener(l);
+//		btnEventList.addActionListener(l);
+//		btnLogOut.addActionListener(l);
+//		btnCreateEvent.addActionListener(l);
+//
+//
+//	}
      
 
-     public JComboBox getComboBox_Calendar() {
+     public JButton getBtnCreateCalendar() {
+		return btnCreateCalendar;
+	}
+
+
+
+	public JButton getBtnDeleteCalendar() {
+		return btnDeleteCalendar;
+	}
+
+
+
+	public JButton getBtnEventList() {
+		return btnEventList;
+	}
+
+
+
+	public JButton getBtnCreateEvent() {
+		return btnCreateEvent;
+	}
+
+
+
+	public JButton getBtnLogOut() {
+		return btnLogOut;
+	}
+
+
+
+	public JComboBox getComboBox_Calendar() {
 		return comboBox_Calendar;
 	}
 

@@ -16,30 +16,50 @@ import javax.swing.border.BevelBorder;
 import java.awt.Cursor;
 import java.awt.event.KeyEvent;
 import java.awt.SystemColor;
+import javax.swing.JComboBox;
 
 public class CreateEvent extends JPanel {
-	private JTextField textField_Location;
-	private JTextField textField_ActivityID;
-	private JTextField textField_Start;
-	private JButton btnSubmit;
-	private JButton btnLogout;
 	private JLabel lblCBSlogo;
-	private JButton btnMainMenu;
 	private JLabel lblUserInfo;
-	private JLabel lblEnd;
-	private JLabel lblName;
-	private JLabel lblText;
-	private JTextField textField_End;
-	private JTextField textField_Title;
-	private JTextField textField_Text;
+	private JLabel label;
+	private final JTextField textField_Location = new JTextField();
+	private final JLabel lblLocation = new JLabel("Location");
+	private final JLabel lblStart = new JLabel("Start");
+	private final JLabel lblEnd = new JLabel("End");
+	private final JLabel lblText = new JLabel("Text");
+	private final JLabel lblTitle = new JLabel("Title");
+	private final JTextField textField_Title = new JTextField();
+	private final JTextField textField_Text = new JTextField();
 	private final JLabel lblType = new JLabel("Type");
 	private final JTextField textField_Type = new JTextField();
-	private final JLabel lblEventid = new JLabel("EventID");
-	private final JTextField textField_EventID = new JTextField();
 	private final JLabel lblDescription = new JLabel("Description");
 	private final JTextField textField_Description = new JTextField();
-	private JLabel lblCalendarname;
-	private JTextField textField_CalendarName;
+	private final JButton btnCreateEvent = new JButton("Create Event");
+	private final JLabel lblCalendarname = new JLabel("Calendar Name");
+	private final JTextField textField_CalendarName = new JTextField();
+	private final JComboBox comboBox_StartMinutes = new JComboBox();
+	private final JComboBox comboBox_StartHour = new JComboBox();
+	private final JComboBox comboBox_EndHour = new JComboBox();
+	private final JComboBox comboBox_EndMinutes = new JComboBox();
+	private final JLabel lblStartYear = new JLabel("Year:");
+	private final JLabel lblEndYear = new JLabel("Year:");
+	private final JComboBox comboBox_StartYear = new JComboBox();
+	private final JComboBox comboBox_EndYear = new JComboBox();
+	private final JLabel lblStartMonth = new JLabel("Month:");
+	private final JLabel lblEndMonth = new JLabel("Month:");
+	private final JLabel lblStartDay = new JLabel("Day:");
+	private final JLabel lblEndDay = new JLabel("Day:");
+	private final JComboBox comboBox_StartMonth = new JComboBox();
+	private final JComboBox comboBox_EndMonth = new JComboBox();
+	private final JComboBox comboBox_StartDay = new JComboBox();
+	private final JComboBox comboBox_EndDay = new JComboBox();
+	private final JLabel lblStartTime = new JLabel("Time:");
+	private final JLabel lblEndTime = new JLabel("Time:");
+	private final JLabel label_17 = new JLabel(":");
+	private final JLabel label_18 = new JLabel(":");
+	private final JButton btnMain = new JButton("Main");
+	private final JButton btnLogout = new JButton("Log Out");
+	private final JButton btnEventList = new JButton("Event List");
 
 	/**
 	 * Create the panel.
@@ -50,209 +70,235 @@ public class CreateEvent extends JPanel {
 		setLayout(null);
 		
 		lblCBSlogo = new JLabel("");
-		lblCBSlogo.setBounds(10, 698, 250, 59);
+		lblCBSlogo.setIcon(new ImageIcon(CreateEvent.class.getResource("/Images2/CBSLogo3.png")));
+		lblCBSlogo.setBounds(0, 709, 250, 59);
 		add(lblCBSlogo);
-		
-
-		btnLogout = new JButton("Log out");
-		btnLogout.setBounds(611, 684, 143, 59);
-		btnLogout.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
-		btnLogout.setForeground(new Color(255, 255, 255));
-		btnLogout.setFont(new Font("Arial", Font.BOLD, 30));
-		btnLogout.setContentAreaFilled(false);
-		add(btnLogout);
-
-		textField_Location = new JTextField();
-		textField_Location.setBounds(688, 198, 120, 34);
-		textField_Location.setForeground(new Color(105, 105, 105));
-		textField_Location.setColumns(10);
-		add(textField_Location);
-
-		JLabel lblEmail = new JLabel("Location");
-		lblEmail.setBounds(483, 195, 109, 30);
-		lblEmail.setForeground(new Color(255, 255, 255));
-		lblEmail.setFont(new Font("Arial", Font.BOLD, 26));
-		add(lblEmail);
-
-		textField_ActivityID = new JTextField();
-		textField_ActivityID.setBounds(755, 238, 120, 34);
-		textField_ActivityID.setForeground(new Color(105, 105, 105));
-		textField_ActivityID.setColumns(10);
-		add(textField_ActivityID);
-
-		JLabel lblTeam = new JLabel("ActivityID");
-		lblTeam.setBounds(483, 242, 159, 31);
-		lblTeam.setFont(new Font("Arial", Font.BOLD, 26));
-		lblTeam.setForeground(new Color(255, 255, 255));
-		add(lblTeam);
-
-		textField_Start = new JTextField();
-		textField_Start.setBounds(755, 285, 120, 34);
-		textField_Start.setForeground(new Color(105, 105, 105));
-		textField_Start.setColumns(10);
-		add(textField_Start);
-
-		JLabel lblCreateddate = new JLabel("Start");
-		lblCreateddate.setBounds(483, 288, 159, 31);
-		lblCreateddate.setForeground(new Color(255, 255, 255));
-		lblCreateddate.setFont(new Font("Arial", Font.BOLD, 26));
-		add(lblCreateddate);
-
-		btnSubmit = new JButton("Create event");
-		btnSubmit.setBounds(570, 600, 239, 43);
-		btnSubmit.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-		btnSubmit.setContentAreaFilled(false);
-		btnSubmit.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
-		btnSubmit.setForeground(new Color(255, 255, 255));
-		btnSubmit.setFont(new Font("Arial", Font.BOLD, 30));
-		btnSubmit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			//Submit changes to databases
-			//hvad sker der n�r �ndringer ved en bruger submittes
-			}
-		}
-		);
-		add(btnSubmit);
-
-		
-				
-		btnMainMenu = new JButton("Main menu");
-		btnMainMenu.setBounds(611, 641, 164, 44);
-		btnMainMenu.setForeground(Color.WHITE);
-		btnMainMenu.setFont(new Font("Arial", Font.BOLD, 30));
-		btnMainMenu.setContentAreaFilled(false);
-		btnMainMenu.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
-		add(btnMainMenu);
 
 		lblUserInfo = new JLabel("Create event");
-		lblUserInfo.setBounds(451, 90, 466, 91);
+		lblUserInfo.setBounds(451, 11, 492, 90);
 		lblUserInfo.setForeground(Color.WHITE);
 		lblUserInfo.setFont(new Font("Arial", Font.BOLD, 78));
 		add(lblUserInfo);
-
-		lblEnd = new JLabel("End");
-		lblEnd.setBounds(483, 337, 159, 31);
+		textField_Location.setForeground(SystemColor.controlDkShadow);
+		textField_Location.setColumns(10);
+		textField_Location.setBounds(744, 134, 120, 34);
+		
+		add(textField_Location);
+		lblLocation.setForeground(Color.WHITE);
+		lblLocation.setFont(new Font("Arial", Font.BOLD, 26));
+		lblLocation.setBounds(472, 134, 160, 30);
+		
+		add(lblLocation);
+		lblStart.setForeground(Color.WHITE);
+		lblStart.setFont(new Font("Arial", Font.BOLD, 26));
+		lblStart.setBounds(472, 179, 160, 30);
+		
+		add(lblStart);
 		lblEnd.setForeground(Color.WHITE);
 		lblEnd.setFont(new Font("Arial", Font.BOLD, 26));
+		lblEnd.setBounds(472, 224, 160, 30);
+		
 		add(lblEnd);
-
-		lblName = new JLabel("Title");
-		lblName.setBounds(483, 379, 159, 31);
-		lblName.setForeground(Color.WHITE);
-		lblName.setFont(new Font("Arial", Font.BOLD, 26));
-		add(lblName);
-
-		lblText = new JLabel("Text");
-		lblText.setBounds(483, 429, 159, 31);
 		lblText.setForeground(Color.WHITE);
 		lblText.setFont(new Font("Arial", Font.BOLD, 26));
+		lblText.setBounds(472, 314, 160, 30);
+		
 		add(lblText);
-
-		textField_End = new JTextField();
-		textField_End.setBounds(755, 332, 120, 34);
-		textField_End.setForeground(SystemColor.controlDkShadow);
-		textField_End.setColumns(10);
-		add(textField_End);
-
-		textField_Title = new JTextField();
-		textField_Title.setBounds(755, 379, 120, 34);
+		lblTitle.setForeground(Color.WHITE);
+		lblTitle.setFont(new Font("Arial", Font.BOLD, 26));
+		lblTitle.setBounds(472, 269, 160, 30);
+		
+		add(lblTitle);
 		textField_Title.setForeground(SystemColor.controlDkShadow);
 		textField_Title.setColumns(10);
+		textField_Title.setBounds(744, 269, 120, 34);
+		
 		add(textField_Title);
-
-		textField_Text = new JTextField();
-		textField_Text.setBounds(755, 426, 120, 34);
 		textField_Text.setForeground(SystemColor.controlDkShadow);
 		textField_Text.setColumns(10);
+		textField_Text.setBounds(744, 314, 201, 90);
+		
 		add(textField_Text);
-		lblType.setBounds(483, 471, 159, 31);
 		lblType.setForeground(Color.WHITE);
 		lblType.setFont(new Font("Arial", Font.BOLD, 26));
-
+		lblType.setBounds(472, 420, 160, 30);
+		
 		add(lblType);
-		textField_Type.setBounds(755, 471, 120, 34);
 		textField_Type.setForeground(SystemColor.controlDkShadow);
 		textField_Type.setColumns(10);
-
+		textField_Type.setBounds(744, 420, 120, 34);
+		
 		add(textField_Type);
-		lblEventid.setBounds(483, 513, 159, 31);
-		lblEventid.setForeground(Color.WHITE);
-		lblEventid.setFont(new Font("Arial", Font.BOLD, 26));
-		
-		add(lblEventid);
-		textField_EventID.setBounds(755, 513, 120, 34);
-		textField_EventID.setForeground(SystemColor.controlDkShadow);
-		textField_EventID.setColumns(10);
-		
-		add(textField_EventID);
-		lblDescription.setBounds(483, 558, 159, 31);
 		lblDescription.setForeground(Color.WHITE);
 		lblDescription.setFont(new Font("Arial", Font.BOLD, 26));
+		lblDescription.setBounds(472, 465, 160, 30);
 		
 		add(lblDescription);
-		textField_Description.setBounds(755, 555, 120, 34);
 		textField_Description.setForeground(SystemColor.controlDkShadow);
 		textField_Description.setColumns(10);
+		textField_Description.setBounds(744, 465, 120, 34);
 		
 		add(textField_Description);
-		//=======
-
-		//>>>>>>> FETCH_HEAD
-
-		JLabel lblBackground = new JLabel("");
-		lblBackground.setBounds(0, 0, 0, 0);
-		add(lblBackground);
+		btnCreateEvent.setForeground(Color.WHITE);
+		btnCreateEvent.setFont(new Font("Tahoma", Font.BOLD, 30));
+		btnCreateEvent.setContentAreaFilled(false);
+		btnCreateEvent.setBounds(558, 609, 250, 59);
 		
-		lblCalendarname = new JLabel("CalendarName");
-		lblCalendarname.setBounds(939, 484, 70, 14);
+		add(btnCreateEvent);
+		lblCalendarname.setForeground(Color.WHITE);
+		lblCalendarname.setFont(new Font("Arial", Font.BOLD, 26));
+		lblCalendarname.setBounds(472, 510, 201, 30);
+		
 		add(lblCalendarname);
-		
-		textField_CalendarName = new JTextField();
-		textField_CalendarName.setBounds(1061, 481, 86, 20);
-		add(textField_CalendarName);
 		textField_CalendarName.setColumns(10);
+		textField_CalendarName.setBounds(744, 510, 120, 34);
+		
+		add(textField_CalendarName);
+		comboBox_StartMinutes.setBounds(1179, 187, 48, 20);
+		
+		add(comboBox_StartMinutes);
+		comboBox_StartHour.setBounds(1121, 187, 48, 20);
+		
+		add(comboBox_StartHour);
+		comboBox_EndHour.setBounds(1121, 232, 48, 20);
+		
+		add(comboBox_EndHour);
+		comboBox_EndMinutes.setBounds(1179, 232, 48, 20);
+		
+		add(comboBox_EndMinutes);
+		lblStartYear.setForeground(Color.WHITE);
+		lblStartYear.setFont(new Font("Arial", Font.BOLD, 20));
+		lblStartYear.setBounds(612, 185, 50, 24);
+		
+		add(lblStartYear);
+		lblEndYear.setForeground(Color.WHITE);
+		lblEndYear.setFont(new Font("Arial", Font.BOLD, 20));
+		lblEndYear.setBounds(612, 230, 50, 24);
+		
+		add(lblEndYear);
+		comboBox_StartYear.setBounds(685, 187, 64, 20);
+		
+		add(comboBox_StartYear);
+		comboBox_EndYear.setBounds(685, 232, 64, 20);
+		
+		add(comboBox_EndYear);
+		lblStartMonth.setForeground(Color.WHITE);
+		lblStartMonth.setFont(new Font("Arial", Font.BOLD, 20));
+		lblStartMonth.setBounds(772, 185, 67, 24);
+		
+		add(lblStartMonth);
+		lblEndMonth.setForeground(Color.WHITE);
+		lblEndMonth.setFont(new Font("Arial", Font.BOLD, 20));
+		lblEndMonth.setBounds(772, 230, 67, 24);
+		
+		add(lblEndMonth);
+		lblStartDay.setForeground(Color.WHITE);
+		lblStartDay.setFont(new Font("Arial", Font.BOLD, 20));
+		lblStartDay.setBounds(929, 185, 43, 24);
+		
+		add(lblStartDay);
+		lblEndDay.setForeground(Color.WHITE);
+		lblEndDay.setFont(new Font("Arial", Font.BOLD, 20));
+		lblEndDay.setBounds(929, 230, 43, 24);
+		
+		add(lblEndDay);
+		comboBox_StartMonth.setBounds(858, 187, 48, 20);
+		
+		add(comboBox_StartMonth);
+		comboBox_EndMonth.setBounds(858, 232, 48, 20);
+		
+		add(comboBox_EndMonth);
+		comboBox_StartDay.setBounds(982, 187, 50, 20);
+		
+		add(comboBox_StartDay);
+		comboBox_EndDay.setBounds(982, 232, 50, 20);
+		
+		add(comboBox_EndDay);
+		lblStartTime.setForeground(Color.WHITE);
+		lblStartTime.setFont(new Font("Arial", Font.BOLD, 20));
+		lblStartTime.setBounds(1048, 185, 53, 24);
+		
+		add(lblStartTime);
+		lblEndTime.setForeground(Color.WHITE);
+		lblEndTime.setFont(new Font("Arial", Font.BOLD, 20));
+		lblEndTime.setBounds(1048, 230, 53, 24);
+		
+		add(lblEndTime);
+		label_17.setForeground(Color.WHITE);
+		label_17.setFont(new Font("Arial", Font.BOLD, 20));
+		label_17.setBounds(1170, 230, 7, 24);
+		
+		add(label_17);
+		label_18.setForeground(Color.WHITE);
+		label_18.setFont(new Font("Arial", Font.BOLD, 20));
+		label_18.setBounds(1170, 185, 7, 24);
+		
+		add(label_18);
+		btnMain.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnMain.setForeground(Color.WHITE);
+		btnMain.setFont(new Font("Tahoma", Font.BOLD, 30));
+		btnMain.setContentAreaFilled(false);
+		btnMain.setBounds(52, 214, 225, 45);
+		
+		add(btnMain);
+		btnLogout.setForeground(Color.WHITE);
+		btnLogout.setFont(new Font("Tahoma", Font.BOLD, 30));
+		btnLogout.setContentAreaFilled(false);
+		btnLogout.setBounds(52, 290, 225, 45);
+		
+		add(btnLogout);
+		btnEventList.setForeground(Color.WHITE);
+		btnEventList.setFont(new Font("Tahoma", Font.BOLD, 30));
+		btnEventList.setContentAreaFilled(false);
+		btnEventList.setBounds(52, 134, 225, 45);
+		
+		add(btnEventList);
+		
+		label = new JLabel("");
+		label.setIcon(new ImageIcon(CreateEvent.class.getResource("/Images2/MetalBackground.jpg")));
+		label.setBounds(0, 0, 1366, 768);
+		add(label);
 
 
 
 	}
 	
 	public void addActionListener(ActionListener l) {
-		btnSubmit.addActionListener(l);
+		btnCreateEvent.addActionListener(l);
 		btnLogout.addActionListener(l);
-		btnMainMenu.addActionListener(l);
+		btnMain.addActionListener(l);
+		btnEventList.addActionListener(l);
+	}
+
+	public JComboBox getComboBox_StartYear() {
+		return comboBox_StartYear;
+	}
+
+	public JComboBox getComboBox_EndYear() {
+		return comboBox_EndYear;
 	}
 
 	public JTextField getTextField_Location() {
 		return textField_Location;
 	}
-
-	public JTextField getTextField_ActivityID() {
-		return textField_ActivityID;
-	}
-
 	
 	public JTextField getTextField_CalendarName() {
 		return textField_CalendarName;
 	}
 
-	public JTextField getTextField_Start() {
-		return textField_Start;
-	}
-
-	public JButton getBtnSubmit() {
-		return btnSubmit;
+	public JButton getBtnCreateEvent() {
+		return btnCreateEvent;
 	}
 
 	public JButton getBtnLogout() {
 		return btnLogout;
 	}
 
-	public JButton getBtnMainMenu() {
-		return btnMainMenu;
-	}
-
-	public JTextField getTextField_End() {
-		return textField_End;
+	public JButton getBtnMain() {
+		return btnMain;
 	}
 
 	public JTextField getTextField_Title() {
@@ -267,11 +313,44 @@ public class CreateEvent extends JPanel {
 		return textField_Type;
 	}
 
-	public JTextField getTextField_EventID() {
-		return textField_EventID;
-	}
-
 	public JTextField getTextField_Description() {
 		return textField_Description;
 	}
+
+	public JComboBox getComboBox_StartMinutes() {
+		return comboBox_StartMinutes;
+	}
+
+	public JComboBox getComboBox_StartHour() {
+		return comboBox_StartHour;
+	}
+
+	public JComboBox getComboBox_EndHour() {
+		return comboBox_EndHour;
+	}
+
+	public JComboBox getComboBox_EndMinutes() {
+		return comboBox_EndMinutes;
+	}
+
+	public JComboBox getComboBox_StartMonth() {
+		return comboBox_StartMonth;
+	}
+
+	public JComboBox getComboBox_EndMonth() {
+		return comboBox_EndMonth;
+	}
+
+	public JComboBox getComboBox_StartDay() {
+		return comboBox_StartDay;
+	}
+
+	public JComboBox getComboBox_EndDay() {
+		return comboBox_EndDay;
+	}
+
+	public JButton getBtnEventList() {
+		return btnEventList;
+	}
+	
 }
