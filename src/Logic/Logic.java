@@ -221,9 +221,9 @@ public class Logic {
 				DC.setUserName(L.getEmail());
 				try {
 					String JSonString = tcp.bla(DC);
+					DeleteCalendar DCanswer = (DeleteCalendar)gson.fromJson(JSonString, DeleteCalendar.class);
 
-
-					JOptionPane.showMessageDialog(null, JSonString
+					JOptionPane.showMessageDialog(null, DCanswer.getAnswer()
 							, "Return message",JOptionPane.PLAIN_MESSAGE);
 				} catch (UnknownHostException e1) {
 					e1.printStackTrace();
@@ -300,7 +300,9 @@ public class Logic {
 
 					try {
 						String JsonString=tcp.bla(CC);
-						JOptionPane.showMessageDialog(null, JsonString
+						CreateCalender CCanswer = (CreateCalender)gson.fromJson(JsonString, CreateCalender.class);
+
+						JOptionPane.showMessageDialog(null, CCanswer.getAnswer()
 								, "Return message",JOptionPane.PLAIN_MESSAGE);
 					} catch (UnknownHostException e1) {
 
@@ -310,8 +312,7 @@ public class Logic {
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 					}
-					JOptionPane.showMessageDialog(null, "Your calendar has now been created."
-							, "Message",JOptionPane.PLAIN_MESSAGE);
+					
 
 				}
 
@@ -341,62 +342,71 @@ public class Logic {
 
 
 
+
+				boolean empty = false;
 				String description = screen.getCreateEvent().getTextField_Description().getText();
-				
+
 				String location = screen.getCreateEvent().getTextField_Location().getText();
-				
+
 				String title = screen.getCreateEvent().getTextField_Title().getText();
-				String type = screen.getCreateEvent().getTextField_Type().getText();
-				
-				String eventID = "1";
+				String type = "1";
+				String EventID = "1";
 				String activityID = "1";
+				
 				String calendarName =  screen.getCreateEvent().getTextField_CalendarName().getText();
 				String note = screen.getCreateEvent().getTextField_Text().getText();
-				
+
 				Object startYear = screen.getCreateEvent().getComboBox_StartYear().getSelectedItem();
 				Object startMonth = screen.getCreateEvent().getComboBox_StartMonth().getSelectedItem();
 				Object startDay = screen.getCreateEvent().getComboBox_StartDay().getSelectedItem();
 				Object startHour = screen.getCreateEvent().getComboBox_StartHour().getSelectedItem();
 				Object startMinutes = screen.getCreateEvent().getComboBox_StartMinutes().getSelectedItem();
-				
-				
-				
+
+
+
 				if(startMinutes.equals("0")){
 					startMinutes = "00";
 				}
-				
+
 				Object endYear = screen.getCreateEvent().getComboBox_EndYear().getSelectedItem();
 				Object endMonth = screen.getCreateEvent().getComboBox_EndMonth().getSelectedItem();
 				Object endDay = screen.getCreateEvent().getComboBox_EndDay().getSelectedItem();
 				Object endHour = screen.getCreateEvent().getComboBox_EndHour().getSelectedItem();
 				Object endMinutes = screen.getCreateEvent().getComboBox_EndMinutes().getSelectedItem();
-				
+
 				if(endMinutes.equals("0")){
 					endMinutes = "00";
 				}
-			
+
 				String start = startYear.toString()+ "-"+ startMonth.toString()+ "-"+ startDay.toString()+ " "+startHour.toString()+":"+startMinutes+":00";
 				String end = endYear.toString()+ "-"+ endMonth.toString()+ "-"+ endDay.toString()+ " "+endHour.toString()+":"+endMinutes+":00";
-				        
-				String EventID = "1";
-				System.out.println("note: "+note);
+
+				
+				if (title.equals("")||location.equals("")|| calendarName.equals("")|| description.equals(""))
+				{
+					JOptionPane.showMessageDialog(null, "\nPlease fill out all the fields"
+							, "Error message",JOptionPane.PLAIN_MESSAGE);
+					empty = true;
+				}
+				
+				if (empty == false){
 				CreateEvent CE = new CreateEvent("createEvent", 0,activityID,EventID , type, title, description, start, end, location,  calendarName ,note);
-						
-				
-				
+
 				try {
 					String CreateEvent = tcp.bla(CE);
-					
-					JOptionPane.showMessageDialog(null, CreateEvent
+					CreateEvent CEanswer = (CreateEvent)gson.fromJson(CreateEvent, CreateEvent.class);
+
+					JOptionPane.showMessageDialog(null, CEanswer.getAnswer()
 							, "Return message",JOptionPane.PLAIN_MESSAGE);
-					} catch (UnknownHostException e1) {
-						
-						e1.printStackTrace();
-					} catch (IOException e1) {
-						e1.printStackTrace();
-					} catch (SQLException e1) {
-						e1.printStackTrace();
-					}
+					
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				} catch (UnknownHostException e1) {
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				}
 			}
 		if (e.getSource() == screen.getCreateEvent().getBtnEventList()){
 				screen.show(Screen.EVENTLIST);

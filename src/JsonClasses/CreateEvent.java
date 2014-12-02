@@ -15,6 +15,7 @@ public class CreateEvent implements java.io.Serializable
 	private String location;
 	private String note;
 	private String calendarName;
+	private String answer = "";
 	
 	public CreateEvent(String _overallID, int _ID, String _activityID, String _eventID, String _type, String _title, String _description, String _start, String _end, String _location, String _calendarName, String _note){
 		setOverallID(_overallID);
@@ -34,11 +35,24 @@ public class CreateEvent implements java.io.Serializable
 	
 	 
 	
-	//Getters and setters for everything, bitch
+	//Getters and setters for everything
+	
 
 	public String getOverallID() {
 		return overallID;
 	}
+	public String getAnswer() {
+		return answer;
+	}
+
+
+
+	public void setAnswer(String answer) {
+		this.answer = answer;
+	}
+
+
+
 	public String getNote() {
 		return note;
 	}

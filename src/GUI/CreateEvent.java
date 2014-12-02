@@ -30,8 +30,6 @@ public class CreateEvent extends JPanel {
 	private final JLabel lblTitle = new JLabel("Title");
 	private final JTextField textField_Title = new JTextField();
 	private final JTextField textField_Text = new JTextField();
-	private final JLabel lblType = new JLabel("Type");
-	private final JTextField textField_Type = new JTextField();
 	private final JLabel lblDescription = new JLabel("Description");
 	private final JTextField textField_Description = new JTextField();
 	private final JButton btnCreateEvent = new JButton("Create Event");
@@ -119,24 +117,14 @@ public class CreateEvent extends JPanel {
 		textField_Text.setBounds(744, 314, 201, 90);
 		
 		add(textField_Text);
-		lblType.setForeground(Color.WHITE);
-		lblType.setFont(new Font("Arial", Font.BOLD, 26));
-		lblType.setBounds(472, 420, 160, 30);
-		
-		add(lblType);
-		textField_Type.setForeground(SystemColor.controlDkShadow);
-		textField_Type.setColumns(10);
-		textField_Type.setBounds(744, 420, 120, 34);
-		
-		add(textField_Type);
 		lblDescription.setForeground(Color.WHITE);
 		lblDescription.setFont(new Font("Arial", Font.BOLD, 26));
-		lblDescription.setBounds(472, 465, 160, 30);
+		lblDescription.setBounds(472, 415, 160, 30);
 		
 		add(lblDescription);
 		textField_Description.setForeground(SystemColor.controlDkShadow);
 		textField_Description.setColumns(10);
-		textField_Description.setBounds(744, 465, 120, 34);
+		textField_Description.setBounds(744, 415, 120, 34);
 		
 		add(textField_Description);
 		btnCreateEvent.setForeground(Color.WHITE);
@@ -147,11 +135,11 @@ public class CreateEvent extends JPanel {
 		add(btnCreateEvent);
 		lblCalendarname.setForeground(Color.WHITE);
 		lblCalendarname.setFont(new Font("Arial", Font.BOLD, 26));
-		lblCalendarname.setBounds(472, 510, 201, 30);
+		lblCalendarname.setBounds(472, 460, 201, 30);
 		
 		add(lblCalendarname);
 		textField_CalendarName.setColumns(10);
-		textField_CalendarName.setBounds(744, 510, 120, 34);
+		textField_CalendarName.setBounds(744, 460, 120, 34);
 		
 		add(textField_CalendarName);
 		comboBox_StartMinutes.setBounds(1179, 187, 48, 20);
@@ -339,10 +327,6 @@ public class CreateEvent extends JPanel {
 
 	public JTextField getTextField_Text() {
 		return textField_Text;
-	}
-
-	public JTextField getTextField_Type() {
-		return textField_Type;
 	}
 
 	public JTextField getTextField_Description() {
