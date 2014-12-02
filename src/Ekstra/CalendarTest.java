@@ -14,7 +14,7 @@ import com.google.gson.JsonParser;
 
 import java.awt.*;  
 
-import JsonClasses.CreateCalender;
+import JsonClasses.CreateCalendar;
 import JsonClasses.CreateEvent;
 import JsonClasses.DailyUpdate;
 import JsonClasses.DeleteCalendar;

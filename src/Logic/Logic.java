@@ -23,7 +23,7 @@ import com.sun.xml.internal.ws.Closeable;
 
 import TCPClient.TCPClient;
 import GUI.Screen;
-import JsonClasses.CreateCalender;
+import JsonClasses.CreateCalendar;
 import JsonClasses.CreateEvent;
 import JsonClasses.ForgotLogin;
 import JsonClasses.Login;
@@ -257,7 +257,7 @@ public class Logic {
 
 			if (e.getSource() == screen.getCreatecalendar().getBtnCreateCalendar()){
 
-				CreateCalender CC = new CreateCalender();
+				CreateCalendar CC = new CreateCalendar();
 				boolean empty = false;
 				String name = screen.getCreatecalendar().getTxtName().getText();
 				int type = 2; //2 betyder er det er en brugerskabt kalender og ikke den som er hentet fra CBS.
@@ -300,7 +300,7 @@ public class Logic {
 
 					try {
 						String JsonString=tcp.bla(CC);
-						CreateCalender CCanswer = (CreateCalender)gson.fromJson(JsonString, CreateCalender.class);
+						CreateCalendar CCanswer = (CreateCalendar)gson.fromJson(JsonString, CreateCalendar.class);
 
 						JOptionPane.showMessageDialog(null, CCanswer.getAnswer()
 								, "Return message",JOptionPane.PLAIN_MESSAGE);
