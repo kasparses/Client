@@ -4,25 +4,25 @@ public class CreateCalender implements java.io.Serializable
 {
 	private  final long serialVersionUID = 1L;
 	private String overallID = "createCalendar";
-	private String calenderName;
+	private String calendarName;
 	private String userName;
 	private int publicOrPrivate;
 	private int type;
 	private int Active;
-	
-	
-	//Getters and setters for everything, bitch
+	private String answer = "";
+		
+	//Getters and setters for everything
 	public String getOverallID() {
 		return overallID;
 	}
 	public void setOverallID(String overallID) {
 		this.overallID = overallID;
 	}
-	public String getCalenderName() {
-		return calenderName;
+	public String getCalendarName() {
+		return calendarName;
 	}
-	public void setCalenderName(String calenderName) {
-		this.calenderName = calenderName;
+	public void setCalendarName(String calendarName) {
+		this.calendarName = calendarName;
 	}
 	public String getUserName() {
 		return userName;
@@ -48,6 +48,12 @@ public class CreateCalender implements java.io.Serializable
 	public void setActive(int active) {
 		Active = active;
 	}
-	
+	public String getAnswer() {
+		return answer;
+	}
+	public void setAnswer(String answer) {
+		this.answer = answer;
+	}
+
 
 }

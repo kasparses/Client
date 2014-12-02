@@ -11,6 +11,7 @@ import javax.swing.JRadioButton;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.ImageIcon;
+import java.awt.event.ActionEvent;
 
 public class Createcalendar extends JPanel {
 	private JLabel lblCreatecalendar;
@@ -44,6 +45,10 @@ public class Createcalendar extends JPanel {
 		add(lblName);
 		
 		btnCreateCalendar = new JButton("Create calendar");
+		btnCreateCalendar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnCreateCalendar.setContentAreaFilled(false);
 		btnCreateCalendar.setForeground(Color.WHITE);
 		btnCreateCalendar.setFont(new Font("Tahoma", Font.BOLD, 30));
@@ -52,8 +57,8 @@ public class Createcalendar extends JPanel {
 		
 		txtName = new JTextField();
 		txtName.setBounds(737, 260, 272, 23);
-		add(txtName);
 		txtName.setColumns(10);
+		add(txtName);
 		
 		rdbtnPublic = new JRadioButton("Public calendar");
 		rdbtnPublic.setOpaque(false);

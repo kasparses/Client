@@ -13,7 +13,7 @@ public class Screen extends JFrame {
 	
 	public static final String LOGOUT = "name_271364461837793";
 	public static final String LOGIN = "name_271353069859059";
-	public static final String DELTECALENDAR = "name_271341061178742";
+	public static final String DELETECALENDAR = "name_271341061178742";
 	public static final String CREATEEVENT = "name_403949887096492";
 	public static final String CREATECALENDAR = "name_271288584224003";
 	public static final String CALENDAR = "name_271270913019346";

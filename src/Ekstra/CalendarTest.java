@@ -15,9 +15,12 @@ import com.google.gson.JsonParser;
 import java.awt.*;  
 
 import JsonClasses.CreateCalender;
+import JsonClasses.CreateEvent;
 import JsonClasses.DailyUpdate;
+import JsonClasses.DeleteCalendar;
 import JsonClasses.Login;
 import JsonClasses.SaveNote;
+import Logic.Logic;
 
 import javax.swing.*;  
 import javax.swing.table.*;  
@@ -98,7 +101,6 @@ public class CalendarTest{
     private static JLabel lblCelsius7;
     private static JLabel lblDate7;
     private static JLabel label_14;
-	Screen screen = new Screen();
 
     
     data d = new data();
@@ -158,7 +160,7 @@ public class CalendarTest{
        
         
         //Prepare frame
-        frmMain = new JFrame ("Gestionnaire de clients"); //Create frame
+        frmMain = new JFrame ("DØK Calendar"); //Create frame
         frmMain.setTitle("D\u00D8K Calendar");
         frmMain.setSize(1366, 768); //Set size to 400x400 pixels
         pane = frmMain.getContentPane(); //Get content pane
@@ -503,8 +505,8 @@ public class CalendarTest{
         btnCreateCalendar = new JButton("Create Calendar");
         btnCreateCalendar.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		screen.setVisible(true);
-        		screen.show(Screen.CREATECALENDAR);
+        		Logic.screen.setVisible(true);
+        		Logic.screen.show(Screen.CREATECALENDAR);
         		
         	}
         });
@@ -514,94 +516,13 @@ public class CalendarTest{
         btnCreateCalendar.setBounds(25, 187, 129, 23);
         pnlCalendar.add(btnCreateCalendar);
         
+        
         btnDeleteCalendar = new JButton("Delete Calendar");
         btnDeleteCalendar.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		screen.setVisible(true);
-        		screen.show(Screen.DELTECALENDAR);
-        		private class CreateCalendarActionListener implements ActionListener {
-
-        			public void actionPerformed(ActionEvent e) {
-
-        				if (e.getSource() == screen.getCreatecalendar().getBtnCreateCalendar()){
-
-        					CreateCalender CC = new CreateCalender();
-        					boolean empty = false;
-        					String name = screen.getCreatecalendar().getTxtName().getText();
-        					int type = 2; //2 betyder er det er en brugerskabt kalender og ikke den som er hentet fra CBS.
-        					int active = 1; // 1 betyder at den er aktiv. 2 betyder at den ikke er aktiv.
-
-        					if( name.equals("")) {
-
-        						JOptionPane.showMessageDialog(null, "\nPlease fill out all the fields"
-        								, "Error message",JOptionPane.PLAIN_MESSAGE);
-        						empty = true;
-        					}
-
-        					boolean PrivateOrPublic = false;
-        					int PrivateOrPublicValue = 0;
-
-
-        					if (screen.getCreatecalendar().getRdbtnPrivate().isSelected())
-        					{
-        						PrivateOrPublicValue = 2; //2 er lig med private.
-        						PrivateOrPublic = true;
-        					}
-        					if (screen.getCreatecalendar().getRdbtnPublic().isSelected())
-        					{
-        						PrivateOrPublicValue = 1; //1 er lig med public.
-        						PrivateOrPublic = true;
-        					}
-
-
-        					if( PrivateOrPublic == false){
-        						JOptionPane.showMessageDialog(null, "Please select whether your database is a public or a private database"
-        								, "Error message",JOptionPane.PLAIN_MESSAGE);
-
-        					}
-
-        					if (empty == false && PrivateOrPublic == true){
-        						CC.setCalenderName(name);
-        						CC.setPublicOrPrivate(PrivateOrPublicValue);
-        						CC.setType(type);
-        						CC.setActive(active);
-        						CC.setUserName(L.getEmail());
-
-        						try {
-        							String JsonString=tcp.bla(CC);
-        							JOptionPane.showMessageDialog(null, JsonString
-        									, "Return message",JOptionPane.PLAIN_MESSAGE);
-        						} catch (UnknownHostException e1) {
-
-        							e1.printStackTrace();
-        						} catch (IOException e1) {
-        							e1.printStackTrace();
-        						} catch (SQLException e1) {
-        							e1.printStackTrace();
-        						}
-        						JOptionPane.showMessageDialog(null, "Your calendar has now been created."
-        								, "Message",JOptionPane.PLAIN_MESSAGE);
-
-        					}
-
-        				}
-        			if (e.getSource() == screen.getCreatecalendar().getBtnEventList()){
-        				screen.show(Screen.EVENTLIST);
-
-        			}
-        			if (e.getSource() == screen.getCreatecalendar().getBtnLogOut()){
-        				screen.show(Screen.LOGOUT);
-
-        			}
-        			if (e.getSource() == screen.getCreatecalendar().getBtnMain()){
-        				System.out.println("calendar");
-        				screen.dispose();
-
-        			}
-        			}
-
-        		}
-
+        		Logic.screen.setVisible(true);
+        		Logic.screen.show(Screen.DELETECALENDAR);
+        		
         	}
         });
         btnDeleteCalendar.setForeground(Color.WHITE);
@@ -610,11 +531,12 @@ public class CalendarTest{
         btnDeleteCalendar.setBounds(25, 232, 129, 23);
         pnlCalendar.add(btnDeleteCalendar);
         
+        
         btnEventList = new JButton("Event List");
         btnEventList.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		screen.setVisible(true);
-        		screen.show(Screen.EVENTLIST);
+        		Logic.screen.setVisible(true);
+        		Logic.screen.show(Screen.EVENTLIST);
         	}
         });
         btnEventList.setForeground(Color.WHITE);
@@ -626,8 +548,8 @@ public class CalendarTest{
         btnCreateEvent = new JButton("Create Event");
         btnCreateEvent.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		screen.setVisible(true);
-        		screen.show(Screen.CREATEEVENT);
+        		Logic.screen.setVisible(true);
+        		Logic.screen.show(Screen.CREATEEVENT);
         	}
         });
         btnCreateEvent.setForeground(Color.WHITE);
@@ -639,8 +561,8 @@ public class CalendarTest{
         btnLogOut = new JButton("Log Out");
         btnLogOut.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		screen.setVisible(true);
-        		screen.show(Screen.LOGOUT);
+        		Logic.screen.setVisible(true);
+        		Logic.screen.show(Screen.LOGOUT);
         	}
         });
         btnLogOut.setForeground(Color.WHITE);
@@ -693,128 +615,128 @@ public class CalendarTest{
         cmbYear.setSelectedItem(String.valueOf(year)); //Select the correct year in the combo box
         
         //sætter quote, author og topic
-        lblQuote.setText("''"+Logic.Logic.Quote+"''");
-        lblAuthor.setText("By: "+Logic.Logic.Author);
-        lblTopic.setText("Topic: "+Logic.Logic.Topic);
+        lblQuote.setText("''"+Logic.Quote+"''");
+        lblAuthor.setText("By: "+Logic.Author);
+        lblTopic.setText("Topic: "+Logic.Topic);
         
         //sætter beskrivelser til dag 1
-        lblDate1.setText(Logic.Logic.Date1);
-        lblCelsius1.setText(Logic.Logic.Celsius1+" Celsius.");
-        lblDesc1.setText("Weather: "+Logic.Logic.Desc1);
+        lblDate1.setText(Logic.Date1);
+        lblCelsius1.setText(Logic.Celsius1+" Celsius.");
+        lblDesc1.setText("Weather: "+Logic.Desc1);
         //sætter billeder til dag 1
         
         
-        if(Logic.Logic.Desc1.equals("broken clouds")){
+        if(Logic.Desc1.equals("broken clouds")){
         	lblPicture1.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/broken clouds.png")));
-        } else if(Logic.Logic.Desc1.equals("few clouds")){
+        } else if(Logic.Desc1.equals("few clouds")){
         	lblPicture1.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/few clouds.png")));
-        } else if(Logic.Logic.Desc1.equals("light rain")){
+        } else if(Logic.Desc1.equals("light rain")){
         	lblPicture1.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/light rain.png")));
-        } else if(Logic.Logic.Desc1.equals("sky is clear")){
+        } else if(Logic.Desc1.equals("sky is clear")){
         	lblPicture1.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/sky is clear.png")));
-        } else if(Logic.Logic.Desc1.equals("light snow")){
+        } else if(Logic.Desc1.equals("light snow")){
         	lblPicture1.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/light snow.png")));
         }
         
       //sætter beskrivelser til dag 2
-        lblDate2.setText(Logic.Logic.Date2);
-        lblCelsius2.setText(Logic.Logic.Celsius2+" Celsius.");
-        lblDesc2.setText("Weather: "+Logic.Logic.Desc2);
+        lblDate2.setText(Logic.Date2);
+        lblCelsius2.setText(Logic.Celsius2+" Celsius.");
+        lblDesc2.setText("Weather: "+Logic.Desc2);
         //sætter billeder til dag 2
-        if(Logic.Logic.Desc2.equals("broken clouds")){
+        if(Logic.Desc2.equals("broken clouds")){
         	lblPicture2.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/broken clouds.png")));
-        } else if(Logic.Logic.Desc2.equals("few clouds")){
+        } else if(Logic.Desc2.equals("few clouds")){
         	lblPicture2.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/few clouds.png")));
-        } else if(Logic.Logic.Desc2.equals("light rain")){
+        } else if(Logic.Desc2.equals("light rain")){
         	lblPicture2.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/light rain.png")));
-        } else if(Logic.Logic.Desc2.equals("sky is clear")){
+        } else if(Logic.Desc2.equals("sky is clear")){
         	lblPicture2.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/sky is clear.png")));
-        } else if(Logic.Logic.Desc2.equals("light snow")){
+        } else if(Logic.Desc2.equals("light snow")){
         	lblPicture2.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/light snow.png")));
         }
         
       //sætter beskrivelser til dag 3
-        lblDate3.setText(Logic.Logic.Date3);
-        lblCelsius3.setText(Logic.Logic.Celsius3+" Celsius.");
-        lblDesc3.setText("Weather: "+Logic.Logic.Desc3);
+        lblDate3.setText(Logic.Date3);
+        lblCelsius3.setText(Logic.Celsius3+" Celsius.");
+        lblDesc3.setText("Weather: "+Logic.Desc3);
         //sætter billeder til dag 3
-        if(Logic.Logic.Desc3.equals("broken clouds")){
+        if(Logic.Desc3.equals("broken clouds")){
         	lblPicture3.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/broken clouds.png")));
-        } else if(Logic.Logic.Desc3.equals("few clouds")){
+        } else if(Logic.Desc3.equals("few clouds")){
         	lblPicture3.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/few clouds.png")));
-        } else if(Logic.Logic.Desc3.equals("light rain")){
+        } else if(Logic.Desc3.equals("light rain")){
         	lblPicture3.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/light rain.png")));
-        } else if(Logic.Logic.Desc3.equals("sky is clear")){
+        } else if(Logic.Desc3.equals("sky is clear")){
         	lblPicture3.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/sky is clear.png")));
-        } else if(Logic.Logic.Desc3.equals("light snow")){
+        } else if(Logic.Desc3.equals("light snow")){
         	lblPicture3.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/light snow.png")));
         }
         
       //sætter beskrivelser til dag 4
-        lblDate4.setText(Logic.Logic.Date4);
-        lblCelsius4.setText(Logic.Logic.Celsius4+" Celsius.");
-        lblDesc4.setText("Weather: "+Logic.Logic.Desc4);
+        lblDate4.setText(Logic.Date4);
+        lblCelsius4.setText(Logic.Celsius4+" Celsius.");
+        lblDesc4.setText("Weather: "+Logic.Desc4);
         //sætter billeder til dag 4
-        if(Logic.Logic.Desc4.equals("broken clouds")){
+        if(Logic.Desc4.equals("broken clouds")){
         	lblPicture4.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/broken clouds.png")));
-        } else if(Logic.Logic.Desc4.equals("few clouds")){
+        } else if(Logic.Desc4.equals("few clouds")){
         	lblPicture4.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/few clouds.png")));
-        } else if(Logic.Logic.Desc4.equals("light rain")){
+        } else if(Logic.Desc4.equals("light rain")){
         	lblPicture4.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/light rain.png")));
-        } else if(Logic.Logic.Desc4.equals("sky is clear")){
+        } else if(Logic.Desc4.equals("sky is clear")){
         	lblPicture4.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/sky is clear.png")));
-        } else if(Logic.Logic.Desc4.equals("light snow")){
+        } else if(Logic.Desc4.equals("light snow")){
         	lblPicture4.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/light snow.png")));
         }
         
       //sætter beskrivelser til dag 5
-        lblDate5.setText(Logic.Logic.Date5);
-        lblCelsius5.setText(Logic.Logic.Celsius5+" Celsius.");
-        lblDesc5.setText("Weather: "+Logic.Logic.Desc5);
+        lblDate5.setText(Logic.Date5);
+        lblCelsius5.setText(Logic.Celsius5+" Celsius.");
+        lblDesc5.setText("Weather: "+Logic.Desc5);
         //sætter billeder til dag 5
-        if(Logic.Logic.Desc5.equals("broken clouds")){
+        if(Logic.Desc5.equals("broken clouds")){
         	lblPicture5.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/broken clouds.png")));
-        } else if(Logic.Logic.Desc5.equals("few clouds")){
+        } else if(Logic.Desc5.equals("few clouds")){
         	lblPicture5.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/few clouds.png")));
-        } else if(Logic.Logic.Desc5.equals("light rain")){
+        } else if(Logic.Desc5.equals("light rain")){
         	lblPicture5.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/light rain.png")));
-        } else if(Logic.Logic.Desc5.equals("sky is clear")){
+        } else if(Logic.Desc5.equals("sky is clear")){
         	lblPicture5.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/sky is clear.png")));
-        } else if(Logic.Logic.Desc5.equals("light snow")){
+        } else if(Logic.Desc5.equals("light snow")){
         	lblPicture5.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/light snow.png")));
         }
         
       //sætter beskrivelser til dag 6
-        lblDate6.setText(Logic.Logic.Date6);
-        lblCelsius6.setText(Logic.Logic.Celsius6+" Celsius.");
-        lblDesc6.setText("Weather: "+Logic.Logic.Desc6);
+        lblDate6.setText(Logic.Date6);
+        lblCelsius6.setText(Logic.Celsius6+" Celsius.");
+        lblDesc6.setText("Weather: "+Logic.Desc6);
         //sætter billeder til dag 6
-        if(Logic.Logic.Desc6.equals("broken clouds")){
+        if(Logic.Desc6.equals("broken clouds")){
         	lblPicture6.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/broken clouds.png")));
-        } else if(Logic.Logic.Desc6.equals("few clouds")){
+        } else if(Logic.Desc6.equals("few clouds")){
         	lblPicture6.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/few clouds.png")));
-        } else if(Logic.Logic.Desc6.equals("light rain")){
+        } else if(Logic.Desc6.equals("light rain")){
         	lblPicture6.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/light rain.png")));
-        } else if(Logic.Logic.Desc6.equals("sky is clear")){
+        } else if(Logic.Desc6.equals("sky is clear")){
         	lblPicture6.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/sky is clear.png")));
-        } else if(Logic.Logic.Desc6.equals("light snow")){
+        } else if(Logic.Desc6.equals("light snow")){
         	lblPicture6.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/light snow.png")));
         }
         
         //sætter beskrivelser til dag 7
-        lblDate7.setText(Logic.Logic.Date7);
-        lblCelsius7.setText(Logic.Logic.Celsius7+" Celsius.");
-        lblDesc7.setText("Weather: "+Logic.Logic.Desc7);
+        lblDate7.setText(Logic.Date7);
+        lblCelsius7.setText(Logic.Celsius7+" Celsius.");
+        lblDesc7.setText("Weather: "+Logic.Desc7);
         //sætter billeder til dag 7
-        if(Logic.Logic.Desc7.equals("broken clouds")){
+        if(Logic.Desc7.equals("broken clouds")){
         	lblPicture7.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/broken clouds.png")));
-        } else if(Logic.Logic.Desc7.equals("few clouds")){
+        } else if(Logic.Desc7.equals("few clouds")){
         	lblPicture7.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/few clouds.png")));
-        } else if(Logic.Logic.Desc7.equals("light rain")){
+        } else if(Logic.Desc7.equals("light rain")){
         	lblPicture7.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/light rain.png")));
-        } else if(Logic.Logic.Desc7.equals("sky is clear")){
+        } else if(Logic.Desc7.equals("sky is clear")){
         	lblPicture7.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/sky is clear.png")));
-        } else if(Logic.Logic.Desc7.equals("light snow")){
+        } else if(Logic.Desc7.equals("light snow")){
         	lblPicture7.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/light snow.png")));
         }
         

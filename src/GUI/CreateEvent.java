@@ -262,6 +262,38 @@ public class CreateEvent extends JPanel {
 		label.setBounds(0, 0, 1366, 768);
 		add(label);
 
+		for (int c=0; c<=24; c++){
+			 comboBox_StartHour.addItem(c);
+	        }
+		 for (int c2=0; c2<=60; c2+=5){
+			 comboBox_StartMinutes.addItem(c2);
+	        }
+		 for (int c3=0; c3<=24; c3++){
+			 comboBox_EndHour.addItem(c3);
+	        }
+		 for (int c4=0; c4<=60; c4+=5){
+			 comboBox_EndMinutes.addItem(c4);
+	        }
+
+		 
+		 for (int c5 = 2014; c5<2017; c5++){
+			 comboBox_StartYear.addItem(c5);
+		 }
+		 for (int c6 = 0; c6<=12; c6++){
+			 comboBox_StartMonth.addItem(c6);
+		 }
+		 for (int c5 = 2014; c5<2017; c5++){
+			 comboBox_EndYear.addItem(c5);
+		 }
+		 for (int c6 = 0; c6<=12; c6++){
+			 comboBox_EndMonth.addItem(c6);
+		 }
+		 for (int c7 = 0; c7<=31; c7++){
+			 comboBox_EndDay.addItem(c7);
+		 }
+		 for (int c8 = 0; c8<=31; c8++){
+			 comboBox_StartDay.addItem(c8);
+		 }
 
 
 	}

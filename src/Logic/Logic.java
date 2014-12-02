@@ -62,7 +62,9 @@ public class Logic {
 	public static String Author;
 	public static String Topic;
 	
-	private Screen screen;
+	public static Screen screen;
+	
+	
 	TCPClient tcp = new TCPClient();
 	Gson gson = new GsonBuilder().create();
 	Login L = new Login();
@@ -81,6 +83,7 @@ public class Logic {
 		screen.getEventlist().addActionListener(new EventListActionListener());
 		screen.getCreateEvent().addActionListener(new AddEventGUIActionListener());
 		screen.getForgotLogin().addActionListener(new ForgotLoginActionListener());
+		screen.getLogOut().addActionListener(new LogOutActionListener());
 
 
 
@@ -288,9 +291,8 @@ public class Logic {
 							, "Error message",JOptionPane.PLAIN_MESSAGE);
 
 				}
-
 				if (empty == false && PrivateOrPublic == true){
-					CC.setCalenderName(name);
+					CC.setCalendarName(name);
 					CC.setPublicOrPrivate(PrivateOrPublicValue);
 					CC.setType(type);
 					CC.setActive(active);
@@ -451,8 +453,12 @@ public class Logic {
 					JOptionPane.showMessageDialog(null, "\nYour username is: "+FL.getEmail()+"\nYour password is: "+FL.getPassword()
 							, "Message",JOptionPane.PLAIN_MESSAGE);
 				}
-				else if(FL.getAnswer().equals("notCorrect")){
-					JOptionPane.showMessageDialog(null, "\nIt did not work!...."
+				else if(!FL.getAnswer().equals("correct")){
+					JOptionPane.showMessageDialog(null, "\nPlease enter a valid security number."
+							, "Error",JOptionPane.PLAIN_MESSAGE);
+				}
+				if (cPR.equals("")){
+					JOptionPane.showMessageDialog(null, "\nPlease fill out the field."
 							, "Error",JOptionPane.PLAIN_MESSAGE);
 				}
 
@@ -465,14 +471,26 @@ public class Logic {
 		
 	}
 	}
+	private class LogOutActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			if (e.getSource() == screen.getLogOut().getBtnLogIn()){
+				
 
+			screen.show(Screen.LOGIN);
+
+		}
+		
+	}
+	}
 	public String[] getDate() {
 		return Date;
 	}
 	public void setDate(String[] date) {
 		Date = date;
 	}
-
+	public Screen getScreen() {
+		return screen;
+	}
 	
 	
 	
