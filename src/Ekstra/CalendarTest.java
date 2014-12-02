@@ -105,7 +105,7 @@ public class CalendarTest{
     int [] rows = new int[100];	// tilpas længden
     int [] columns = new int[100]; // tilpas længden 
 
-    ArrayList<ColumnRow> columnRows = new ArrayList<ColumnRow>();
+    public static ArrayList<ColumnRow> columnRows = new ArrayList<ColumnRow>();
     
     ArrayList<Event> lcs = new ArrayList<Event>();
     ArrayList<CalendarData> lcs2 = new ArrayList<CalendarData>();
@@ -210,6 +210,8 @@ public class CalendarTest{
         	
         	mtblCalendar.addColumn(headers[a]);
         }
+        
+        
         
         tblCalendar.getParent().setBackground(tblCalendar.getBackground()); //Set background
         
@@ -1118,6 +1120,7 @@ public class CalendarTest{
 	}
 	
 	public ArrayList<ColumnRow> getColumnRows() {
+		System.out.println(" blabla: "+columnRows.size());
 		return columnRows;
 	}
 

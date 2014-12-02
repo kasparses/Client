@@ -32,6 +32,7 @@ public class BorderCellRenderer extends JLabel
     
     
     try {
+    	System.out.println(CalendarTest.columnRows.size());
     	System.out.println("BorderCellRender size "+CT.getColumnRows().size());
     	
     	
@@ -48,6 +49,13 @@ public class BorderCellRenderer extends JLabel
 //    		
 //    	}
 //    }
+//  CT.getColumnRows().get(0).getRow();
+  for(int i=0; i<CalendarTest.columnRows.size(); i++){
+  	if(row == CalendarTest.columnRows.get(i).getRow() && column == CalendarTest.columnRows.get(i).getColumn()){
+  		setBackground(new Color(255,220,220));
+  		
+  	}
+  }
     
 //    if (row ==d.getRow() && column ==d.getColumn() ){
 //    	setBackground(new Color(255,220,220));

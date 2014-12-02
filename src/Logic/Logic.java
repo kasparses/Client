@@ -77,7 +77,7 @@ public class Logic {
 		screen.getCreateEvent().addActionListener(new AddEventGUIActionListener());
 		//		screen.getAddUser().addActionListener(new AddUserActionListener());
 
-
+		
 
 	}
 	public void run() {
@@ -117,6 +117,9 @@ public class Logic {
 
 					GCBS.setUserName(L.getEmail());
 					String JsonString3 = tcp.bla(GCBS);
+					
+					System.out.println("testststst");
+					System.out.println(JsonString3);
 
 					SD.setOverallID("getClientForecast");
 					String JsonString4 = tcp.bla(SD);
@@ -174,7 +177,7 @@ public class Logic {
 					System.out.println(JsonString5);
 					
 					
-
+					screen.dispose();
 					data d = new data();  
 					new CalendarTest().run(d.calculateNewDate(),JsonString3, JsonString5, L.getEmail());
 
