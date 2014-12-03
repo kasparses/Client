@@ -8,7 +8,6 @@ public class data {
 	
 	GregorianCalendar cal = new GregorianCalendar(); //Create calendar
     private int dayofWeek = cal.get(GregorianCalendar.DAY_OF_WEEK_IN_MONTH);
-    private int dayofweek2 = cal.get(GregorianCalendar.DAY_OF_WEEK);
     private int weekofYear = cal.get(GregorianCalendar.WEEK_OF_YEAR);
     private int realDay = cal.get(GregorianCalendar.DAY_OF_MONTH); //Get day
     private int realMonth = cal.get(GregorianCalendar.MONTH); //Get month
@@ -42,20 +41,6 @@ public class data {
     
     
     
-	public int getDayofweek2() {
-		return dayofweek2;
-	}
-
-
-
-
-	public void setDayofweek2(int dayofweek2) {
-		this.dayofweek2 = dayofweek2;
-	}
-
-
-
-
 	public int[] getRows() {
 		return rows;
 	}

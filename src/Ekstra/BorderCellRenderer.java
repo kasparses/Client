@@ -13,6 +13,7 @@ import javax.swing.border.*;
 public class BorderCellRenderer extends JLabel
 
     implements TableCellRenderer {
+	String RealDay;
   protected Border noFocusBorder;
   protected Border columnBorder;
   data d = new data();
@@ -42,22 +43,22 @@ public class BorderCellRenderer extends JLabel
 	      setBackground(new Color(255, 255, 255));
 	    }
    
+    if(d.getRealDay() <= 10) {
+    	RealDay = "0"+d.getRealDay();
+    }
     
     //Ændre baggrundsfarve på column tilhørende til dagen i dag + column 5 og 6 (altså 6 og 7)
-//    for(int x=0; x<7; x++){
-//    	if(CalendarTest.headers[x].equals("0"+d.getRealDay()+"-"+(d.getCurrentMonth()+1)+"-"+d.getCurrentYear())){
-        	if(d.getDayofWeek()+1 == column){
-        		System.out.println("dayofweek: "+d.getDayofWeek());
-        		System.out.println("dayofweek2: "+d.getDayofweek2());
-        		System.out.println("column: "+column);
+    for(int x=0; x<7; x++){
+    	if(CalendarTest.headers[x].equals(RealDay+"-"+(d.getCurrentMonth()+1)+"-"+d.getCurrentYear())){
+        	if(((d.getRealDay()+6)%7) == column){
     			setBackground(new Color(234, 234, 245));
         	} else if(column == 5 || column == 6) { 
         		setBackground(new Color(255, 215, 216));
     	    } else {
     	    	setBackground(new Color(255, 255, 255));
     	    }
-//    	}
-//    }
+    	}
+    }
 
     
    

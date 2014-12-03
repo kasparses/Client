@@ -219,11 +219,11 @@ public class CalendarTest{
         for (int a=0; a<7; a++){
             String hej = "";
         	Date currentDate = new Date(newDate);
+        	System.out.println("date: "+newDate);
         	
-        	String swag = date_format.format(currentDate);
-        	headers[a] = swag;
+        	String ugeDag = date_format.format(currentDate);
+        	headers[a] = ugeDag;
         	newDate +=86400000;
-        	
         	
         	mtblCalendar.addColumn(headers[a]);
         }
