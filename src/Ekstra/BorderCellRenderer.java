@@ -13,7 +13,8 @@ import javax.swing.border.*;
 public class BorderCellRenderer extends JLabel
 
     implements TableCellRenderer {
-	String RealDay;
+	String CurrentDay;
+	String CurrentMonth;
   protected Border noFocusBorder;
   protected Border columnBorder;
   data d = new data();
@@ -44,12 +45,20 @@ public class BorderCellRenderer extends JLabel
 	    }
    
     if(d.getRealDay() <= 10) {
-    	RealDay = "0"+d.getRealDay();
+    	CurrentDay = "0"+d.getRealDay();
+    } else {
+    	CurrentDay = ""+d.getRealDay();
+    }
+    
+    if((d.getCurrentMonth()+1) <=10){
+    	CurrentMonth = "0"+(d.getCurrentMonth()+1);
+    } else {
+    	CurrentMonth = ""+(d.getCurrentMonth()+1);
     }
     
     //Ændre baggrundsfarve på column tilhørende til dagen i dag + column 5 og 6 (altså 6 og 7)
     for(int x=0; x<7; x++){
-    	if(CalendarTest.headers[x].equals(RealDay+"-"+(d.getCurrentMonth()+1)+"-"+d.getCurrentYear())){
+    	if(CalendarTest.headers[x].equals(CurrentDay+"-"+CurrentMonth+"-"+d.getCurrentYear())){
         	if(((d.getRealDay()+6)%7) == column){
     			setBackground(new Color(234, 234, 245));
         	} else if(column == 5 || column == 6) { 
