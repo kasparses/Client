@@ -61,7 +61,7 @@ public class Logic {
 	public static String Quote;
 	public static String Author;
 	public static String Topic;
-	
+	boolean active = false;
 	public static Screen screen;
 	
 	
@@ -116,7 +116,17 @@ public class Logic {
 
 				LoginAnswer LA = gson.fromJson(JsonString, LoginAnswer.class);  
 
-				if (LA.getAnswer().equals("correct")){
+				
+				if(LA.getActive().equals("active")){
+					active = true;
+				}
+				if(LA.getActive().equals("inactive")){
+					JOptionPane.showMessageDialog(null, "Your account has been set inactive.\nPlease contact us via this email:\n"
+							+ "help@cbs.dk"
+							, "Error message",JOptionPane.PLAIN_MESSAGE);
+					active = false;
+				}
+				if (LA.getAnswer().equals("correct") && active == true){
 
 					SD.setOverallID("DailyUpdate");
 					String JsonString2 = tcp.bla(SD);
