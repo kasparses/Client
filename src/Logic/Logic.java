@@ -344,6 +344,7 @@ public class Logic {
 
 
 				boolean empty = false;
+				boolean timeError = false;
 				String description = screen.getCreateEvent().getTextField_Description().getText();
 
 				String location = screen.getCreateEvent().getTextField_Location().getText();
@@ -363,16 +364,64 @@ public class Logic {
 				Object startMinutes = screen.getCreateEvent().getComboBox_StartMinutes().getSelectedItem();
 
 
-
-				if(startMinutes.equals("0")){
-					startMinutes = "00";
-				}
-
 				Object endYear = screen.getCreateEvent().getComboBox_EndYear().getSelectedItem();
 				Object endMonth = screen.getCreateEvent().getComboBox_EndMonth().getSelectedItem();
 				Object endDay = screen.getCreateEvent().getComboBox_EndDay().getSelectedItem();
 				Object endHour = screen.getCreateEvent().getComboBox_EndHour().getSelectedItem();
 				Object endMinutes = screen.getCreateEvent().getComboBox_EndMinutes().getSelectedItem();
+				
+				
+				String endHourString = endHour.toString();
+				String endMinutesString = endMinutes.toString();
+				String endDayString = endDay.toString();
+				String endMonthString = endMonth.toString();
+				String endYearString = endYear.toString();
+				
+				String startHourString = startHour.toString();
+				String startMinutesString = startMinutes.toString();
+				String startDayString = startDay.toString();
+				String startMonthString = startMonth.toString();
+				String startYearString = startYear.toString();
+				
+				int endHourInt = Integer.parseInt(endHourString);
+				int endMinutesInt = Integer.parseInt(endMinutesString);
+				int endDayInt = Integer.parseInt(endDayString);
+				int endMonthInt = Integer.parseInt(endMonthString);
+				int endYearInt = Integer.parseInt(endYearString);
+				
+				int startHourInt = Integer.parseInt(startHourString);
+				int startMinutesInt = Integer.parseInt(startMinutesString);
+				int startDayInt = Integer.parseInt(startDayString);
+				int startMonthInt = Integer.parseInt(startMonthString);
+				int startYearInt = Integer.parseInt(startYearString);
+				
+				
+				if(startHourInt> endHourInt){
+					timeError = true;
+				}
+				if (startHourInt == endHourInt && startMinutesInt> endMinutesInt){
+					timeError = true;
+				}
+				if (startDayInt > endDayInt){
+					timeError = true;
+				}
+				if (startMonthInt > endMonthInt){
+					timeError = true;
+				}
+				if(startYearInt> endYearInt){
+					timeError = true;
+				}
+				
+				
+
+				if (timeError == true){
+					JOptionPane.showMessageDialog(null, "\nYou cannot create an event that ends before it starts. "
+							, "Error message",JOptionPane.PLAIN_MESSAGE);
+				}
+
+				if(startMinutes.equals("0")){
+					startMinutes = "00";
+				}
 
 				if(endMinutes.equals("0")){
 					endMinutes = "00";
@@ -388,8 +437,10 @@ public class Logic {
 							, "Error message",JOptionPane.PLAIN_MESSAGE);
 					empty = true;
 				}
+	
+			
 				
-				if (empty == false){
+				if (empty == false && timeError == false ){
 				CreateEvent CE = new CreateEvent("createEvent", 0,activityID,EventID , type, title, description, start, end, location,  calendarName ,note);
 
 				try {

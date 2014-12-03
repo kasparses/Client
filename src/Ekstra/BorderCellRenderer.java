@@ -32,8 +32,7 @@ public class BorderCellRenderer extends JLabel
     
     
     try {
-    	System.out.println(CalendarTest.columnRows.size());
-    	System.out.println("BorderCellRender size "+CT.getColumnRows().size());
+    	
     	
     	
 //		System.out.println(CT.getColumnRows().get(0).getRow());

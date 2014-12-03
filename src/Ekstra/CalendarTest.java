@@ -106,6 +106,7 @@ public class CalendarTest{
     data d = new data();
     String [] headers = new String[7];
     int notes [][] = new int [20][7];
+    
     int [] rows = new int[100];	// tilpas længden
     int [] columns = new int[100]; // tilpas længden 
 
@@ -138,11 +139,7 @@ public class CalendarTest{
      * @wbp.parser.entryPoint
      */
     public void run (long newDate, String JsonString3, String JsonString5, String userName){
-    	
-    	
-    	System.out.println("CalendarTest size "+columnRows.size());
-    	 columnRows.add(new ColumnRow(1,15));
-    	 System.out.println("CalendarTest size "+columnRows.size());
+    
     	
 
     	d.setUserName(userName);
@@ -241,7 +238,7 @@ public class CalendarTest{
         tblCalendar.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         
         //Set row/column count
-        tblCalendar.setRowHeight(38);
+        tblCalendar.setRowHeight(23);
         
         lblMonday = new JLabel("Monday");
         lblMonday.setBounds(379, 66, 38, 14);
@@ -272,59 +269,59 @@ public class CalendarTest{
         pnlCalendar.add(lblSunday);
         
         label = new JLabel("8:00");
-        label.setBounds(317, 116, 22, 14);
+        label.setBounds(317, 110, 28, 14);
         pnlCalendar.add(label);
         
         label_1 = new JLabel("9:00");
-        label_1.setBounds(317, 141, 22, 14);
+        label_1.setBounds(317, 133, 28, 14);
         pnlCalendar.add(label_1);
         
         label_2 = new JLabel("10:00");
-        label_2.setBounds(311, 166, 28, 14);
+        label_2.setBounds(311, 156, 28, 14);
         pnlCalendar.add(label_2);
         
         label_3 = new JLabel("11:00");
-        label_3.setBounds(311, 191, 28, 14);
+        label_3.setBounds(311, 179, 28, 14);
         pnlCalendar.add(label_3);
         
         label_4 = new JLabel("12:00");
-        label_4.setBounds(311, 216, 28, 14);
+        label_4.setBounds(311, 202, 28, 14);
         pnlCalendar.add(label_4);
         
         label_5 = new JLabel("13:00");
-        label_5.setBounds(311, 241, 28, 14);
+        label_5.setBounds(311, 225, 28, 14);
         pnlCalendar.add(label_5);
         
         label_6 = new JLabel("14:00");
-        label_6.setBounds(311, 266, 28, 14);
+        label_6.setBounds(311, 248, 28, 14);
         pnlCalendar.add(label_6);
         
         label_7 = new JLabel("15:00");
-        label_7.setBounds(311, 291, 28, 14);
+        label_7.setBounds(311, 271, 28, 14);
         pnlCalendar.add(label_7);
         
         label_8 = new JLabel("16:00");
-        label_8.setBounds(311, 316, 28, 14);
+        label_8.setBounds(311, 294, 28, 14);
         pnlCalendar.add(label_8);
         
         label_9 = new JLabel("17:00");
-        label_9.setBounds(311, 341, 28, 14);
+        label_9.setBounds(311, 317, 28, 14);
         pnlCalendar.add(label_9);
         
         label_10 = new JLabel("18:00");
-        label_10.setBounds(311, 366, 28, 14);
+        label_10.setBounds(311, 340, 28, 14);
         pnlCalendar.add(label_10);
         
         label_11 = new JLabel("19:00");
-        label_11.setBounds(311, 391, 28, 14);
+        label_11.setBounds(311, 363, 28, 14);
         pnlCalendar.add(label_11);
         
         label_12 = new JLabel("20:00");
-        label_12.setBounds(311, 416, 28, 14);
+        label_12.setBounds(311, 386, 28, 14);
         pnlCalendar.add(label_12);
         
         label_13 = new JLabel("21:00");
-        label_13.setBounds(311, 441, 28, 14);
+        label_13.setBounds(311, 409, 28, 14);
         pnlCalendar.add(label_13);
         
         lblQuote = new JLabel("");
@@ -463,12 +460,12 @@ public class CalendarTest{
         label_14.setBounds(30, 515, 1302, 14);
         pnlCalendar.add(label_14);
         
-        btnGetNote = new JButton("Show note for selected event");
+        btnGetNote = new JButton("Show note, location and time for selected event");
         btnGetNote.setContentAreaFilled(false);
         btnGetNote.setForeground(Color.WHITE);
-        btnGetNote.setFont(new Font("Tahoma", Font.BOLD, 16));
+        btnGetNote.setFont(new Font("Tahoma", Font.BOLD, 12));
         btnGetNote.setEnabled(true);
-        btnGetNote.setBounds(1050, 91, 271, 29);
+        btnGetNote.setBounds(1032, 87, 331, 23);
         pnlCalendar.add(btnGetNote);
         btnGetNote.addActionListener(new btnGetNote());
         
@@ -565,6 +562,7 @@ public class CalendarTest{
         	public void actionPerformed(ActionEvent e) {
         		Logic.screen.setVisible(true);
         		Logic.screen.show(Screen.LOGOUT);
+        		frmMain.dispose();
         	}
         });
         btnLogOut.setForeground(Color.WHITE);
@@ -582,7 +580,7 @@ public class CalendarTest{
         
 
         mtblCalendar.setColumnCount(7);
-        mtblCalendar.setRowCount(20);
+        mtblCalendar.setRowCount(15);
         
         Color gridColor = UIManager.getColor("Table.gridColor");  
         TableColumnModel model = tblCalendar.getColumnModel();  
@@ -590,7 +588,7 @@ public class CalendarTest{
 //        for (int c=d.getRealYear()-100; c<=d.getRealYear()+100; c++){
 //            cmbYear.addItem(String.valueOf(c));
 //        }
-        System.out.println("yolo");
+        
         //Refresh calendar
         refreshCalendar (d.getWeekofYear(), d.getRealYear(), d.getJsonString(), d.getJsonString5(), d.getUserName()); //Refresh calendar
     }
@@ -599,11 +597,12 @@ public class CalendarTest{
     
     public  void refreshCalendar(int week, int year, String JSonString3, String JsonString5, String userName){
     	
+    	columnRows.clear();
         //Variables
     	String [] weeks = new String[53];
     		for(int d =0; d<weeks.length; d++){
     			weeks [d] = "Week "+ Integer.toString(d);
-    	System.out.println("yolo2");
+    
     		}
         int nod, som; //Number Of Days, Start Of Month
         
@@ -776,9 +775,9 @@ public class CalendarTest{
         }
 
 
-        
+       
 
-        System.out.println(lcs2.size());
+       
         for (int c=0; c<lcs2.size(); c++){
         	if (lcs2.get(c).getActive()==1 && (lcs2.get(c).getPrivatePublic()==1 || lcs2.get(c).getCreatedBy().equals(userName) )){  //1 er aktiv og 1 er public
         		
@@ -846,7 +845,7 @@ public class CalendarTest{
         
         boolean isTop,isLeft,isBottom,isRight;
 
-        int[] rows    = new int[20];
+        int[] rows    = new int[15];
         
         for(int å1 = 0; å1<rows.length; å1++){
       	  rows[å1] = å1;
@@ -938,6 +937,8 @@ public class CalendarTest{
     		String startMinutes =daySplit[14]+daySplit[15];
     		String startTime = startHours + ":"+startMinutes;
     		
+    		
+    		
     		String endHours =daySplitEnd[11]+daySplitEnd[12];
     		String endMinutes =daySplitEnd[14]+daySplitEnd[15];
     		String endTime = endHours + ":"+endMinutes;
@@ -954,6 +955,9 @@ public class CalendarTest{
     		if(match == true){
     			match = false;
     			
+    			if (!lcs.get(g).getActivityid().equals("")){
+    				
+    			
 
     			for (int st=0; st<startCalendarTime.length; st++){ //st = startTime
     				if (startTime.equals(startCalendarTime[st])){
@@ -968,6 +972,99 @@ public class CalendarTest{
     					
 
     				}
+    			}
+    			}
+    			
+    			if (lcs.get(g).getActivityid().equals("1")){
+    				if(startHours.equals("08")){
+    					startRow =0;
+    				}
+    				if(startHours.equals("09")){
+    					startRow =1;
+    				}
+    				if(startHours.equals("10")){
+    					startRow =2;
+    				}
+    				if(startHours.equals("11")){
+    					startRow =3;
+    				}
+    				if(startHours.equals("12")){
+    					startRow =4;
+    				}
+    				if(startHours.equals("13")){
+    					startRow =5;
+    				}
+    				if(startHours.equals("14")){
+    					startRow =6;
+    				}
+    				if(startHours.equals("15")){
+    					startRow =7;
+    				}
+    				if(startHours.equals("16")){
+    					startRow =8;
+    				}
+    				if(startHours.equals("17")){
+    					startRow =9;
+    				}
+    				if(startHours.equals("18")){
+    					startRow =10;
+    				}
+    				if(startHours.equals("19")){
+    					startRow =11;
+    				}
+    				if(startHours.equals("20")){
+    					startRow =12;
+    				}
+    				if(startHours.equals("21")){
+    					startRow =13;
+    				}
+
+    				if(endHours.equals("08")){
+    					endRow =0;
+    				}
+    				if(endHours.equals("09")){
+    					endRow =2;
+    				}
+    				if(endHours.equals("10")){
+    					endRow =3;
+    				}
+    				if(endHours.equals("11")){
+    					endRow =4;
+    				}
+    				if(endHours.equals("12")){
+    					endRow =5;
+    				}
+    				if(endHours.equals("13")){
+    					endRow =6;
+    				}
+    				if(endHours.equals("14")){
+    					endRow =7;
+    				}
+    				if(endHours.equals("15")){
+    					endRow =8;
+    				}
+    				if(endHours.equals("16")){
+    					endRow =9;
+    				}
+    				if(endHours.equals("17")){
+    					endRow =10;
+    				}
+    				if(endHours.equals("18")){
+    					endRow =11;
+    				}
+    				if(endHours.equals("19")){
+    					endRow =12;
+    				}
+    				if(endHours.equals("20")){
+    					endRow =13;
+    				}
+    				if(endHours.equals("21")){
+    					endRow =14;
+    				}
+    				if(endHours.equals("22")){
+    					endRow =15;
+    				}
+    					
     			}
     			for (int k = startRow; k<endRow; k++){
     				
@@ -999,7 +1096,10 @@ public class CalendarTest{
             			if(i1==0){
             				value = lcs.get(g).getDescription();
             			}
-            			if(i1>0){
+            			if(i1==1){
+            				value = startTime+ "-"+endTime;
+            			}
+            			if(i1>1){
             				value = "";
             			}
         		        isTop1    = (i1 == 0       )? true: false;
@@ -1036,14 +1136,13 @@ public class CalendarTest{
         		            
         		            notes [rowb1][columnb1] = g;
         		            
+        		            
         		            mtblCalendar.setValueAt(myData, rowb1, columnb1);
         		            
         		            columnRows.add(new ColumnRow(rowb1,columnb1));
         		            
-        		            System.out.println("for loop "+columnRows.size());
-        		            
-        		          
-        		            
+        		      
+        		         
 
         		            
         		        }
@@ -1059,29 +1158,10 @@ public class CalendarTest{
         }
         
         }
-        //Apply renderers
-//        tblCalendar.setDefaultRenderer(tblCalendar.getColumnClass(0), new tblCalendarRenderer());
+
     }
     
-//     class tblCalendarRenderer extends DefaultTableCellRenderer{
-//        public Component getTableCellRendererComponent (JTable table, Object value, boolean selected, boolean focused, int row, int column){
-//            super.getTableCellRendererComponent(table, value, selected, focused, row, column);
-//            if (column == 5 || column == 6){ //Week-end
-//                setBackground(new Color(255, 220, 220));
-//            }
-//            else{ //Week
-//                setBackground(new Color(255, 255, 255));
-//            }
-//            if (value != null){
-//                if (Integer.parseInt(value.toString()) == d.getRealDay() && d.getCurrentMonth() == d.getRealMonth() && d.getCurrentYear() == d.getRealYear()){ //Today
-//                    setBackground(new Color(220, 220, 255));
-//                }
-//            }
-//            setBorder(null);
-//            setForeground(Color.black);
-//            return this;
-//        }
-//    }
+
     
      class btnPrev_Action implements ActionListener{
         public void actionPerformed (ActionEvent e){
@@ -1131,7 +1211,9 @@ public class CalendarTest{
              int colIndex = tblCalendar.getSelectedColumn();
              int selection = notes[rowIndex][colIndex];
             
-             JOptionPane.showMessageDialog(null, lcs.get(selection).getNote()
+             JOptionPane.showMessageDialog(null, "Note: "+ lcs.get(selection).getNote()+ "\nLocation "+ lcs.get(selection).getLocation()+ 
+            		 "\nStartTime: "+lcs.get(selection).getStart()+ "\nEndTime: "+lcs.get(selection).getEnd()
+            		
 						, lcs.get(selection).getDescription(),JOptionPane.PLAIN_MESSAGE);
              
          }
@@ -1155,7 +1237,7 @@ public class CalendarTest{
 					 SaveNote SN = gson.fromJson(JsonString, SaveNote.class);
 					 lcs.get(selection).setNote(txtNotetext.getText());
 					 
-					 System.out.println(SN.getAnswer());
+					
 					 JOptionPane.showMessageDialog(null, SN.getAnswer()
 								, "Note",JOptionPane.PLAIN_MESSAGE);
 				} catch (UnknownHostException e1) {
@@ -1187,7 +1269,7 @@ public class CalendarTest{
          public void actionPerformed (ActionEvent e){
         	 Object objectCalendarName = comboBox_Calendar.getSelectedItem();
              String stringCalendarName = objectCalendarName.toString();
-             System.out.println("comboBox_Calendar.getSelectedItem: "+stringCalendarName);
+             
  
              for(int bh2 = 0; bh2<lcs2.size(); bh2++){
              	if(stringCalendarName.equals(lcs2.get(bh2).getName())){
@@ -1266,7 +1348,7 @@ public class CalendarTest{
 	}
 	
 	public ArrayList<ColumnRow> getColumnRows() {
-		System.out.println(" blabla: "+columnRows.size());
+		
 		return columnRows;
 	}
 
