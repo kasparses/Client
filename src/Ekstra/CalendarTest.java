@@ -104,7 +104,7 @@ public class CalendarTest{
 
     
     data d = new data();
-    String [] headers = new String[7];
+    static String [] headers = new String[7];
     int notes [][] = new int [20][7];
     
     int [] rows = new int[100];	// tilpas længden
@@ -219,9 +219,11 @@ public class CalendarTest{
         for (int a=0; a<7; a++){
             String hej = "";
         	Date currentDate = new Date(newDate);
+        	
         	String swag = date_format.format(currentDate);
         	headers[a] = swag;
         	newDate +=86400000;
+        	
         	
         	mtblCalendar.addColumn(headers[a]);
         }
@@ -625,8 +627,6 @@ public class CalendarTest{
         lblCelsius1.setText(Logic.Celsius1+" Celsius.");
         lblDesc1.setText("Weather: "+Logic.Desc1);
         //sætter billeder til dag 1
-        
-        
         if(Logic.Desc1.equals("broken clouds")){
         	lblPicture1.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/broken clouds.png")));
         } else if(Logic.Desc1.equals("few clouds")){
@@ -637,7 +637,15 @@ public class CalendarTest{
         	lblPicture1.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/sky is clear.png")));
         } else if(Logic.Desc1.equals("light snow")){
         	lblPicture1.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/light snow.png")));
+        } else if(Logic.Desc1.equals("overcast clouds")){
+        	lblPicture1.setIcon(new ImageIcon(CalendarTest.class.getResource("/overcast clouds.png")));
+        } else if(Logic.Desc1.equals("moderate rain")){
+        	lblPicture1.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/moderate rain.png")));
+        } else if(Logic.Desc1.equals("scattered clouds")){
+        	lblPicture1.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/scattered clouds.png")));
         }
+        
+        
         
       //sætter beskrivelser til dag 2
         lblDate2.setText(Logic.Date2);
@@ -654,7 +662,14 @@ public class CalendarTest{
         	lblPicture2.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/sky is clear.png")));
         } else if(Logic.Desc2.equals("light snow")){
         	lblPicture2.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/light snow.png")));
+        } else if(Logic.Desc2.equals("overcast clouds")){
+        	lblPicture2.setIcon(new ImageIcon(CalendarTest.class.getResource("/overcast clouds.png")));
+        } else if(Logic.Desc2.equals("moderate rain")){
+        	lblPicture2.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/moderate rain.png")));
+        } else if(Logic.Desc2.equals("scattered clouds")){
+        	lblPicture2.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/scattered clouds.png")));
         }
+        
         
       //sætter beskrivelser til dag 3
         lblDate3.setText(Logic.Date3);
@@ -671,6 +686,12 @@ public class CalendarTest{
         	lblPicture3.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/sky is clear.png")));
         } else if(Logic.Desc3.equals("light snow")){
         	lblPicture3.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/light snow.png")));
+        } else if(Logic.Desc3.equals("overcast clouds")){
+        	lblPicture3.setIcon(new ImageIcon(CalendarTest.class.getResource("/overcast clouds.png")));
+        } else if(Logic.Desc3.equals("moderate rain")){
+        	lblPicture3.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/moderate rain.png")));
+        } else if(Logic.Desc3.equals("scattered clouds")){
+        	lblPicture3.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/scattered clouds.png")));
         }
         
       //sætter beskrivelser til dag 4
@@ -688,6 +709,12 @@ public class CalendarTest{
         	lblPicture4.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/sky is clear.png")));
         } else if(Logic.Desc4.equals("light snow")){
         	lblPicture4.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/light snow.png")));
+        } else if(Logic.Desc4.equals("overcast clouds")){
+        	lblPicture4.setIcon(new ImageIcon(CalendarTest.class.getResource("/overcast clouds.png")));
+        } else if(Logic.Desc4.equals("moderate rain")){
+        	lblPicture4.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/moderate rain.png")));
+        } else if(Logic.Desc4.equals("scattered clouds")){
+        	lblPicture4.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/scattered clouds.png")));
         }
         
       //sætter beskrivelser til dag 5
@@ -705,6 +732,12 @@ public class CalendarTest{
         	lblPicture5.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/sky is clear.png")));
         } else if(Logic.Desc5.equals("light snow")){
         	lblPicture5.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/light snow.png")));
+        } else if(Logic.Desc5.equals("overcast clouds")){
+        	lblPicture5.setIcon(new ImageIcon(CalendarTest.class.getResource("/overcast clouds.png")));
+        } else if(Logic.Desc5.equals("moderate rain")){
+        	lblPicture5.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/moderate rain.png")));
+        } else if(Logic.Desc5.equals("scattered clouds")){
+        	lblPicture5.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/scattered clouds.png")));
         }
         
       //sætter beskrivelser til dag 6
@@ -722,7 +755,14 @@ public class CalendarTest{
         	lblPicture6.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/sky is clear.png")));
         } else if(Logic.Desc6.equals("light snow")){
         	lblPicture6.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/light snow.png")));
+        } else if(Logic.Desc6.equals("overcast clouds")){
+        	lblPicture6.setIcon(new ImageIcon(CalendarTest.class.getResource("/overcast clouds.png")));
+        } else if(Logic.Desc6.equals("moderate rain")){
+        	lblPicture6.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/moderate rain.png")));
+        } else if(Logic.Desc6.equals("scattered clouds")){
+        	lblPicture6.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/scattered clouds.png")));
         }
+        
         
         //sætter beskrivelser til dag 7
         lblDate7.setText(Logic.Date7);
@@ -739,6 +779,12 @@ public class CalendarTest{
         	lblPicture7.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/sky is clear.png")));
         } else if(Logic.Desc7.equals("light snow")){
         	lblPicture7.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/light snow.png")));
+        } else if(Logic.Desc7.equals("overcast clouds")){
+        	lblPicture7.setIcon(new ImageIcon(CalendarTest.class.getResource("/overcast clouds.png")));
+        } else if(Logic.Desc7.equals("moderate rain")){
+        	lblPicture7.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/moderate rain.png")));
+        } else if(Logic.Desc7.equals("scattered clouds")){
+        	lblPicture7.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/scattered clouds.png")));
         }
         
         Gson gson = new GsonBuilder().create();
@@ -1139,7 +1185,7 @@ public class CalendarTest{
         		            
         		            mtblCalendar.setValueAt(myData, rowb1, columnb1);
         		            
-        		            columnRows.add(new ColumnRow(rowb1,columnb1));
+        		            columnRows.add(new ColumnRow(rowb1,columnb1,lcs.get(g).getDescription()));
         		            
         		      
         		         

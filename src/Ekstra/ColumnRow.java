@@ -4,10 +4,12 @@ public class ColumnRow {
 
 	private int row;
 	private int column;
+	private String description;
 	
-	public ColumnRow(int row, int column){
+	public ColumnRow(int row, int column, String description){
 		this.column=column;
 		this.row=row;
+		this.description=description;
 	}
 	
 	public int getRow() {
@@ -21,6 +23,12 @@ public class ColumnRow {
 	}
 	public void setColumn(int column) {
 		this.column = column;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 }
