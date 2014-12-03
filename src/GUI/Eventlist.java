@@ -16,7 +16,7 @@ import javax.swing.ImageIcon;
 public class Eventlist extends JPanel {
 	private final JLabel lblEventList = new JLabel("Event List");
 	private final JButton btnAdd = new JButton("Add");
-	private final JButton btnMain = new JButton("Main Menu");
+	private final JButton btnMain = new JButton("Main");
 	private final JButton btnLogOut = new JButton("Log Out");
 	private final JLabel label = new JLabel("");
 	private final JLabel label_1 = new JLabel("");

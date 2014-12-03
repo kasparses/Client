@@ -250,6 +250,7 @@ public class Logic {
 
 		}
 		if (e.getSource() == screen.getDeleteCalendar().getBtnLogOut()){
+			CalendarTest.getFrmMain().dispose();
 
 			screen.show(Screen.LOGOUT);
 
@@ -332,6 +333,8 @@ public class Logic {
 
 		}
 		if (e.getSource() == screen.getCreatecalendar().getBtnLogOut()){
+			CalendarTest.getFrmMain().dispose();
+
 			screen.show(Screen.LOGOUT);
 
 		}
@@ -476,6 +479,8 @@ public class Logic {
 			screen.dispose();
 		}
 		if (e.getSource() == screen.getCreateEvent().getBtnLogout()){
+			CalendarTest.getFrmMain().dispose();
+
 			screen.show(Screen.LOGOUT);
 		}
 		
@@ -495,6 +500,7 @@ public class Logic {
 
 		}
 		if (e.getSource() == screen.getEventlist().getBtnLogOut()){
+			CalendarTest.getFrmMain().dispose();
 
 			screen.show(Screen.LOGOUT);
 
@@ -546,7 +552,6 @@ public class Logic {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == screen.getLogOut().getBtnLogIn()){
 				
-
 			screen.show(Screen.LOGIN);
 
 		}

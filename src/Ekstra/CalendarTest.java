@@ -480,7 +480,6 @@ public class CalendarTest{
         pnlCalendar.add(btnAddNote);
         
         txtNotetext = new JTextField();
-        txtNotetext.setText("NoteText");
         txtNotetext.setBounds(1070, 163, 86, 20);
         pnlCalendar.add(txtNotetext);
         txtNotetext.setColumns(10);
@@ -1343,6 +1342,12 @@ public class CalendarTest{
 
      public JButton getBtnCreateCalendar() {
 		return btnCreateCalendar;
+	}
+
+
+
+	public static JFrame getFrmMain() {
+		return frmMain;
 	}
 
 
