@@ -4,9 +4,6 @@ public class DailyUpdate implements java.io.Serializable
 {
 	private  final long serialVersionUID = 1L;
 	private String overallID = "dailyUpdate";
-	private String date = "";
-	private String apparentTemperature = "";
-	private String summary = "";
 	private String qotd = "";
 	private String author = "";
 	private String topic = "";
@@ -19,24 +16,6 @@ public class DailyUpdate implements java.io.Serializable
 	}
 	public void setOverallID(String overallID) {
 		this.overallID = overallID;
-	}
-	public String getDate() {
-		return date;
-	}
-	public void setDate(String date) {
-		this.date = date;
-	}
-	public String getApparentTemperature() {
-		return apparentTemperature;
-	}
-	public void setApparentTemperature(String apparentTemperature) {
-		this.apparentTemperature = apparentTemperature;
-	}
-	public String getSummary() {
-		return summary;
-	}
-	public void setSummary(String summary) {
-		this.summary = summary;
 	}
 	public String getQotd() {
 		return qotd;
@@ -68,7 +47,5 @@ public class DailyUpdate implements java.io.Serializable
 	public void setUpdate_timestamp(String update_timestamp) {
 		this.update_timestamp = update_timestamp;
 	}
-
-	
 
 }

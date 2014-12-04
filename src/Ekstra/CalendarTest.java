@@ -219,7 +219,6 @@ public class CalendarTest{
         for (int a=0; a<7; a++){
             String hej = "";
         	Date currentDate = new Date(newDate);
-        	System.out.println("date: "+newDate);
         	
         	String ugeDag = date_format.format(currentDate);
         	headers[a] = ugeDag;
