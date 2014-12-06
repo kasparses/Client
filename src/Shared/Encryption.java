@@ -8,11 +8,9 @@ public class Encryption {
 	{
 	
 //		Defines the decryption value of the byte
-		//The 4 lines below needs to work later on, but for now, it will be hardcode
-//		String crypKey = CF.getFfcryptkey();
 		String crypKey = "3.1470";
-		double gladKo = Double.parseDouble(crypKey);
-		byte ff = (byte) gladKo;
+		double value = Double.parseDouble(crypKey);
+		byte ff = (byte) value;
 //		Generates for loop containing decryption value
 		for(int i = 0 ; i<b.length ; i++)
 		{
