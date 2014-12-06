@@ -657,9 +657,7 @@ public class CalendarTest{
 			lblPicture1.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/moderate rain.png")));
 		} else if(Logic.Desc1.equals("scattered clouds")){
 			lblPicture1.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/scattered clouds.png")));
-		} else if(Logic.Desc1.equals("heavy intensity rain")){
-			lblPicture1.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/heavy_rain.png")));
-		} 
+		}
 
 
 
@@ -685,9 +683,7 @@ public class CalendarTest{
 			lblPicture2.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/moderate rain.png")));
 		} else if(Logic.Desc2.equals("scattered clouds")){
 			lblPicture2.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/scattered clouds.png")));
-		} else if(Logic.Desc2.equals("heavy intensity rain")){
-			lblPicture2.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/heavy_rain.png")));
-		} 
+		}
 
 
 		//Sets descriptions to day 3.
@@ -711,9 +707,7 @@ public class CalendarTest{
 			lblPicture3.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/moderate rain.png")));
 		} else if(Logic.Desc3.equals("scattered clouds")){
 			lblPicture3.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/scattered clouds.png")));
-		} else if(Logic.Desc3.equals("heavy intensity rain")){
-			lblPicture3.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/heavy_rain.png")));
-		} 
+		}
 
 		//Sets descriptions to day 4.
 		lblDate4.setText(Logic.Date4);
@@ -736,9 +730,7 @@ public class CalendarTest{
 			lblPicture4.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/moderate rain.png")));
 		} else if(Logic.Desc4.equals("scattered clouds")){
 			lblPicture4.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/scattered clouds.png")));
-		} else if(Logic.Desc4.equals("heavy intensity rain")){
-			lblPicture4.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/heavy_rain.png")));
-		} 
+		}
 
 		//Sets descriptions to day 5.
 		lblDate5.setText(Logic.Date5);
@@ -761,9 +753,7 @@ public class CalendarTest{
 			lblPicture5.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/moderate rain.png")));
 		} else if(Logic.Desc5.equals("scattered clouds")){
 			lblPicture5.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/scattered clouds.png")));
-		} else if(Logic.Desc5.equals("heavy intensity rain")){
-			lblPicture5.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/heavy_rain.png")));
-		} 
+		}
 
 		//Sets descriptions to day 6.
 		lblDate6.setText(Logic.Date6);
@@ -786,9 +776,7 @@ public class CalendarTest{
 			lblPicture6.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/moderate rain.png")));
 		} else if(Logic.Desc6.equals("scattered clouds")){
 			lblPicture6.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/scattered clouds.png")));
-		} else if(Logic.Desc6.equals("heavy intensity rain")){
-			lblPicture6.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/heavy_rain.png")));
-		} 
+		}
 
 
 		//Sets descriptions to day 7.
@@ -812,9 +800,7 @@ public class CalendarTest{
 			lblPicture7.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/moderate rain.png")));
 		} else if(Logic.Desc7.equals("scattered clouds")){
 			lblPicture7.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/scattered clouds.png")));
-		} else if(Logic.Desc7.equals("heavy intensity rain")){
-			lblPicture7.setIcon(new ImageIcon(CalendarTest.class.getResource("/Images/heavy_rain.png")));
-		} 
+		}
 
 		Gson gson = new GsonBuilder().create();
 
