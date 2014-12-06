@@ -1,12 +1,9 @@
 package GUI;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import java.awt.CardLayout;
 
 public class Screen extends JFrame {
@@ -28,7 +25,6 @@ public class Screen extends JFrame {
 	CardLayout c;
 	private CreateEvent createEvent;
 	private final ForgotLogin forgotLogin = new ForgotLogin();
-	private final Eventlist eventlist = new Eventlist();
 
 	/**
 	 * Launch the application.
@@ -56,9 +52,7 @@ public class Screen extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new CardLayout(0, 0));
-		
-		contentPane.add(eventlist, "name_1036762552199787");
-		
+				
 		createEvent = new CreateEvent();
 		contentPane.add(createEvent, "name_403949887096492");
 
@@ -108,10 +102,6 @@ public class Screen extends JFrame {
 
 	public ForgotLogin getForgotLogin() {
 		return forgotLogin;
-	}
-
-	public Eventlist getEventlist() {
-		return eventlist;
 	}
 	
 }
