@@ -2,7 +2,9 @@ package Ekstra;
 
 import java.util.GregorianCalendar;
 
-
+/**
+ * The purpose of this class is to contain information that is used by the class CalendarTest to make the calendar. 
+ */
 public class data {
 	
 	
@@ -28,8 +30,7 @@ public class data {
     String JsonString = "";
     String [] headers = new String[7];
     
-    int [] rows = new int[100];	// tilpas længden
-    int [] columns = new int[100]; // tilpas længden 
+     
 
 
     public long calculateNewDate(){
@@ -38,36 +39,6 @@ public class data {
     	return newDate;
     }
     
-    
-    
-    
-	public int[] getRows() {
-		return rows;
-	}
-
-
-
-
-	public void setRows(int[] rows) {
-		this.rows = rows;
-	}
-
-
-
-
-	public int[] getColumns() {
-		return columns;
-	}
-
-
-
-
-	public void setColumns(int[] columns) {
-		this.columns = columns;
-	}
-
-
-
 
 	public int getCalendarID() {
 		return calendarID;
