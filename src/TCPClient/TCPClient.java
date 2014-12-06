@@ -6,13 +6,13 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.sql.SQLException;
-
 import Shared.Encryption;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-
+/**
+ * The purpose of this class is to send data to the server and receive data from the server. 
+ */
 public class TCPClient {
 	private String ny = "";
 	private Encryption cryp = new Encryption();

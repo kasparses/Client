@@ -1,7 +1,6 @@
 package Logic;
 import Ekstra.CalendarTest;
 import Ekstra.data;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
@@ -9,18 +8,12 @@ import java.net.UnknownHostException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
-
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.CloseAction;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import com.sun.xml.internal.ws.Closeable;
-
 import TCPClient.TCPClient;
 import GUI.Screen;
 import JsonClasses.CreateCalendar;
@@ -35,6 +28,9 @@ import JsonClasses.Update;
 import JsonClasses.GetCbsCalendar;
 import Ekstra.*;
 
+/**
+ * The purpose of this class is to control what happens to the users input. 
+ */
 public class Logic {
 	
 	public static String Date1;
@@ -62,19 +58,44 @@ public class Logic {
 	public static String Author;
 	public static String Topic;
 	boolean active = false;
+	
+	/**
+	 * Object of the class screen. 
+	 */
 	public static Screen screen;
 	
-	
+	/**
+	 * Object of the class TCPClient
+	 */
 	TCPClient tcp = new TCPClient();
+	/**
+	 * Object of GsonBuilder.
+	 */
 	Gson gson = new GsonBuilder().create();
+	/**
+	 * Object of the class Login
+	 */
 	Login L = new Login();
+	/**
+	 * Object of the class DeleteCalendar
+	 */
 	DeleteCalendar DC = new DeleteCalendar();
+	/**
+	 * Object of the class ServerData
+	 */
 	ServerData SD = new ServerData();
+	/**
+	 * Object of the class Update
+	 */
 	Update UD = new Update();
+	/**
+	 * Object of the class GetCbsCalendar
+	 */
 	GetCbsCalendar GCBS = new GetCbsCalendar();
-	String [] Date = new String[20];
+	
 
 	public Logic(){
+		
 		screen = new Screen();
 
 		screen.getLogin().addActionListener(new LoginActionListener());
@@ -88,23 +109,22 @@ public class Logic {
 
 
 	}
+	
 	public void run() {
-
+		
 		screen.show(Screen.LOGIN);
 		screen.setVisible(true);
 	}
 
 		
-
+	/**
+	 * The purpose of this class is to control the user input from the screen Login. 
+	 */
 	private class LoginActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			
 			if (e.getSource() == screen.getLogin().getBtnLogin()){			
 				try{
-			
-				Date date = new Date();
-				long date1 = date.getTime();
-
 
 				String email = screen.getLogin().getTextField_Username().getText();
 				String password = screen.getLogin().getTextField_Password().getText();
@@ -116,7 +136,6 @@ public class Logic {
 
 				LoginAnswer LA = gson.fromJson(JsonString, LoginAnswer.class);  
 
-				
 				if(LA.getActive().equals("active")){
 					active = true;
 				}
@@ -221,6 +240,9 @@ public class Logic {
 		}
 	}
 	
+	/**
+	 * The purpose of this class is to control the user input from the screen DeleteCalendar. 
+	 */
 	private class DeleteCalendarActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == screen.getDeleteCalendar().getBtnDeletecalendar()){
@@ -262,6 +284,9 @@ public class Logic {
 		}
 	}
 	}
+	/**
+	 * The purpose of this class is to control the user input from the screen CreateCalendar. 
+	 */
 	private class CreateCalendarActionListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
@@ -346,7 +371,9 @@ public class Logic {
 		}
 
 	}
-
+	/**
+	 * The purpose of this class is to control the user input from the screen CreateEvent. 
+	 */
 	private class AddEventGUIActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 
@@ -487,6 +514,9 @@ public class Logic {
 
 		}
 	}
+	/**
+	 * The purpose of this class is to control the user input from the screen EventList. 
+	 */
 	private class EventListActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == screen.getEventlist().getBtnMain()){
@@ -507,6 +537,9 @@ public class Logic {
 		}
 	}
 	}
+	/**
+	 * The purpose of this class is to control the user input from the screen ForgotLogin. 
+	 */
 	private class ForgotLoginActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == screen.getForgotLogin().getBtnGetLogin()){
@@ -548,6 +581,9 @@ public class Logic {
 		
 	}
 	}
+	/**
+	 * The purpose of this class is to control the user input from the screen LogOut. 
+	 */
 	private class LogOutActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == screen.getLogOut().getBtnLogIn()){
@@ -558,12 +594,7 @@ public class Logic {
 		
 	}
 	}
-	public String[] getDate() {
-		return Date;
-	}
-	public void setDate(String[] date) {
-		Date = date;
-	}
+	
 	public Screen getScreen() {
 		return screen;
 	}
