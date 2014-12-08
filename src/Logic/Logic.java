@@ -345,10 +345,7 @@ public class Logic {
 				}
 
 			}
-			if (e.getSource() == screen.getCreatecalendar().getBtnEventList()){ 
-				screen.show(Screen.EVENTLIST);
-
-			}
+			
 			if (e.getSource() == screen.getCreatecalendar().getBtnLogOut()){ // If the user clicks on the button btnLogOut.	
 				CalendarTest.getFrmMain().dispose();
 
@@ -486,9 +483,7 @@ public class Logic {
 					}
 				}
 			}
-			if (e.getSource() == screen.getCreateEvent().getBtnEventList()){
-				screen.show(Screen.EVENTLIST);
-			}
+			
 			if (e.getSource() == screen.getCreateEvent().getBtnMain()){ // If the user clicks on the button btnMain.	
 				screen.dispose();
 			}
