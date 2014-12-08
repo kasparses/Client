@@ -12,7 +12,11 @@ import javax.swing.ImageIcon;
 import javax.swing.border.BevelBorder;
 import javax.swing.SwingConstants;
 import javax.swing.JPasswordField;
-
+/**
+ * Creates the JPanel for Login to the Screen 
+ * @author Mathias
+ *
+ */
 public class Login extends JPanel {
 	private JLabel lblLogin;
 	private JLabel lblUsername;
@@ -89,10 +93,12 @@ public class Login extends JPanel {
 		add(label);
 			
 	}
+	//Creates ActionsListeners for buttons
 	public void addActionListener(ActionListener l) {
 		btnLogin.addActionListener(l);
 		btnForgotLogin.addActionListener(l);
 }
+	//Getters & setters
 	public JButton getBtnLogin() {
 		return btnLogin;
 	}

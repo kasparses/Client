@@ -1,4 +1,4 @@
-package Ekstra;
+package Calendar;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,8 +9,9 @@ import java.util.Date;
 
 
 /**
- * Created by jesperbruun on 10/10/14.
- * Den laver selve arrayet af alle generede Event
+ * This class establishes the array of all generated events
+ * @author Mathias
+ *
  */
 public class Events {
     ArrayList<Event> events = new ArrayList<Event>();
@@ -26,7 +27,7 @@ public class Events {
     }
     
     
-    // Konverterer array events til en tekst streng
+    // Converts the array events to a text String
     @Override
     public String toString() {
         return Arrays.toString(events.toArray());

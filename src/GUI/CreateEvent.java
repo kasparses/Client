@@ -18,6 +18,11 @@ import java.awt.event.KeyEvent;
 import java.awt.SystemColor;
 import javax.swing.JComboBox;
 
+/**
+ * Creates the JPanel for CreateEvent to the Screen 
+ * @author Mathias
+ *
+ */
 public class CreateEvent extends JPanel {
 	private JLabel lblCBSlogo;
 	private JLabel lblUserInfo;
@@ -250,6 +255,7 @@ public class CreateEvent extends JPanel {
 		label.setBounds(0, 0, 1366, 768);
 		add(label);
 
+		//for loops for the radio buttons
 		for (int c=0; c<=24; c++){
 			 comboBox_StartHour.addItem(c);
 	        }
@@ -263,7 +269,6 @@ public class CreateEvent extends JPanel {
 			 comboBox_EndMinutes.addItem(c4);
 	        }
 
-		 
 		 for (int c5 = 2014; c5<2017; c5++){
 			 comboBox_StartYear.addItem(c5);
 		 }
@@ -285,14 +290,14 @@ public class CreateEvent extends JPanel {
 
 
 	}
-	
+	//Creates the ActionListeners for buttons
 	public void addActionListener(ActionListener l) {
 		btnCreateEvent.addActionListener(l);
 		btnLogout.addActionListener(l);
 		btnMain.addActionListener(l);
 		btnEventList.addActionListener(l);
 	}
-
+	//Getters & setters
 	public JComboBox getComboBox_StartYear() {
 		return comboBox_StartYear;
 	}

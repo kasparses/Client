@@ -1,13 +1,13 @@
-package Ekstra;
+package Calendar;
 
 import java.util.GregorianCalendar;
 
 /**
  * The purpose of this class is to contain information that is used by the class CalendarTest to make the calendar. 
  */
-public class data {
+public class Data {
 	
-	
+	//Initializes variables
 	GregorianCalendar cal = new GregorianCalendar(); //Create calendar
     private int dayofWeek = cal.get(GregorianCalendar.DAY_OF_WEEK_IN_MONTH);
     private int weekofYear = cal.get(GregorianCalendar.WEEK_OF_YEAR);
@@ -22,11 +22,7 @@ public class data {
     private String JsonString5;
     private String userName;
     private int calendarID = 1;
-   
-    
-
-    
-    		long newDate;
+    long newDate;
     String JsonString = "";
     String [] headers = new String[7];
     
@@ -39,7 +35,7 @@ public class data {
     	return newDate;
     }
     
-
+    //Getters and setters
 	public int getCalendarID() {
 		return calendarID;
 	}

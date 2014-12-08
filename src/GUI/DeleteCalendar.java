@@ -9,7 +9,11 @@ import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.ImageIcon;
-
+/**
+ * Creates the JPanel for DeleteCalendar to the Screen 
+ * @author Mathias
+ *
+ */
 public class DeleteCalendar extends JPanel {
 	private JLabel lblDeletecalendar;
 	private JLabel lblCalendarname;
@@ -83,6 +87,7 @@ public class DeleteCalendar extends JPanel {
 		add(label_1);
 
 	}
+	//Creates ActionListeners for buttons
 	public void addActionListener(ActionListener l){
 		btnDeletecalendar.addActionListener(l);
 		btnEventList.addActionListener(l);
@@ -91,7 +96,7 @@ public class DeleteCalendar extends JPanel {
 
 	}
 	
-
+	//Getters & setters
 	public JButton getBtnEventList() {
 		return btnEventList;
 	}

@@ -1,8 +1,9 @@
-package Ekstra;
+package Calendar;
 
 /**
- * Created by danielfranch on 16/10/14.
- * Constructor til ForecastModel Arraylist
+ * Constructor to ForecastModel Arraylist
+ * @author Mathias
+ *
  */
 public class Forecast {
 
@@ -10,14 +11,14 @@ public class Forecast {
     private String celsius;
     private String desc;
 
-    // Funktion som setter dato, grader og beskrivelse til Forecast objektet
+    // Function that sets the date, celsius and description to the Forecast object
     public Forecast(String date, String celsius, String desc) {
         this.date = date;
         this.celsius = celsius;
         this.desc = desc;
     }
     
-    // Settere og gettere for Forecast klassen
+    // Setters og getters for the Forecast class
     public String getDate() {
         return date;
     }
@@ -42,7 +43,7 @@ public class Forecast {
         this.desc = desc;
     }
     
-    // Returnere vejrudsigten som en json tekststreng
+    // Returns the weather as a Json text String
     public String toString() {
         return "Forecast{" +
                 "date='" + date + '\'' +

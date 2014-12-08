@@ -1,10 +1,10 @@
-package Ekstra;
+package Calendar;
 
 import java.util.ArrayList;
 
 /**
  * Created by jesperbruun on 10/10/14.
- * Til hver specifik event bliver de defineret saaledes.
+ * Til hver specifik event bliver de defineret saaledes. Every single specific event gets defined as follows
  */
 public class Event implements java.io.Serializable{
 	private  final long serialVersionUID = 1L;
@@ -19,7 +19,7 @@ public class Event implements java.io.Serializable{
     private String location;
     private String note;
 
-    // Settere og gettere for Event objektet 
+    // Setters og getters for the Event object
     public void setActivityid(String activityid){
         this.activityid = activityid;
     }

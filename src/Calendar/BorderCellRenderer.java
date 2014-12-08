@@ -1,4 +1,4 @@
-package Ekstra;
+package Calendar;
 
 import java.awt.*;
 import javax.swing.*;
@@ -16,7 +16,7 @@ implements TableCellRenderer {
 	String CurrentMonth;
 	protected Border noFocusBorder;
 	protected Border columnBorder;
-	data d = new data();
+	Data d = new Data();
 	CalendarTest CT = new CalendarTest();
 	public BorderCellRenderer() {
 		noFocusBorder = new EmptyBorder(1, 2, 1, 2);

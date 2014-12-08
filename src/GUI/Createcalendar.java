@@ -13,6 +13,11 @@ import java.awt.Color;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionEvent;
 
+/**
+ * Creates the JPanel for CreateCalendar to the Screen 
+ * @author Mathias
+ *
+ */
 public class Createcalendar extends JPanel {
 	private JLabel lblCreatecalendar;
 	private JLabel lblName;
@@ -74,7 +79,7 @@ public class Createcalendar extends JPanel {
 		rdbtnPrivate.setBounds(494, 310, 193, 33);
 		add(rdbtnPrivate);
 		
-
+		//Creates the Buttongroup so just one of the buttons can be chosen
 		ButtonGroup group = new ButtonGroup();
 		group.add(getRdbtnPrivate());
 		group.add(getRdbtnPublic());
@@ -111,13 +116,14 @@ public class Createcalendar extends JPanel {
 		add(label_1);
 
 	}
+	//Creates the ActionListeners for the buttons
 	public void addActionListener(ActionListener l) {
 		btnCreateCalendar.addActionListener(l);
 		btnEventList.addActionListener(l);
 		btnLogOut.addActionListener(l);
 		btnMain.addActionListener(l);
 }
-	
+	//Getters & Setters for the buttons and text fields
 	public JButton getBtnCreateCalendar() {
 		return btnCreateCalendar;
 	}

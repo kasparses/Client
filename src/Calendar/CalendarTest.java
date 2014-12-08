@@ -1,8 +1,8 @@
-package Ekstra;
+package Calendar;
 
-import Ekstra.CellBorder;
-import Ekstra.LinesBorder;
-import Ekstra.BorderCellRenderer;
+import Calendar.BorderCellRenderer;
+import Calendar.CellBorder;
+import Calendar.LinesBorder;
 import GUI.Screen;
 import TCPClient.TCPClient;
 import com.google.gson.Gson;
@@ -94,7 +94,7 @@ public class CalendarTest{
 	/**
 	 * Creates an object of the class data.
 	 */
-	data d = new data(); 
+	Data d = new Data(); 
 	/**
 	 * Creates an Array which is to contain the header values of the JTable. 
 	 */
@@ -911,7 +911,7 @@ public class CalendarTest{
 			}
 		}
 
-		// Initialises variables. 
+		// Initializes variables. 
 		int column = 0;
 		int row = 0;
 		int startRow = 0;
@@ -1217,18 +1217,11 @@ public class CalendarTest{
 
 								columnRows.add(new ColumnRow(rowb1,columnb1,lcs.get(g).getDescription()));
 
-
-
-
-
 							}
 						}
 						tblCalendar.clearSelection();
 						tblCalendar.revalidate();
 						tblCalendar.repaint();
-
-
-
 					}
 				}
 			}
@@ -1363,7 +1356,7 @@ public class CalendarTest{
 		}
 	}
 
-
+	//Getters & setters
 	public JButton getBtnCreateCalendar() {
 		return btnCreateCalendar;
 	}

@@ -9,7 +9,11 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-
+/**
+ * Creates the JPanel for LogOut to the Screen 
+ * @author Mathias
+ *
+ */
 public class LogOut extends JPanel {
 	private final JLabel lblYouAreNow = new JLabel("You are now logged out");
 	private final JLabel lblSeeYouSoon = new JLabel("See you soon");
@@ -48,11 +52,13 @@ public class LogOut extends JPanel {
 		add(label_1);
 
 	}
+	//ActionListeners for buttons
 	public void addActionListener(ActionListener l){
 		btnLogIn.addActionListener(l);
 		
 
 	}
+	//Getter
 	public JButton getBtnLogIn() {
 		return btnLogIn;
 	}

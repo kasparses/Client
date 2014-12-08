@@ -10,7 +10,11 @@ import java.awt.event.ActionListener;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
-
+/**
+ * Creates the JPanel for ForgotLogin to the Screen 
+ * @author Mathias
+ *
+ */
 public class ForgotLogin extends JPanel {
 	private final JLabel lblForgotLogin = new JLabel("Forgot Login");
 	private final JLabel lblEnterYourSecurity = new JLabel("Enter your security number:");
@@ -61,12 +65,14 @@ public class ForgotLogin extends JPanel {
 		add(label_1);
 
 	}
+	//Creates ActionListeners for buttons
 	public void addActionListener(ActionListener l){
 		btnGetLogin.addActionListener(l);
 		btnLogin.addActionListener(l);
 		
 
 	}
+	//Getters & setters
 	public JTextField getTextField_CPR() {
 		return textField_CPR;
 	}

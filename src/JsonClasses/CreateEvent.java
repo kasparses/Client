@@ -1,5 +1,9 @@
 package JsonClasses;
-
+/**
+ * The purpose for this class is to store the variables as Json Strings
+ * @author Mathias
+ *
+ */
 public class CreateEvent implements java.io.Serializable
 {
 	private  final long serialVersionUID = 1L;

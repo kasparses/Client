@@ -1,4 +1,4 @@
-package Ekstra;
+package Calendar;
 
 /**
  * The purpose of this class is to store the information of the Calendars that are sent from the database. 

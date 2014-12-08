@@ -5,7 +5,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.CardLayout;
-
+/**
+ * Creates the Screen for the view to the Client
+ * @author Mathias
+ *
+ */
 public class Screen extends JFrame {
 	
 	public static final String LOGOUT = "name_271364461837793";
@@ -72,7 +76,7 @@ public class Screen extends JFrame {
 
 		c = (CardLayout) getContentPane().getLayout();
 	}
-
+	//Getters
 	public JPanel getContentPane() {
 		return contentPane;
 	}

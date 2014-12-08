@@ -1,18 +1,21 @@
 package Logic;
-import Ekstra.CalendarTest;
-import Ekstra.data;
+import Calendar.*;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+
 import TCPClient.TCPClient;
 import GUI.Screen;
 import JsonClasses.CreateCalendar;
@@ -25,7 +28,6 @@ import JsonClasses.ServerData;
 import JsonClasses.DailyUpdate;
 import JsonClasses.Update;
 import JsonClasses.GetCbsCalendar;
-import Ekstra.*;
 
 /**
  * The purpose of this class is to control what happens to the users input. 
@@ -211,7 +213,7 @@ public class Logic {
 
 						String JsonString5 = tcp.bla(SD); // Send the data from the ServerData class to the server in order to run the getCalendar case in the giantSwitch. 
 
-						data d = new data();
+						Data d = new Data();
 						screen.dispose(); // Disposes of the Login screen. 
 						new CalendarTest().run(d.calculateNewDate(),JsonString3, JsonString5, L.getEmail()); //Starts the run method in the CalendarTest class to show the calendar. 
 
