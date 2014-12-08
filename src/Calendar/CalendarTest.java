@@ -29,7 +29,7 @@ import java.util.*;
  */
 public class CalendarTest{
 
-	static JLabel lblMonth, lblYear;
+	static JLabel lblMonth;
 	static JButton btnPrev, btnNext;
 	JTable tblCalendar;
 	static JFrame frmMain;
@@ -143,7 +143,6 @@ public class CalendarTest{
 	private JLabel label_background;
 	private JButton btnCreateCalendar;
 	private JButton btnDeleteCalendar;
-	private JButton btnEventList;
 	private JButton btnCreateEvent;
 	private JButton btnLogOut;
 
@@ -154,6 +153,7 @@ public class CalendarTest{
 	 * @param JsonString3, a JSON string containing the events sent from the database. 
 	 * @param JsonString5, a JSON string containing the information of the calendars sent from the database. 
 	 * @param userName, a String of the username of the user who is currently logged in. 
+	 * @wbp.parser.entryPoint
 	 */
 	public void run (long newDate, String JsonString3, String JsonString5, String userName){
 
@@ -178,8 +178,7 @@ public class CalendarTest{
 		frmMain.setSize(1366, 768); //Set size to 1366x768 pixels
 		pane = frmMain.getContentPane(); //Get content pane
 		pane.setLayout(null); //Apply null layout
-		frmMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Close when X is clicked
-		lblYear = new JLabel ("");
+		frmMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		mtblCalendar = new DefaultTableModel(){public boolean isCellEditable(int rowIndex, int mColIndex){return false;}};
 		tblCalendar = new JTable(mtblCalendar);
@@ -196,7 +195,6 @@ public class CalendarTest{
 		lblMonth = new JLabel ("January");
 		pnlCalendar.add(lblMonth);
 		lblMonth.setBounds(590, 25, 405, 25);
-		pnlCalendar.add(lblYear);
 		btnNext = new JButton ("Next");
 		btnNext.setContentAreaFilled(false);
 		btnNext.setForeground(Color.WHITE);
@@ -217,7 +215,6 @@ public class CalendarTest{
 
 		//Set bounds
 		pnlCalendar.setBounds(0, 0, 1360, 739);
-		lblYear.setBounds(317, 479, 80, 20);
 		stblCalendar.setBounds(349, 91, 662, 377);
 
 		//Make frame visible
@@ -338,16 +335,16 @@ public class CalendarTest{
 		pnlCalendar.add(label_13);
 
 		lblQuote = new JLabel("");
-		lblQuote.setBounds(613, 479, 518, 25);
+		lblQuote.setBounds(349, 479, 518, 25);
 		pnlCalendar.add(lblQuote);
 
 		lblAuthor = new JLabel("");
-		lblAuthor.setBounds(613, 503, 145, 20);
+		lblAuthor.setBounds(349, 504, 191, 20);
 		pnlCalendar.add(lblAuthor);
 
 
 		lblTopic = new JLabel("");
-		lblTopic.setBounds(759, 503, 154, 20);
+		lblTopic.setBounds(550, 504, 239, 20);
 		pnlCalendar.add(lblTopic);
 
 		//1th day weather
@@ -473,12 +470,12 @@ public class CalendarTest{
 		label_14.setBounds(30, 515, 1302, 14);
 		pnlCalendar.add(label_14);
 
-		btnGetNote = new JButton("Show note, location and time for selected event");
+		btnGetNote = new JButton("Show info for selected event");
 		btnGetNote.setContentAreaFilled(false);
 		btnGetNote.setForeground(Color.WHITE);
-		btnGetNote.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnGetNote.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnGetNote.setEnabled(true);
-		btnGetNote.setBounds(1032, 87, 331, 23);
+		btnGetNote.setBounds(1032, 87, 265, 29);
 		pnlCalendar.add(btnGetNote);
 		btnGetNote.addActionListener(new btnGetNote());
 
@@ -487,29 +484,29 @@ public class CalendarTest{
 		btnAddNote.setForeground(Color.WHITE);
 		btnAddNote.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnAddNote.setEnabled(true);
-		btnAddNote.setBounds(1050, 125, 253, 29);
+		btnAddNote.setBounds(1032, 124, 253, 29);
 		pnlCalendar.add(btnAddNote);
 
 		txtNotetext = new JTextField();
-		txtNotetext.setBounds(1070, 163, 86, 20);
+		txtNotetext.setBounds(1044, 176, 280, 20);
 		pnlCalendar.add(txtNotetext);
 		txtNotetext.setColumns(10);
 
-		lblSelectCalendar = new JLabel("Select Calendar");
+		lblSelectCalendar = new JLabel("Select calendar");
 		lblSelectCalendar.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblSelectCalendar.setForeground(Color.WHITE);
-		lblSelectCalendar.setBounds(157, 61, 128, 20);
+		lblSelectCalendar.setBounds(157, 61, 125, 20);
 		pnlCalendar.add(lblSelectCalendar);
 
 		comboBox_Calendar = new JComboBox();
-		comboBox_Calendar.setBounds(157, 100, 110, 20);
+		comboBox_Calendar.setBounds(175, 107, 110, 20);
 		pnlCalendar.add(comboBox_Calendar);
 
 		btnLoadSelectedCalendar = new JButton("Load selected calendar");
 		btnLoadSelectedCalendar.setContentAreaFilled(false);
 		btnLoadSelectedCalendar.setForeground(Color.WHITE);
 		btnLoadSelectedCalendar.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnLoadSelectedCalendar.setBounds(90, 132, 219, 29);
+		btnLoadSelectedCalendar.setBounds(82, 140, 219, 29);
 		btnLoadSelectedCalendar.addActionListener(new btnLoadSelectedCalendar_Action());
 		pnlCalendar.add(btnLoadSelectedCalendar);
 
@@ -523,8 +520,8 @@ public class CalendarTest{
 		});
 		btnCreateCalendar.setContentAreaFilled(false);
 		btnCreateCalendar.setForeground(Color.WHITE);
-		btnCreateCalendar.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnCreateCalendar.setBounds(25, 187, 129, 23);
+		btnCreateCalendar.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnCreateCalendar.setBounds(30, 209, 195, 33);
 		pnlCalendar.add(btnCreateCalendar);
 
 
@@ -537,24 +534,10 @@ public class CalendarTest{
 			}
 		});
 		btnDeleteCalendar.setForeground(Color.WHITE);
-		btnDeleteCalendar.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnDeleteCalendar.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnDeleteCalendar.setContentAreaFilled(false);
-		btnDeleteCalendar.setBounds(25, 232, 129, 23);
+		btnDeleteCalendar.setBounds(30, 254, 193, 33);
 		pnlCalendar.add(btnDeleteCalendar);
-
-
-		btnEventList = new JButton("Event List");
-		btnEventList.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Logic.screen.setVisible(true);
-				Logic.screen.show(Screen.EVENTLIST);
-			}
-		});
-		btnEventList.setForeground(Color.WHITE);
-		btnEventList.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnEventList.setContentAreaFilled(false);
-		btnEventList.setBounds(25, 332, 129, 23);
-		pnlCalendar.add(btnEventList);
 
 		btnCreateEvent = new JButton("Create Event");
 		btnCreateEvent.addActionListener(new ActionListener() {
@@ -564,9 +547,9 @@ public class CalendarTest{
 			}
 		});
 		btnCreateEvent.setForeground(Color.WHITE);
-		btnCreateEvent.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnCreateEvent.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnCreateEvent.setContentAreaFilled(false);
-		btnCreateEvent.setBounds(25, 282, 129, 23);
+		btnCreateEvent.setBounds(30, 299, 161, 33);
 		pnlCalendar.add(btnCreateEvent);
 
 		btnLogOut = new JButton("Log Out");
@@ -578,9 +561,9 @@ public class CalendarTest{
 			}
 		});
 		btnLogOut.setForeground(Color.WHITE);
-		btnLogOut.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnLogOut.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnLogOut.setContentAreaFilled(false);
-		btnLogOut.setBounds(25, 376, 129, 23);
+		btnLogOut.setBounds(32, 344, 111, 33);
 		pnlCalendar.add(btnLogOut);
 
 		label_background = new JLabel("");
@@ -1372,13 +1355,6 @@ public class CalendarTest{
 	public JButton getBtnDeleteCalendar() {
 		return btnDeleteCalendar;
 	}
-
-
-
-	public JButton getBtnEventList() {
-		return btnEventList;
-	}
-
 
 
 	public JButton getBtnCreateEvent() {
