@@ -193,8 +193,10 @@ public class CalendarTest{
 
 		//Create controls
 		lblMonth = new JLabel ("January");
+		lblMonth.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblMonth.setForeground(Color.WHITE);
 		pnlCalendar.add(lblMonth);
-		lblMonth.setBounds(590, 25, 405, 25);
+		lblMonth.setBounds(683, 11, 195, 39);
 		btnNext = new JButton ("Next");
 		btnNext.setContentAreaFilled(false);
 		btnNext.setForeground(Color.WHITE);
@@ -335,16 +337,22 @@ public class CalendarTest{
 		pnlCalendar.add(label_13);
 
 		lblQuote = new JLabel("");
-		lblQuote.setBounds(349, 479, 518, 25);
+		lblQuote.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblQuote.setForeground(Color.WHITE);
+		lblQuote.setBounds(82, 479, 1244, 25);
 		pnlCalendar.add(lblQuote);
 
 		lblAuthor = new JLabel("");
-		lblAuthor.setBounds(349, 504, 191, 20);
+		lblAuthor.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblAuthor.setForeground(Color.WHITE);
+		lblAuthor.setBounds(82, 503, 329, 20);
 		pnlCalendar.add(lblAuthor);
 
 
 		lblTopic = new JLabel("");
-		lblTopic.setBounds(550, 504, 239, 20);
+		lblTopic.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblTopic.setForeground(Color.WHITE);
+		lblTopic.setBounds(421, 503, 382, 20);
 		pnlCalendar.add(lblTopic);
 
 		//1th day weather

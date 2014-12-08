@@ -21,7 +21,6 @@ public class DeleteCalendar extends JPanel {
 	private JButton btnDeletecalendar;
 	private JLabel label;
 	private JLabel label_1;
-	private JButton btnEventList;
 	private JButton btnMain;
 	private JButton btnLogOut;
 
@@ -60,13 +59,6 @@ public class DeleteCalendar extends JPanel {
 		label.setBounds(0, 709, 250, 59);
 		add(label);
 		
-		btnEventList = new JButton("Event List");
-		btnEventList.setForeground(Color.WHITE);
-		btnEventList.setFont(new Font("Tahoma", Font.BOLD, 30));
-		btnEventList.setContentAreaFilled(false);
-		btnEventList.setBounds(55, 137, 225, 45);
-		add(btnEventList);
-		
 		btnMain = new JButton("Main");
 		btnMain.setForeground(Color.WHITE);
 		btnMain.setFont(new Font("Tahoma", Font.BOLD, 30));
@@ -90,16 +82,13 @@ public class DeleteCalendar extends JPanel {
 	//Creates ActionListeners for buttons
 	public void addActionListener(ActionListener l){
 		btnDeletecalendar.addActionListener(l);
-		btnEventList.addActionListener(l);
 		btnLogOut.addActionListener(l);
 		btnMain.addActionListener(l);
 
 	}
 	
 	//Getters & setters
-	public JButton getBtnEventList() {
-		return btnEventList;
-	}
+
 	public JButton getBtnMain() {
 		return btnMain;
 	}

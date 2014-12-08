@@ -62,7 +62,6 @@ public class CreateEvent extends JPanel {
 	private final JLabel label_18 = new JLabel(":");
 	private final JButton btnMain = new JButton("Main");
 	private final JButton btnLogout = new JButton("Log Out");
-	private final JButton btnEventList = new JButton("Event List");
 
 	/**
 	 * Create the panel.
@@ -243,12 +242,6 @@ public class CreateEvent extends JPanel {
 		btnLogout.setBounds(52, 290, 225, 45);
 		
 		add(btnLogout);
-		btnEventList.setForeground(Color.WHITE);
-		btnEventList.setFont(new Font("Tahoma", Font.BOLD, 30));
-		btnEventList.setContentAreaFilled(false);
-		btnEventList.setBounds(52, 134, 225, 45);
-		
-		add(btnEventList);
 		
 		label = new JLabel("");
 		label.setIcon(new ImageIcon(CreateEvent.class.getResource("/Images2/MetalBackground.jpg")));
@@ -295,7 +288,6 @@ public class CreateEvent extends JPanel {
 		btnCreateEvent.addActionListener(l);
 		btnLogout.addActionListener(l);
 		btnMain.addActionListener(l);
-		btnEventList.addActionListener(l);
 	}
 	//Getters & setters
 	public JComboBox getComboBox_StartYear() {
@@ -369,9 +361,4 @@ public class CreateEvent extends JPanel {
 	public JComboBox getComboBox_EndDay() {
 		return comboBox_EndDay;
 	}
-
-	public JButton getBtnEventList() {
-		return btnEventList;
-	}
-	
 }

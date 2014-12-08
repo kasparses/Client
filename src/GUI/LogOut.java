@@ -16,7 +16,7 @@ import javax.swing.JButton;
  */
 public class LogOut extends JPanel {
 	private final JLabel lblYouAreNow = new JLabel("You are now logged out");
-	private final JLabel lblSeeYouSoon = new JLabel("See you soon");
+	private final JLabel lblSeeYouSoon = new JLabel("See you soon!");
 	private final JLabel label = new JLabel("");
 	private final JButton btnLogIn = new JButton("Log In");
 	private final JLabel label_1 = new JLabel("");
@@ -28,12 +28,12 @@ public class LogOut extends JPanel {
 		setLayout(null);
 		lblYouAreNow.setForeground(Color.WHITE);
 		lblYouAreNow.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblYouAreNow.setBounds(502, 116, 361, 37);
+		lblYouAreNow.setBounds(502, 116, 379, 37);
 		
 		add(lblYouAreNow);
 		lblSeeYouSoon.setForeground(Color.WHITE);
 		lblSeeYouSoon.setFont(new Font("Tahoma", Font.BOLD, 30));
-		lblSeeYouSoon.setBounds(583, 220, 232, 37);
+		lblSeeYouSoon.setBounds(578, 220, 239, 37);
 		
 		add(lblSeeYouSoon);
 		label.setIcon(new ImageIcon(LogOut.class.getResource("/Images2/CBSLogo3.png")));

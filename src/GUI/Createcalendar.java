@@ -25,7 +25,6 @@ public class Createcalendar extends JPanel {
 	private JTextField txtName;
 	private JRadioButton rdbtnPublic;
 	private JRadioButton rdbtnPrivate;
-	private JButton btnEventList;
 	private JButton btnMain;
 	private JButton btnLogOut;
 	private JLabel label;
@@ -84,13 +83,6 @@ public class Createcalendar extends JPanel {
 		group.add(getRdbtnPrivate());
 		group.add(getRdbtnPublic());
 		
-		btnEventList = new JButton("Event List");
-		btnEventList.setForeground(Color.WHITE);
-		btnEventList.setFont(new Font("Tahoma", Font.BOLD, 30));
-		btnEventList.setContentAreaFilled(false);
-		btnEventList.setBounds(54, 130, 225, 45);
-		add(btnEventList);
-		
 		btnMain = new JButton("Main");
 		btnMain.setForeground(Color.WHITE);
 		btnMain.setFont(new Font("Tahoma", Font.BOLD, 30));
@@ -119,7 +111,6 @@ public class Createcalendar extends JPanel {
 	//Creates the ActionListeners for the buttons
 	public void addActionListener(ActionListener l) {
 		btnCreateCalendar.addActionListener(l);
-		btnEventList.addActionListener(l);
 		btnLogOut.addActionListener(l);
 		btnMain.addActionListener(l);
 }
@@ -137,9 +128,6 @@ public class Createcalendar extends JPanel {
 	}
 	public JRadioButton getRdbtnPrivate() {
 		return rdbtnPrivate;
-	}
-	public JButton getBtnEventList() {
-		return btnEventList;
 	}
 
 	public JButton getBtnMain() {
